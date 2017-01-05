@@ -1,0 +1,102 @@
+Applications Memory Usage (kB):
+Uptime: 2146331 Realtime: 2158376
+
+Total PSS by process:
+    95269 kB: system (pid 529)
+    64951 kB: com.gau.go.launcherex (pid 802)
+    30406 kB: com.sohu.inputmethod.sogou (pid 690)
+    24489 kB: com.android.systemui (pid 623)
+    20790 kB: android.process.acore (pid 983)
+    17191 kB: com.tencent.mm (pid 3869)
+    13966 kB: android.process.media (pid 1338)
+    13022 kB: com.chaozh.iReaderFree15 (pid 863)
+    10795 kB: com.tencent.mobileqq:MSF (pid 3903)
+    10754 kB: com.android.settings (pid 966)
+     9680 kB: com.tencent.mm:push (pid 4117)
+     8332 kB: com.android.phone (pid 710)
+     7132 kB: com.google.process.gapps (pid 1357)
+     6881 kB: com.tencent.mobileqq (pid 3921)
+     4996 kB: cn.andouya (pid 4067)
+     4965 kB: sogou.mobile.explorer.hotwords (pid 5580)
+     4615 kB: com.bbk.launcher2 (pid 1865)
+     4059 kB: com.baidu.map.location (pid 820)
+     4043 kB: com.gau.go.launcherex:DownloadService (pid 907)
+     3662 kB: com.android.contacts (pid 1174)
+     3650 kB: com.android.providers.downloads (pid 6036)
+     3586 kB: com.bbk.updater (pid 6023)
+     3537 kB: com.vivo.game:remote (pid 6097)
+     3489 kB: com.iqoo.secure.datausage (pid 5562)
+     3466 kB: com.android.gallery3d (pid 1853)
+     2946 kB: com.mediatek.bluetooth (pid 761)
+     2893 kB: com.mediatek.MediatekDM (pid 5624)
+     2794 kB: com.bbk.facewake (pid 6260)
+     2615 kB: com.vivo.motionrecognition (pid 728)
+     2499 kB: com.mediatek.voicecommand (pid 744)
+     2308 kB: com.mediatek.videofavorites (pid 1913)
+     2269 kB: com.mediatek.atci.service (pid 5488)
+     2162 kB: com.mediatek.thermalmanager (pid 776)
+     2114 kB: com.vivo.daemonService (pid 782)
+        0 kB: com.gau.go.launcherex:UninstallService (pid 1492)
+
+Total PSS by OOM adjustment:
+    95269 kB: System
+               95269 kB: system (pid 529)
+    65947 kB: Persistent
+               24489 kB: com.android.systemui (pid 623)
+               20790 kB: android.process.acore (pid 983)
+                8332 kB: com.android.phone (pid 710)
+                2946 kB: com.mediatek.bluetooth (pid 761)
+                2615 kB: com.vivo.motionrecognition (pid 728)
+                2499 kB: com.mediatek.voicecommand (pid 744)
+                2162 kB: com.mediatek.thermalmanager (pid 776)
+                2114 kB: com.vivo.daemonService (pid 782)
+    64951 kB: Foreground
+               64951 kB: com.gau.go.launcherex (pid 802)
+     8102 kB: Visible
+                4059 kB: com.baidu.map.location (pid 820)
+                4043 kB: com.gau.go.launcherex:DownloadService (pid 907)
+    54543 kB: Perceptible
+               30406 kB: com.sohu.inputmethod.sogou (pid 690)
+               10795 kB: com.tencent.mobileqq:MSF (pid 3903)
+                9680 kB: com.tencent.mm:push (pid 4117)
+                3662 kB: com.android.contacts (pid 1174)
+    33007 kB: A Services
+               17191 kB: com.tencent.mm (pid 3869)
+               13022 kB: com.chaozh.iReaderFree15 (pid 863)
+                2794 kB: com.bbk.facewake (pid 6260)
+    15783 kB: B Services
+                7132 kB: com.google.process.gapps (pid 1357)
+                3489 kB: com.iqoo.secure.datausage (pid 5562)
+                2893 kB: com.mediatek.MediatekDM (pid 5624)
+                2269 kB: com.mediatek.atci.service (pid 5488)
+    62724 kB: Background
+               13966 kB: android.process.media (pid 1338)
+               10754 kB: com.android.settings (pid 966)
+                6881 kB: com.tencent.mobileqq (pid 3921)
+                4996 kB: cn.andouya (pid 4067)
+                4965 kB: sogou.mobile.explorer.hotwords (pid 5580)
+                4615 kB: com.bbk.launcher2 (pid 1865)
+                3650 kB: com.android.providers.downloads (pid 6036)
+                3586 kB: com.bbk.updater (pid 6023)
+                3537 kB: com.vivo.game:remote (pid 6097)
+                3466 kB: com.android.gallery3d (pid 1853)
+                2308 kB: com.mediatek.videofavorites (pid 1913)
+                   0 kB: com.gau.go.launcherex:UninstallService (pid 1492)
+
+Total PSS by category:
+   154649 kB: Dalvik
+    76590 kB: Other dev
+    67040 kB: Unknown
+    42102 kB: .so mmap
+    26315 kB: Other mmap
+    22122 kB: .dex mmap
+     8660 kB: .apk mmap
+     1854 kB: Ashmem
+      555 kB: .ttf mmap
+      403 kB: Native
+       20 kB: .jar mmap
+       16 kB: Cursor
+
+Total PSS: 400326 kB
+      KSM: 0 kB saved from shared 0 kB
+           0 kB unshared; 0 kB volatile
