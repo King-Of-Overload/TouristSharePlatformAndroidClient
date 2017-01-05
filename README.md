@@ -1,3 +1,3 @@
 # TouristSharePlatformAndroidClient
 芳草寻源旅游分享平台Android客户端
-![image](https://github.com/King-Of-Overload/TouristSharePlatformAndroidClient/tree/master/TouristSharePlatformMobile/app/src/main/assets/captures/activity_friend.png)
+![image](https://github.com/King-Of-Overload/TouristSharePlatformAndroidClient/master/TouristSharePlatformMobile/app/src/main/assets/captures/activity_friend.png)
