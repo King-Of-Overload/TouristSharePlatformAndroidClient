@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:background="#0000"
+    android:id="@+id/linear_layout_view_top_bar_width"
+    android:layout_height="50dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageButton
+            android:id="@+id/iv_btn_top_back_width"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_nav_back"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            />
+        <TextView
+            android:id="@+id/tv_top_bar_title_width"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/text_color"
+            android:text="标题"
+            />
+        <TextView
+            android:id="@+id/tv_btn_top_right_optional_width"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="22sp"
+            android:text="发送"
+            android:textColor="@android:color/holo_blue_bright"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

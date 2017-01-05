@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <RadioGroup
+        android:id="@+id/rg_user_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+
+        <RadioButton
+            android:id="@+id/rb_main_page"
+            style="@style/RadioButtonUserInfoTab"
+            android:checked="true"
+            android:text="TAの主页" />
+
+        <RadioButton
+            android:id="@+id/rb_light_strategy"
+            style="@style/RadioButtonUserInfoTab"
+            android:text="轻游记" />
+
+
+        <RadioButton
+            android:id="@+id/rb_photos"
+            style="@style/RadioButtonUserInfoTab"
+            android:text="旅行相册" />
+
+
+
+        <RadioButton
+            android:id="@+id/rb_foot_step"
+            style="@style/RadioButtonUserInfoTab"
+            android:text="TAの足迹" />
+    </RadioGroup>
+
+<zjut.salu.share.widget.UnderlineIndicatorView
+    android:id="@+id/uliv_user_info"
+    android:layout_width="match_parent"
+    android:layout_height="4dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/divider_gray" />
+
+</LinearLayout>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--底部fragment按钮的单个布局文件-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center_vertical"
+    android:padding="5dp"
+    >
+    <LinearLayout
+        android:id="@+id/linear_index_tab"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_iv_index"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/main_tab_imgInfo"
+            android:background="#0000"
+            android:clickable="false"
+            android:src="@drawable/home_common"
+            />
+
+        <TextView
+            android:id="@+id/tv_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_alpha"
+            android:textSize="12sp"
+            android:text="@string/homeText"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_user_strategy_tab"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+        android:id="@+id/image_iv_user_strategy"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:contentDescription="@string/main_tab_imgInfo"
+        android:background="#0000"
+        android:clickable="false"
+        android:src="@drawable/user_strategy_common"
+        />
+
+        <TextView
+        android:id="@+id/tv_user_strategy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black_alpha"
+        android:textSize="12sp"
+        android:text="@string/user_strategy_text"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_pop_up"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="10dip"
+            android:src="@drawable/tabbar_compose_background_icon_add" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_user_best_tab"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_iv_best"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/main_tab_imgInfo"
+            android:background="#0000"
+            android:clickable="false"
+            android:src="@drawable/jingxuan_common"
+            />
+
+        <TextView
+            android:id="@+id/tv_user_best"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_alpha"
+            android:textSize="12sp"
+            android:text="@string/best_text"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_personal_setting_tab"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_iv_personal_setting"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/main_tab_imgInfo"
+            android:background="#0000"
+            android:clickable="false"
+            android:src="@drawable/my_common"
+            />
+
+        <TextView
+            android:id="@+id/tv_personal_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_alpha"
+            android:textSize="12sp"
+            android:text="@string/personal_setting_text"
+            />
+    </LinearLayout>
+
+</LinearLayout>

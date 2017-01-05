@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_about_author"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="zjut.salu.share.activity.AboutAuthorActivity">
+
+    <include layout="@layout/view_top_bar"/>
+    <zjut.salu.share.widget.MyScrollView
+        android:id="@+id/about_author_scroll"
+        android:background="@color/bacground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="20dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/author_avatar"
+                android:background="@drawable/author_avatar_style"
+                />
+
+            <TextView
+                android:layout_marginTop="60dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/author_name_text"
+                android:textSize="22sp"
+                />
+            <View
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:background="@color/text_hint"
+                android:layout_width="200dp"
+                android:layout_height="1dp"
+                />
+
+            <RelativeLayout
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_avator_github"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/github_text"
+                    android:layout_alignParentLeft="true"
+                    android:textColor="@color/font_normal"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/github_url_text"
+                    android:textColor="@color/font_normal"/>
+
+                <TextView
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/tv_avator_sina_wei_blog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_avator_github"
+                    android:text="@string/sina_wei_blog_text"
+                    android:layout_alignParentLeft="true"
+                    android:textColor="@color/font_normal"/>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:layout_below="@id/tv_avator_github"
+                    android:layout_toRightOf="@id/tv_avator_sina_wei_blog"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/wei_blog_nickname_text"
+                    android:textColor="@color/font_normal"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </zjut.salu.share.widget.MyScrollView>
+
+
+
+</LinearLayout>

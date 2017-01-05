@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xrefreshview="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/bacground"
+    android:layout_height="match_parent">
+    <com.andview.refreshview.XRefreshView
+        android:id="@+id/xref_all_user_strategy"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xrefreshview:isHeightMatchParent="true"
+        xrefreshview:isWidthMatchParent="true"
+        android:orientation="vertical"
+        android:background="@color/bacground"
+        xrefreshview:autoRefresh="false">
+        <ListView
+            android:id="@+id/lv_all_user_strategy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            />
+        <include layout="@layout/layout_connect_error"
+            android:id="@+id/layout__user_strategy_no_net"
+            android:visibility="gone"
+            />
+    </com.andview.refreshview.XRefreshView>
+
+</LinearLayout>

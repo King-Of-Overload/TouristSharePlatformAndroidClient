@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    tools:context="zjut.salu.share.activity.HomeActivity">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:elevation="0dp">
+        <FrameLayout
+            android:id="@+id/toolbar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_home"
+            android:layout_width="match_parent"
+            style="@style/ClubToolbar"
+            app:layout_collapseMode="pin"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/theme_color_primary"
+            android:elevation="0dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            >
+            <LinearLayout
+                android:id="@+id/navigation_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <zjut.salu.share.widget.CommonCircleImageView
+                    android:id="@+id/toolbar_user_avatar"
+                    android:layout_width="@dimen/circle_user_small_size"
+                    android:layout_height="@dimen/circle_user_small_size"
+                    android:layout_marginRight="@dimen/default_tiny_margin"
+                    android:layout_marginEnd="@dimen/default_tiny_margin"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginLeft="4dp"
+                    android:src="@drawable/user_avatar_ym_test"
+                    app:border_color="@color/white"
+                    app:border_width="@dimen/circle_default_width" />
+
+                <TextView
+                    android:id="@+id/tv_toolbar_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_marginLeft="@dimen/default_general_margin"
+                    android:layout_marginStart="@dimen/default_general_margin"
+                    android:maxLines="1"
+                    android:text="用户名"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/default_medium_text_size" />
+
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+            <com.miguelcatalan.materialsearchview.MaterialSearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+</FrameLayout>
+    </android.support.design.widget.AppBarLayout>
+
+        <!--整体放在垂直线性布局中，包括两部分选项卡和具体的页面显示-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!--显示单个页面信息-->
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:foregroundGravity="right"
+                >
+                <FrameLayout
+                    android:id="@+id/real_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </FrameLayout>
+
+
+
+            <!--底部显示所有的选项-->
+            <include layout="@layout/home_tab"/>
+        </LinearLayout>
+
+</LinearLayout>
+

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_height="wrap_content">
+
+    <zjut.salu.share.widget.CommonCircleImageView
+        android:id="@+id/cciv_avatar_comment_love_card_detail"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/feedback_cartoon"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/love_card_single_avatar"
+        />
+    <LinearLayout
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/tv_username_comment_love_card_detail"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="唐雨柔"
+            android:textColor="@color/text_color"
+            />
+        <TextView
+            android:id="@+id/tv_time_comment_love_card_detail"
+            android:textColor="@color/icon_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00 11:13"
+            android:textSize="13sp"
+            />
+        <TextView
+            android:id="@+id/tv_content_comment_love_card_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textSize="16sp"
+            android:text="sdssdsdsdsdsdsdsdsdsdsdsdsdsdssssssssssssssssssssssss"
+            />
+
+        <TextView
+            android:id="@+id/tv_reply_comment_love_card_detail"
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reply_text"
+            android:textColor="@color/icon_text"
+            android:layout_gravity="end"
+            android:layout_marginRight="16dp"
+            />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/md_white_1000"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_toolbar"/>
+<zjut.salu.share.widget.MyScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <WebView
+        android:id="@+id/common_web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:descendantFocusability="blocksDescendants"
+        />
+            <zjut.salu.share.widget.CircleProgressView
+                android:id="@+id/circle_progress"
+                android:layout_width="@dimen/circle_progress_view_default_size"
+                android:layout_height="@dimen/circle_progress_view_default_size"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/default_grow_margin"
+                app:matProg_barColor="?attr/colorPrimary"
+                app:matProg_barWidth="4dp"/>
+
+            <ImageView
+                android:id="@+id/iv_loading_failed"
+                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/loading_failed"
+                />
+        </FrameLayout>
+</zjut.salu.share.widget.MyScrollView>
+</LinearLayout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_user_feed_back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/gray_bg"
+    android:fitsSystemWindows="true"
+    tools:context="zjut.salu.share.activity.UserFeedBackActivity">
+
+    <include layout="@layout/view_top_bar"/>
+
+    <EditText
+        android:id="@+id/et_feedback_content"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:inputType="textMultiLine"
+        android:background="@color/white"
+        android:hint="@string/feed_back_content_text"
+        android:textColorHint="@color/text_hint"
+        android:textSize="16sp"
+        />
+
+    <EditText
+        android:id="@+id/et_feedback_contact"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:maxLines="2"
+        android:textColorHint="@color/text_hint"
+        android:hint="@string/feed_back_contact_text"
+        android:textSize="16sp"
+        />
+
+    <ImageView
+        android:background="@color/plain"
+        android:layout_marginTop="4dp"
+        android:layout_gravity="right"
+        android:src="@drawable/feedback_cartoon_comic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_exchange_type"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/bacground"
+    tools:context="zjut.salu.share.activity.ExchangeTypeActivity">
+    <include layout="@layout/layout_toolbar"/>
+
+    <zjut.salu.share.widget.PullSeparateListView
+        android:id="@+id/pull_lv_exchange"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:background="#e2e4fe"
+        android:dividerHeight="15dp"
+        />
+</LinearLayout>

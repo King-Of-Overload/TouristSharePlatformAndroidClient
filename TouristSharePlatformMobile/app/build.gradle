@@ -1,0 +1,137 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'org.greenrobot.greendao'
+Properties props = new Properties()
+props.load(new FileInputStream(file("configuration.properties")))
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+    defaultConfig {
+        applicationId "zjut.salu.share"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+//        targetCompatibility 1.8
+//        sourceCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+greendao{
+    schemaVersion 1
+    daoPackage 'zjut.salu.share.greendao'
+    targetGenDir 'src/main/java'
+}
+
+repositories{
+    flatDir{
+        dirs'libs'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    //compile 'com.android.support:appcompat-v7:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    //单元测试
+    testCompile 'junit:junit:4.12'
+    //okhttp
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    //compile 'com.github.xxl6097:okhttputils:2.4.1'
+//    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:design:25.0.1'
+    compile 'com.android.support:cardview-v7:23.4.0'
+    //Gson jsoup
+    compile 'org.jsoup:jsoup:1.9.2'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    //标签布局
+    compile 'com.zhy:flowlayout-lib:1.0.1'
+    //tabLayout
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.0@aar'
+    //compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.android.support:recyclerview-v7:25.0.1'
+    //Picasso图片加载库
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    //androidL动画库
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.github.ozodrukh:CircularReveal:1.1.0@aar'
+    //轮播图
+    compile 'com.youth.banner:banner:1.4.1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    //boom menu
+    compile 'com.nightonke:boommenu:1.0.9'
+    //sweet-alert
+    compile 'cn.pedant.sweetalert:library:1.3'
+    compile(name: 'ColorDialog-release', ext: 'aar')
+    compile 'com.github.medyo:dynamicbox:1.2@aar'
+    //动态加载
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    //pull refresh view
+    compile 'com.huxq17.xrefreshview:xrefreshview:3.5.5'
+    //城市样式
+    compile 'com.yalantis:phoenix:1.2.3'
+    //飞机样式
+    compile 'com.yalantis:pulltorefresh:1.0.0'
+    compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
+
+    //下拉放大
+    compile 'com.github.frank-zhu:pullzoomview:1.0.0'
+    //popup menu
+    compile 'com.yalantis:contextmenu:1.0.7'
+    compile 'com.github.zzz40500:android-shapeLoadingView:1.0.3.2'
+    //drawer_layout
+    compile('com.mikepenz:materialdrawer:5.7.0@aar') {
+        transitive = true
+    }
+   // transfer picture to any style
+    compile 'cn.lankton:anyshape:1.0.0'
+    //chose list
+    compile 'com.github.dongjunkun:DropDownMenu:1.0.3'
+    //jump word
+    compile 'net.frakbot:jumpingbeans:1.3.0'
+    //floating_search_view
+    compile 'com.github.arimorty:floatingsearchview:2.0.3'
+    //delete_list_view
+    compile "com.daimajia.swipelayout:library:1.2.0@aar"
+    //rxjava
+    compile 'com.trello:rxlifecycle-components:0.6.1'
+    compile 'io.reactivex:rxjava:1.1.0'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.3.0'
+    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.3.0'
+    compile 'com.jakewharton.rxbinding:rxbinding-design:0.3.0'
+    //saluno_pulltorefresh
+    compile(name: 'salu-pulltorefreshview', ext: 'aar')
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.bilibili:magicasakura:0.1.1@aar'
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
+    //bomb后端云
+    compile 'cn.bmob.android:bmob-sdk:3.4.6'
+    //兼容Android6.0
+    compile 'cn.bmob.android:http-legacy:1.0'
+    compile 'com.etsy.android.grid:library:1.0.5'
+    compile 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.6'
+    //sqlite ORM
+    compile 'org.greenrobot:greendao:3.2.0'
+    compile 'com.bilibili:magicasakura:0.1.1@aar'
+}

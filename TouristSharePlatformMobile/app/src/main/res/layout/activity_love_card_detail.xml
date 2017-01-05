@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/relative_love_card_detail"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent">
+    <com.mingle.widget.LoadingView
+        android:background="@color/bacground"
+        android:visibility="visible"
+        android:id="@+id/loadView_love_postcard_detail"
+        android:layout_width="fill_parent"
+        app:loadingText="@string/loading_text"
+        android:layout_height="fill_parent"/>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bacground"
+    android:id="@+id/activity_love_card_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    tools:context="zjut.salu.share.activity.LoveCardDetailActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_love_card_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        >
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:background="@color/bacground"
+        android:id="@+id/collapsing_toolbar_love_card_detail"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentScrim="?attr/colorAccent"
+        app:expandedTitleTextAppearance="@style/CollapsingToolbarTitleStyle.About"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_header_cover_love_card_detail"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:src="@drawable/temp_test"
+                android:scaleType="fitXY"
+                />
+        </FrameLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_love_card_detail"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested_scroll_view_love_card_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:background="@drawable/love_card_scroll_back"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <zjut.salu.share.widget.CommonCircleImageView
+                        android:id="@+id/cciv_avatar_love_card_detail"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/feedback_cartoon"
+                        android:background="@drawable/love_card_single_avatar"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        />
+                    <LinearLayout
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/tv_title_love_card_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="飞来飞去的明信片"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_color"
+                            />
+                        <TextView
+                            android:id="@+id/tv_begin_time_love_card_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="开始：2013-06-06 13:15"
+                            android:textSize="12sp"
+                            />
+                        <TextView
+                            android:id="@+id/tv_dead_time_love_card_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="截止：2013-06-06 13:15"
+                            android:textSize="12sp"
+                            />
+                        <TextView
+                            android:id="@+id/tv_tag_love_card_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="标签：互寄"
+                            android:textSize="12sp"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <Button
+                    android:id="@+id/btn_participate_love_card_detail"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/btn_love_card_detail"
+                    android:text="我要参加"
+                    android:textSize="14sp"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="4dp"
+                    />
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_marginBottom="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_marginTop="3dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tv_author_love_card_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/holo_blue_light"
+                        android:text="发起：唐雨柔"
+                        />
+                    <TextView
+                        android:id="@+id/tv_person_num_love_card_detail"
+                        android:layout_marginLeft="40dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="预寄：40张(已确认1人)"
+                        />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_marginTop="1dp"
+                    app:cardBackgroundColor="@color/blue_color"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="楼主说："
+                            />
+                        <TextView
+                            android:id="@+id/tv_content_love_card_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="最好的朋友生日快到了，想为她收集来自不同地方的祝福。
+参与的亲们，请一定要写上:来自＊＊的祝福！
+希望不要写上记得回寄这样的字，一旦我选择了寄给你，我就会寄出的。
+我有重庆，云南，丽江，泰国，越南，马来西亚，新加坡，美国和英国的明信片！
+我愿意用它们来和你们交换祝福！你们愿意吗？
+来自重庆的我，期待能帮朋友收集到来自四面八方的祝福！
+
+朋友名字:Tansy
+地址:重庆市渝中区民权路27号新华国际19-1
+ 邮编:400010
+谢谢各位亲啦！"
+                            />
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+<android.support.v7.widget.CardView
+    android:id="@+id/card_view_no_scroll_view_love_card_detail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <zjut.salu.share.widget.NoScrollListView
+        android:listSelector="@android:color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/no_scroll_view_comment_love_card_detail"
+        android:divider="@color/icon_text"
+        android:dividerHeight="1dp"
+        />
+</android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_no_reply_love_card_detail"
+                android:layout_marginTop="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/empty"
+                        android:scaleType="fitXY"
+                        android:layout_gravity="center"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_reply_text"
+                        android:layout_gravity="center"
+                        />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    <!--第三部分：漂浮按钮-->
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:clickable="true"
+        android:src="@drawable/sel_btn_info"
+        app:layout_anchor="@id/appbar_love_card_detail"
+        app:layout_anchorGravity="bottom|right|end" />
+    </android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

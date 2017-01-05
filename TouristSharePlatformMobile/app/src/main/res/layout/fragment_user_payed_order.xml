@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xrefreshview="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bacground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<com.andview.refreshview.XRefreshView
+    android:id="@+id/xref_payed"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xrefreshview:isHeightMatchParent="true"
+    xrefreshview:isWidthMatchParent="true"
+    android:orientation="vertical"
+    android:background="@color/bacground"
+    xrefreshview:autoRefresh="false"
+    >
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:id="@+id/recycle_view_payed_order_list"
+        />
+    <TextView
+        android:id="@+id/tv_payed_no_order"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/no_payed_order_text"
+        android:textColor="@color/text_color"
+        android:gravity="center"
+        android:textSize="18sp"
+        />
+</com.andview.refreshview.XRefreshView>
+
+
+</LinearLayout>

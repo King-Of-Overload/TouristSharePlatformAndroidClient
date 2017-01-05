@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="bacground">#F1F1F1</color>
+    <!--主题配色-->
+    <color name="transparent">#00000000</color>
+    <color name="primary">#FA7198</color>
+    <color name="white">#fff</color>
+    <color name="top_bar_bg">@color/primary</color>
+    <color name="top_bar_home_bg">#00ffff</color>
+    <color name="divider_gray">#d7d7d7</color>
+    <color name="theme_color_primary_trans">#99f0486c</color>
+    <!-- 45%透明黑 -->
+    <color name="black_alpha">#71000000</color>
+    <color name="black">#000000</color>
+    <color name="login_top_bar">#D4BAA3</color>
+    <color name="theme_color_primary_dark">#b85671</color>
+
+    <color name="txt_black">#232323</color>
+    <!-- hint色 -->
+    <color name="text_hint">#b3b3b3</color>
+    <!--iconfont色-->
+    <color name="icon_text">#999</color>
+
+
+    <!-- 输入边框 -->
+    <color name="login_text_color">#222222</color>
+    <color name="input_border">#a5a5a5</color>
+
+    <!-- 灰色 -->
+    <color name="gray">#b8b8b8</color>
+    <color name="gray_bg">#f0f0f0</color>
+    <color name="gray_light">#e5e5e5</color>
+
+    <!-- 字体颜色 -->
+    <color name="font_normal">#555555</color>
+    <color name="font_deep">#222222</color>
+    <color name="font_light">#888888</color>
+    <color name="font_gray">#656565</color>
+
+    <!-- 描边线 -->
+    <color name="button_divider">#dbd9d9</color>
+    <!--登录按钮颜色-->
+    <color name="login_btn_color">#36b05e</color>
+    <color name="login_btn_press_color">#99cc33</color>
+    <!--注册按钮颜色-->
+    <color name="register_btn_color">#FF7800</color>
+    <color name="register_btn_press_color">#FFCC33</color>
+    <color name="cyan">#00FFFF</color>
+    <!--头像外部圆圈-->
+    <color name="user_avatar_outer_border_color">#9F9887</color>
+    <!--用户界面立即登录按钮-->
+    <color name="user_login_now_btn_color">#3BBB65</color>
+    <color name="plain">#0000</color>
+    <color name="orange">#FF8000</color>
+    <color name="red">#FF0000</color>
+    <color name="blue_color">#76EEC6</color>
+    <color name="vertical_line">#CCCCCC</color>
+    <color name="price_color">#CC3366</color>
+    <color name="bg_agray">#49dddddd</color>
+    <color name="pink">#fb7299</color>
+    <color name="purple">#673AB7</color>
+    <color name="blue">#2196F3</color>
+    <color name="green">#4CAF50</color>
+    <color name="green_light">#8BC34A</color>
+    <color name="yellow">#FDD835</color>
+    <color name="theme_color_primary">#fb7299</color>
+    <color name="search_background_color">#E9EAEA</color>
+    <color name="gray_light_30">#E5E5E5</color>
+    <color name="card_view_background">@color/white</color>
+    <color name="black_alpha_45">#71000000</color>
+    <color name="orange_500">#FF9800</color>
+    <color name="focus_bg_color">@android:color/transparent</color>
+    <color name="focus_text_color">#fb7299</color>
+</resources>
