@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_province"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/md_white_1000"
+    android:fitsSystemWindows="true">
+    <include layout="@layout/layout_toolbar"/>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_view_common"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="4dp"
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_view_common"
+                android:layout_width="match_parent"
+                android:descendantFocusability="blocksDescendants"
+                android:layout_height="match_parent"/>
+            <zjut.salu.share.widget.CircleProgressView
+                android:id="@+id/circle_progress_common"
+                android:layout_width="@dimen/circle_progress_view_default_size"
+                android:layout_height="@dimen/circle_progress_view_default_size"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/default_grow_margin"
+                app:matProg_barColor="?attr/colorPrimary"
+                app:matProg_barWidth="4dp"/>
+            <ImageView
+                android:id="@+id/iv_loading_failed"
+                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/loading_failed"
+                />
+            <ImageView
+                android:id="@+id/iv_empty"
+                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/empty"
+                />
+        </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

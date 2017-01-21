@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_city_index"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="zjut.salu.share.activity.destination.CityIndexActivity">
+
+    <include layout="@layout/layout_toolbar"/>
+
+    <com.ecloud.pulltozoomview.PullToZoomScrollViewEx
+        android:id="@+id/pull_scroll_city_index"
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:layout_height="match_parent"
+        custom:zoomView="@layout/zoom_view_city_index"
+        custom:headerView="@layout/header_view_city_index"
+        custom:contentView="@layout/layout_content_city_index"
+        />
+
+</LinearLayout>

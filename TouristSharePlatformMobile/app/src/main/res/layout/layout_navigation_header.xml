@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="180dp"
+    android:fitsSystemWindows="true"
     android:clickable="true">
 <com.bilibili.magicasakura.widgets.TintFrameLayout
     android:layout_width="match_parent"
@@ -35,8 +36,8 @@
 
         <zjut.salu.share.widget.CommonCircleImageView
             android:id="@+id/user_avatar_view"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="start|top"
             android:layout_marginEnd="@dimen/activity_vertical_margin"
             android:layout_marginStart="@dimen/activity_vertical_margin"
@@ -85,7 +86,7 @@
             android:layout_marginLeft="@dimen/default_general_margin"
             android:background="?attr/selectableItemBackground"
             android:orientation="vertical"
-            android:paddingTop="@dimen/default_tiny_padding">
+            android:paddingTop="6dp">
 
 
             <LinearLayout
@@ -122,7 +123,7 @@
                 android:id="@+id/user_other_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/default_tiny_margin"
+                android:padding="6dp"
                 android:text="大家好，我是有咩酱，摸咩会给你咩毛玉~微博@有咩酱"
                 android:textColor="@color/white"
                 android:textSize="14sp" />

@@ -31,7 +31,9 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import zjut.salu.share.R;
+import zjut.salu.share.activity.HomeActivity;
 import zjut.salu.share.activity.LocaltionWebViewActivity;
+import zjut.salu.share.activity.local.RecommendRouteActivity;
 import zjut.salu.share.config.CuteTouristShareConfig;
 import zjut.salu.share.model.LocalInformation;
 import zjut.salu.share.utils.OkHttpUtils;
@@ -54,6 +56,7 @@ public class UserStrategyFragment extends RxLazyFragment{
     @Bind(R.id.tv_wanna_go_num)TextView wannaGoNumTV;//想去人数
     @Bind(R.id.iv_went)ImageView hasGoneIV;//去过按钮
     @Bind(R.id.tv_gone_num)TextView hasGoneNumTV;//去过人数
+
 
     private Context context;
     private OkHttpUtils httpUtils;
@@ -145,8 +148,10 @@ public class UserStrategyFragment extends RxLazyFragment{
      * @param v
      */
     @OnClick(R.id.iv_recommand_local_route)
-    public void recommandRouteClick(View v){
-        //TODO:推荐路线
+    public void recommendRouteClick(View v){
+        Intent intent=new Intent(context, RecommendRouteActivity.class);
+        intent.putExtra("cityid",currentCityId);
+        context.startActivity(intent);
     }
 
 

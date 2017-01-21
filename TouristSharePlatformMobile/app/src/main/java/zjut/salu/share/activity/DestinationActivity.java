@@ -1,5 +1,6 @@
 package zjut.salu.share.activity;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
@@ -23,10 +24,11 @@ import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
 import rx.Observable;
 import rx.Observer;
 import zjut.salu.share.R;
+import zjut.salu.share.activity.destination.ProvinceActivity;
 import zjut.salu.share.base.RxBaseActivity;
 
 /**
- * 目的地界面
+ * 目的地界面控制层
  */
 public class DestinationActivity extends RxBaseActivity{
     @Bind(R.id.toolbar)Toolbar mToolBar;
@@ -65,6 +67,12 @@ public class DestinationActivity extends RxBaseActivity{
         SimpleAdapter adapter=new SimpleAdapter(reference.get(),getGridData(),R.layout.item_destination_grid_view,new String[]{
         "grid_image","grid_title"},new int[]{R.id.cciv_destination_avatar,R.id.tv_destination_name});
         mGridView.setAdapter(adapter);
+        mGridView.setOnItemClickListener((parent, view, position, id) -> {//点击事件
+            String selected_island_name=gridTitles[position];
+            Intent intent=new Intent(reference.get(), ProvinceActivity.class);
+            intent.putExtra("destinationName",selected_island_name);
+            startActivity(intent);
+        });
         refreshLayout.setOnRefreshListener(() -> Observable.timer(2, TimeUnit.SECONDS).subscribe(new Observer<Long>() {
             @Override
             public void onCompleted() {refreshLayout.setRefreshing(false);}

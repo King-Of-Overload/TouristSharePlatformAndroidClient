@@ -68,8 +68,14 @@
         <activity android:name=".activity.ExchangeCurrencyActivity" />
         <activity android:name=".activity.ExchangeTypeActivity" />
         <activity android:name=".activity.FriendsActivity" />
-        <activity android:name=".activity.BestTopicActivity"/>
-        <activity android:name=".activity.LocaltionWebViewActivity"/>
+        <activity android:name=".activity.BestTopicActivity" />
+        <activity android:name=".activity.LocaltionWebViewActivity" />
+        <activity android:name=".activity.local.RecommendRouteActivity" />
+        <activity android:name=".activity.local.RecommendRouteDetailActivity" />
+        <activity android:name=".activity.index.LightStrategyActivity" />
+        <activity android:name=".activity.destination.ProvinceActivity" />
+        <activity android:name=".activity.destination.CityActivity" />
+        <activity android:name=".activity.destination.CityIndexActivity"></activity>
     </application>
 
 </manifest>

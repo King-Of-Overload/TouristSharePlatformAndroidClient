@@ -42,6 +42,7 @@ import zjut.salu.share.activity.ProductActivity;
 import zjut.salu.share.activity.SkillAcademyActivity;
 import zjut.salu.share.activity.UserInfoActivity;
 import zjut.salu.share.activity.UserStrategyActivity;
+import zjut.salu.share.activity.index.LightStrategyActivity;
 import zjut.salu.share.greendao.IndexBannerBeanDao;
 import zjut.salu.share.model.IndexBannerBean;
 import zjut.salu.share.utils.GlideImageLoader;
@@ -223,6 +224,11 @@ public class IndexFragment extends RxLazyFragment {
             switch (position){
                 case 0:{//游记攻略
                     Intent intent=new Intent(context, UserStrategyActivity.class);
+                    startActivity(intent);
+                    break;
+                }
+                case 1:{//轻游记
+                    Intent intent=new Intent(context,LightStrategyActivity.class);
                     startActivity(intent);
                     break;
                 }

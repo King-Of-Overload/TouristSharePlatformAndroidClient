@@ -233,4 +233,20 @@
     <string name="traffic_text">交通攻略</string>
     <string name="guide_text">活动指南</string>
     <string name="tips_text">小贴士</string>
+    <string name="recommend_route_text">推荐路线</string>
+    <string name="province_select_text">选择国家/地区</string>
+    <string name="city_select_text">选择城市</string>
+    <string name="food_text">美食</string>
+    <string name="hotel_text">酒店</string>
+    <string name="view_text">景点</string>
+    <string name="shop_text">购物</string>
+    <string name="play_text">娱乐</string>
+    <string name="live_text">生活</string>
+    <string name="route_text">路线</string>
+    <string name="traffics_text">交通</string>
+    <string name="activity_text">活动</string>
+    <string name="local_summary_text">当地概况</string>
+    <string name="know_history_text">了解人文历史</string>
+    <string name="can_not_miss_text">不可错过</string>
+    <string name="value_to_do_text">必做的N件事</string>
 </resources>

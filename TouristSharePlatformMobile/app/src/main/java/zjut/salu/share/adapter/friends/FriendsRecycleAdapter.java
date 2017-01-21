@@ -19,7 +19,7 @@ import zjut.salu.share.model.TripUser;
 import zjut.salu.share.utils.ImageLoaderOptionUtils;
 import zjut.salu.share.utils.RequestURLs;
 
-/**
+/**朋友列表
  * Created by Salu on 2016/12/8.
  */
 
@@ -80,6 +80,8 @@ public class FriendsRecycleAdapter extends AbsRecyclerViewAdapter {
         }
         super.onBindViewHolder(holder, position);
     }
+
+
 
     private class ItemViewHolder extends ClickableViewHolder{
         ImageView imageView;

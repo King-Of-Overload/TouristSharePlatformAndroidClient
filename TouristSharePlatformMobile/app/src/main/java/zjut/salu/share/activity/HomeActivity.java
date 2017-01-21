@@ -5,15 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,43 +19,29 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.nightonke.boommenu.BoomMenuButton;
-import com.nightonke.boommenu.Types.BoomType;
-import com.nightonke.boommenu.Types.ButtonType;
-import com.nightonke.boommenu.Types.PlaceType;
-import com.nightonke.boommenu.Util;
-
 import net.frakbot.jumpingbeans.JumpingBeans;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import butterknife.Bind;
 import cn.refactor.lib.colordialog.ColorDialog;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 import zjut.salu.share.R;
-import zjut.salu.share.base.AbsBaseActivity;
-import zjut.salu.share.base.AbsBaseActivityWithBar;
 import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.fragment.BestFragment;
 import zjut.salu.share.fragment.IndexFragment;
@@ -68,7 +51,6 @@ import zjut.salu.share.model.TripUser;
 import zjut.salu.share.utils.BroadcastReceiverUtil;
 import zjut.salu.share.utils.ColorDialogUtils;
 import zjut.salu.share.utils.CommonUtils;
-import zjut.salu.share.utils.ConstantUtil;
 import zjut.salu.share.utils.OkHttpUtils;
 import zjut.salu.share.utils.PreferenceUtils;
 import zjut.salu.share.utils.RequestURLs;
@@ -282,9 +264,9 @@ public class HomeActivity extends RxBaseActivity{
             drawerEmailTV.setText(user.getUseremail());
             drawerSignatureTV.setText(user.getUsignature());
         }else{
-            toolAvatarIV.setVisibility(View.GONE);
-            toolUsernameTV.setVisibility(View.GONE);
-            mToolBar.setTitle(getString(R.string.app_name));
+            toolAvatarIV.setImageResource(R.mipmap.ic_launcher);
+            toolUsernameTV.setText(R.string.app_name);
+            //mToolBar.setTitle(getString(R.string.app_name));
             drawerAvatarIV.setImageResource(R.drawable.ico_user_default);
             drawerUsernameTV.setText(R.string.plese_login_text);
             drawerEmailTV.setVisibility(View.GONE);
@@ -396,6 +378,10 @@ public class HomeActivity extends RxBaseActivity{
                     return true;
                 })
                 .build();
+        drawer.setGravity(Gravity.START);
+        drawer.setFullscreen(false);
+        Boolean loginStatus=preferences.getBoolean("loginStatus",false);
+        updateDrawerUI(loginStatus);
     }
 
     @Override

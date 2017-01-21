@@ -10,6 +10,15 @@ public class Provinces implements Serializable {
     private int provinceid;//主键，省份id
     private String provincename;//省份名
     private String provincekeys;//省份缩写
+    private Destination destination;//所属大洲
+
+    public Destination getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Destination destination) {
+        this.destination = destination;
+    }
 
     public int getProvinceid() {
         return provinceid;

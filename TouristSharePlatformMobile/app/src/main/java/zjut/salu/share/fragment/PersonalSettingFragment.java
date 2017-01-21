@@ -138,7 +138,7 @@ public class PersonalSettingFragment extends RxLazyFragment {
     private void readLoginInfo(){
         SharedPreferences preferences=PreferenceUtils.getPreferences();
         Boolean loginStatus=preferences.getBoolean("loginStatus",false);
-        if(loginStatus==true){
+        if(loginStatus){
             loginNowBtn.setVisibility(View.GONE);
             tv_username.setVisibility(View.VISIBLE);
             tv_fans_and_focus.setVisibility(View.VISIBLE);

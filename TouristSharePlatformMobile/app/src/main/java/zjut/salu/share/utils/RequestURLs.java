@@ -5,7 +5,7 @@ package zjut.salu.share.utils;
  */
 
 public class RequestURLs {
-    public static final String MAIN_URL="http://10.248.142.6:8080/TouristSharePlatform/";
+    public static final String MAIN_URL="http://192.168.0.104:8080/TouristSharePlatform/";
     public static final String SUBMIT_FEEDBACK_URL=MAIN_URL+"tripuser_submitUserFeedBack.do";//提交反馈意见
     public static final String SUBMIT_REGISTER_DATA=MAIN_URL+"tripuser_registerRemote.do";//手机端注册
     public static final String START_LOGIN_URL=MAIN_URL+"tripuser_loginMobile.do";//登录
@@ -41,4 +41,8 @@ public class RequestURLs {
     public static final String GET_USER_FULL_INFO = MAIN_URL+"tripuser_getUserCompleteInfo.do";//获取用户完整信息
     public static final String GET_ALL_BEST_CHOOSE_URL = MAIN_URL + "tripuser_getAllBestChoose.do";//获取所有精选数据
     public static final String LOCATE_CURRENT_POSITION = MAIN_URL+"tripuser_locateCurrentPosition.do";//获取当前所在城市
+    public static final String GET_ALL_ROUTES_URL = MAIN_URL + "tripuser_getAllRoutes.do";//根据cityid获取相关路线
+    public static final String GET_PROVINCES = MAIN_URL+"tripuser_getProvinces.do";//根据大洲名获取相关地区集合
+
+    public static final String GET_CITY_BY_PROVINCE_ID = MAIN_URL + "tripuser_getCityByPid.do";//根据地区id获取城市集合
 }
