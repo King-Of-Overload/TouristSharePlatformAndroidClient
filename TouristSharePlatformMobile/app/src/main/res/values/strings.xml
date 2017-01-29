@@ -249,4 +249,8 @@
     <string name="know_history_text">了解人文历史</string>
     <string name="can_not_miss_text">不可错过</string>
     <string name="value_to_do_text">必做的N件事</string>
+    <string name="route__strategy_text">路线攻略</string>
+    <string name="all_food_text">全部美食</string>
+    <string name="all_view_text">全部景点</string>
+    <string name="city_not_open_text">该城市暂未开放，敬请期待</string>
 </resources>

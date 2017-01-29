@@ -4,7 +4,6 @@
     android:id="@+id/activity_user_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/bacground"
     tools:context="zjut.salu.share.activity.UserInfoActivity">
 

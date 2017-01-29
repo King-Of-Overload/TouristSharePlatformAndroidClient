@@ -9,9 +9,26 @@ import java.io.Serializable;
 public class CityIndexRecommend implements Serializable{
     private String cityindexid;
     private String cityindexname;
-    private int cityindexcover;
+    private String cityindexcover;
     private String cityindexdes;
     private String cityindexcontent;
+    private City city;
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    public String getCityindexcover() {
+        return cityindexcover;
+    }
+
+    public void setCityindexcover(String cityindexcover) {
+        this.cityindexcover = cityindexcover;
+    }
 
     public String getCityindexid() {
         return cityindexid;
@@ -27,14 +44,6 @@ public class CityIndexRecommend implements Serializable{
 
     public void setCityindexname(String cityindexname) {
         this.cityindexname = cityindexname;
-    }
-
-    public int getCityindexcover() {
-        return cityindexcover;
-    }
-
-    public void setCityindexcover(int cityindexcover) {
-        this.cityindexcover = cityindexcover;
     }
 
     public String getCityindexdes() {

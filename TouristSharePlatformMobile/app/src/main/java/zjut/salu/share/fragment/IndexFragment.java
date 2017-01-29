@@ -19,6 +19,7 @@ import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerClickListener;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -33,18 +34,26 @@ import okhttp3.Callback;
 import okhttp3.Response;
 import rx.Observable;
 import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import zjut.salu.share.R;
 import zjut.salu.share.activity.AlbumActivity;
+import zjut.salu.share.activity.AlbumDetailActivity;
 import zjut.salu.share.activity.DestinationActivity;
 import zjut.salu.share.activity.LoginActivity;
 import zjut.salu.share.activity.LoveCardActivity;
 import zjut.salu.share.activity.ProductActivity;
 import zjut.salu.share.activity.SkillAcademyActivity;
+import zjut.salu.share.activity.SkillAcademyDetailActivity;
 import zjut.salu.share.activity.UserInfoActivity;
 import zjut.salu.share.activity.UserStrategyActivity;
+import zjut.salu.share.activity.UserStrategyDetailActivity;
 import zjut.salu.share.activity.index.LightStrategyActivity;
 import zjut.salu.share.greendao.IndexBannerBeanDao;
 import zjut.salu.share.model.IndexBannerBean;
+import zjut.salu.share.model.SkillAcademy;
+import zjut.salu.share.model.UserAlbums;
+import zjut.salu.share.model.UserStrategy;
 import zjut.salu.share.utils.GlideImageLoader;
 import zjut.salu.share.utils.OkHttpUtils;
 import zjut.salu.share.utils.PreferenceUtils;
@@ -58,6 +67,8 @@ import zjut.salu.share.utils.greendao.GreenDaoDBHelper;
  */
 
 public class IndexFragment extends RxLazyFragment {
+    public static final String ALBUM = "album";
+    public static final String SKILLACADEMY = "skillacademy";
     @Bind(R.id.index_header_banner) Banner banner;//滚动轮播图对象
     @Bind(R.id.index_grid_view)GridView indexGridView;//gridView对象
     @Bind(R.id.xref_index)XRefreshView refreshView;//刷新组件
@@ -74,6 +85,8 @@ public class IndexFragment extends RxLazyFragment {
     private IndexBannerBeanDao bannerBeanDao;
     private List<IndexBannerBean> beans=null;
     private int isRefresh=1;//是否为刷新
+
+    public static final String STRATEGY="strategy";
 
     @Override
     public int getLayoutResId() {
@@ -284,8 +297,77 @@ public class IndexFragment extends RxLazyFragment {
     private class IndexBannerClickListener implements OnBannerClickListener{
         @Override
         public void OnBannerClick(int position) {
-            ToastUtils.ShortToast("你选中了:"+position+"轮播图");
+            String type=bannerType[position-1];
+            String id=bannerId[position-1];
+            String title=titles.get(position-1);
+            switch (type){
+                case STRATEGY:{//攻略
+                    getBannerSingleData(STRATEGY,id);
+                    break;
+                }
+                case ALBUM:{//相册
+                    Intent intent=new Intent(context, AlbumDetailActivity.class);
+                    intent.putExtra("albumid",id);
+                    intent.putExtra("title",title);
+                    startActivity(intent);
+                    break;
+                }
+                case SKILLACADEMY:{//技法
+                    getBannerSingleData(SKILLACADEMY,id);
+                    break;
+                }
+            }
         }
+    }
+
+    /**
+     * 查找单个轮播图数据
+     * @param type 类型
+     * @param id id
+     * @return
+     */
+    private void getBannerSingleData(String type,String id){
+        String url="";
+        switch (type){
+            case STRATEGY:{//攻略
+                url=RequestURLs.GET_USER_STRATEGY_URL;
+                break;
+            }
+            case SKILLACADEMY:{//技法
+                url=RequestURLs.GET_SKILL_ACADEMY;
+                break;
+            }
+        }
+        List<Map<String,Object>> params=new ArrayList<>();
+        Map<String,Object> map=new HashMap<>();
+        map.put("id",id);
+        params.add(map);
+        Observable<String> observable=okHttpUtils.asyncPostRequest(params,url);
+        String finalUrl = url;
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {}
+
+                    @Override
+                    public void onError(Throwable e) {}
+                    @Override
+                    public void onNext(String result) {
+                        Gson gson=new Gson();
+                        if(finalUrl.equals(RequestURLs.GET_USER_STRATEGY_URL)){
+                            UserStrategy strategy=gson.fromJson(result,UserStrategy.class);
+                            Intent intent=new Intent(context, UserStrategyDetailActivity.class);
+                            intent.putExtra("user_strategy",strategy);
+                            startActivity(intent);
+                        }else{
+                            SkillAcademy academy=gson.fromJson(result,SkillAcademy.class);
+                            Intent intent=new Intent(context,SkillAcademyDetailActivity.class);
+                            intent.putExtra("skill_academy",academy);
+                            startActivity(intent);
+                        }
+                    }
+                });
     }
 
 

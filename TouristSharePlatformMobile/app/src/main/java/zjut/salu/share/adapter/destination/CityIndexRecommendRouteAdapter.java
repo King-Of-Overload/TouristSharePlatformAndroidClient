@@ -6,32 +6,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zjut.salu.share.R;
-import zjut.salu.share.model.CityIndexRecommend;
+import zjut.salu.share.model.Routes;
 import zjut.salu.share.utils.ImageLoaderOptionUtils;
+import zjut.salu.share.utils.ImageLoaderUtils;
 import zjut.salu.share.utils.RequestURLs;
-import zjut.salu.share.widget.CommonCircleImageView;
+import zjut.salu.share.widget.HorizontalListView;
 
-/**城市主页推荐
- * Created by Salu on 2017/1/20.
+/**城市首页推荐路线适配器
+ * Created by Salu on 2017/1/21.
  */
 
-public class CityIndexRecommendAdapter extends BaseAdapter {
-    private List<CityIndexRecommend> list;
+public class CityIndexRecommendRouteAdapter extends BaseAdapter {
+    private List<Routes> list;
     private LayoutInflater inflater;
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
 
-    public CityIndexRecommendAdapter(Context context, List<CityIndexRecommend> list, ImageLoader imageLoader) {
+    public CityIndexRecommendRouteAdapter(Context context, List<Routes> list, ImageLoader imageLoader) {
         this.list = list;
         inflater=LayoutInflater.from(context);
         this.imageLoader=imageLoader;
@@ -50,33 +53,32 @@ public class CityIndexRecommendAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return list.size();
+        return position;
     }
 
     class ViewHolder{
-        @Bind(R.id.tv_name)TextView name;
-        @Bind(R.id.cciv_cover)CommonCircleImageView imageView;
-        @Bind(R.id.tv_des)TextView des;
-        public ViewHolder(View v) {
-            ButterKnife.bind(this,v);
+        @Bind(R.id.iv_route_cover)ImageView coverIV;
+        @Bind(R.id.tv_route_name)TextView nameTV;
+        public ViewHolder(View view){
+            ButterKnife.bind(this,view);
         }
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if(convertView==null){
-            convertView=inflater.inflate(R.layout.item_city_index_recommend,null);
+            convertView=inflater.inflate(R.layout.item_city_index_recommend_route,null);
             viewHolder=new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         }else{
             viewHolder= (ViewHolder) convertView.getTag();
         }
-        CityIndexRecommend recommend=list.get(position);
-        viewHolder.name.setText(recommend.getCityindexname());
-        TextPaint paint=viewHolder.name.getPaint();
+        Routes route=list.get(position);
+        viewHolder.nameTV.setText(route.getRoutename());
+        TextPaint paint=viewHolder.nameTV.getPaint();
         paint.setFakeBoldText(true);
-        imageLoader.displayImage(RequestURLs.MAIN_URL+recommend.getCityindexcover(),viewHolder.imageView,options);
-        viewHolder.des.setText(recommend.getCityindexdes());
+        imageLoader.displayImage(RequestURLs.MAIN_URL+route.getRoutecover(),viewHolder.coverIV,options,new ImageLoaderUtils.ImageLoadingListenerImpl());
         return convertView;
     }
 }

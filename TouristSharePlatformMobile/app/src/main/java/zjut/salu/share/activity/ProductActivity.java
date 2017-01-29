@@ -106,7 +106,7 @@ public class ProductActivity extends RxBaseActivity{
     @Override
     public void initViews(Bundle savedInstanceState) {
 
-        mReference=new WeakReference<Activity>(this);
+        mReference=new WeakReference<>(this);
         dynamicBox=new DynamicBox(mReference.get(),mainView);
         DynamicBoxUtils.bindDynamicBox(dynamicBox,getString(R.string.hint_text),getString(R.string.server_exception_text),
                 getString(R.string.loading_now_text),new GetDataFailedClickListener());
@@ -146,12 +146,7 @@ public class ProductActivity extends RxBaseActivity{
 
         @Override
         public void onFailure(Call call, IOException e) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    dynamicBox.showExceptionLayout();
-                }
-            });
+            runOnUiThread(() -> dynamicBox.showExceptionLayout());
         }
 
         @Override
@@ -169,86 +164,80 @@ public class ProductActivity extends RxBaseActivity{
                     }
                     categories=new ArrayList<>();
                     categories=gson.fromJson(categoryString,new TypeToken<List<ProductCategory>>(){}.getType());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if(!categoryIsLoaded){
-                                categoryName=new ArrayList<>();
-                                categoryName.add("全部");
-                                for(ProductCategory c:categories){
-                                    categoryName.add(c.getPcategoryname());
-                                }
-                                secondCategoryName=new ArrayList<>();
-                                secondCategoryName.add("全部");
-                                final View constellationView = getLayoutInflater().inflate(R.layout.custom_layout, null);
-                                GridView constellation = ButterKnife.findById(constellationView, R.id.constellation);
-                                categoryAdapter = new MyConstellationAdapter(mReference.get(), categoryName);
-                                constellation.setAdapter(categoryAdapter);
-                                TextView okBtn = ButterKnife.findById(constellationView, R.id.ok);//确定按钮
-                                okBtn.setOnClickListener(new OkBtnClickListener());
-                                //二级分类
-                                final ListView secondView=new ListView(mReference.get());
-                                secondCategoryAdapter=new MyListDropDownAdapter(mReference.get(),secondCategoryName);
-                                secondView.setAdapter(secondCategoryAdapter);
-                                //新旧
-                                final ListView newOrOldView=new ListView(mReference.get());
-                                status=new String[]{"全新","99新","98新","95新","90新","80新及以下"};
-                                newOrNotAdapter=new MyListDropDownAdapter(mReference.get(),Arrays.asList(status));
-                                newOrOldView.setAdapter(newOrNotAdapter);
-                                popupViews.add(constellationView);
-                                popupViews.add(secondView);
-                                popupViews.add(newOrOldView);
-                                constellation.setOnItemClickListener(new CategoryItemClickListener());//一级分类选项点击事件
-                                secondView.setOnItemClickListener(new SecondCategoryClickListener());//二级分类点击事件
-                                newOrOldView.setOnItemClickListener(new NewOrOldItemClickListener());//新旧选项点击事件
-                                //init 显示区域
-                                contentView=new LinearLayout(mReference.get());
-                                contentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
-                                contentView.setOrientation(LinearLayout.VERTICAL);
-                                contentView.setGravity(Gravity.CENTER);
-                                refreshView=new XRefreshView(mReference.get());
-                                LinearLayout.LayoutParams refreshParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-                                refreshParams.setMargins(0,100,0,0);
-                                refreshView.setLayoutParams(refreshParams);
-                                if(DeviceUtils.hasJellyBean_MR1()){
-                                    refreshView.setId(View.generateViewId());
-                                }else{
-                                    refreshView.setId(StringUtils.generateViewId());
-                                }
-                                listView=new ListView(mReference.get());
-                                LinearLayout.LayoutParams listViewParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
-                                listView.setLayoutParams(listViewParams);
-                                listView.setDividerHeight(1);
-                                listView.setDivider(new ColorDrawable(getResources().getColor(R.color.gray)));
-                                if(DeviceUtils.hasJellyBean_MR1()){
-                                    listView.setId(View.generateViewId());
-                                }else{
-                                    listView.setId(StringUtils.generateViewId());
-                                }
-                                refreshView.addView(listView);
-                                contentView.addView(refreshView);
-                                listViewReference=new WeakReference<>(listView);
-                                dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
-                                categoryIsLoaded=true;
-                                refreshView.setXRefreshViewListener(new MyListViewRefreshListener());
+                    runOnUiThread(() -> {
+                        if(!categoryIsLoaded){
+                            categoryName=new ArrayList<>();
+                            categoryName.add("全部");
+                            for(ProductCategory c:categories){
+                                categoryName.add(c.getPcategoryname());
                             }
-                            //显示列表数据
-                            adapter=new ProductListAdapter(listViewReference.get(),products,mReference.get());
-                            listView.setAdapter(adapter);
-                            listView.setOnItemClickListener(new ProductListItemClickListener());
-                            dynamicBox.hideAll();
+                            secondCategoryName=new ArrayList<>();
+                            secondCategoryName.add("全部");
+                            final View constellationView = getLayoutInflater().inflate(R.layout.custom_layout, null);
+                            GridView constellation = ButterKnife.findById(constellationView, R.id.constellation);
+                            categoryAdapter = new MyConstellationAdapter(mReference.get(), categoryName);
+                            constellation.setAdapter(categoryAdapter);
+                            TextView okBtn = ButterKnife.findById(constellationView, R.id.ok);//确定按钮
+                            okBtn.setOnClickListener(new OkBtnClickListener());
+                            //二级分类
+                            final ListView secondView=new ListView(mReference.get());
+                            secondCategoryAdapter=new MyListDropDownAdapter(mReference.get(),secondCategoryName);
+                            secondView.setAdapter(secondCategoryAdapter);
+                            //新旧
+                            final ListView newOrOldView=new ListView(mReference.get());
+                            status=new String[]{"全新","99新","98新","95新","90新","80新及以下"};
+                            newOrNotAdapter=new MyListDropDownAdapter(mReference.get(),Arrays.asList(status));
+                            newOrOldView.setAdapter(newOrNotAdapter);
+                            popupViews.add(constellationView);
+                            popupViews.add(secondView);
+                            popupViews.add(newOrOldView);
+                            constellation.setOnItemClickListener(new CategoryItemClickListener());//一级分类选项点击事件
+                            secondView.setOnItemClickListener(new SecondCategoryClickListener());//二级分类点击事件
+                            newOrOldView.setOnItemClickListener(new NewOrOldItemClickListener());//新旧选项点击事件
+                            //init 显示区域
+                            contentView=new LinearLayout(mReference.get());
+                            contentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT));
+                            contentView.setOrientation(LinearLayout.VERTICAL);
+                            contentView.setGravity(Gravity.CENTER);
+                            refreshView=new XRefreshView(mReference.get());
+                            LinearLayout.LayoutParams refreshParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+                            refreshParams.setMargins(0,100,0,0);
+                            refreshView.setLayoutParams(refreshParams);
+                            if(DeviceUtils.hasJellyBean_MR1()){
+                                refreshView.setId(View.generateViewId());
+                            }else{
+                                refreshView.setId(StringUtils.generateViewId());
+                            }
+                            listView=new ListView(mReference.get());
+                            LinearLayout.LayoutParams listViewParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+                            listView.setLayoutParams(listViewParams);
+                            listView.setDividerHeight(1);
+                            listView.setDivider(new ColorDrawable(getResources().getColor(R.color.gray)));
+                            if(DeviceUtils.hasJellyBean_MR1()){
+                                listView.setId(View.generateViewId());
+                            }else{
+                                listView.setId(StringUtils.generateViewId());
+                            }
+                            refreshView.addView(listView);
+                            contentView.addView(refreshView);
+                            listViewReference=new WeakReference<>(listView);
+                            dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, contentView);
+                            categoryIsLoaded=true;
+                            refreshView.setXRefreshViewListener(new MyListViewRefreshListener());
                         }
+                        //显示列表数据
+                        adapter=new ProductListAdapter(listViewReference.get(),products,mReference.get());
+                        listView.setAdapter(adapter);
+                        listView.setOnItemClickListener(new ProductListItemClickListener());
+                        dynamicBox.hideAll();
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }else{
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        dynamicBox.showExceptionLayout();
-                        ToastUtils.ShortToast(R.string.server_down_text);
-                    }
+                runOnUiThread(() -> {
+                    dynamicBox.showExceptionLayout();
+                    ToastUtils.ShortToast(R.string.server_down_text);
                 });
             }
         }
@@ -357,18 +346,15 @@ public class ProductActivity extends RxBaseActivity{
 
         @Override
         public void onRefresh() {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    isNetworkAvailable=CommonUtils.isNetworkAvailable(mReference.get());
-                    if(isNetworkAvailable){
-                        getCategoryAndProductsData(cName,scName,pStatus);
-                        refreshView.stopRefresh();
-                        ToastUtils.ShortToast(R.string.refresh_text);
-                    }else{
-                        refreshView.stopRefresh();
-                        ToastUtils.ShortToast(R.string.no_network_connection);
-                    }
+            new Handler().postDelayed(() -> {
+                isNetworkAvailable=CommonUtils.isNetworkAvailable(mReference.get());
+                if(isNetworkAvailable){
+                    getCategoryAndProductsData(cName,scName,pStatus);
+                    refreshView.stopRefresh();
+                    ToastUtils.ShortToast(R.string.refresh_text);
+                }else{
+                    refreshView.stopRefresh();
+                    ToastUtils.ShortToast(R.string.no_network_connection);
                 }
             }, 2000);
         }
@@ -394,12 +380,7 @@ public class ProductActivity extends RxBaseActivity{
         mToolBar.setTitle(getText(R.string.index_trip_equipment_text));
         setSupportActionBar(mToolBar);
         mToolBar.setNavigationIcon(R.drawable.action_button_back_pressed_light);
-        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        mToolBar.setNavigationOnClickListener(v -> finish());
     }
 
     /**

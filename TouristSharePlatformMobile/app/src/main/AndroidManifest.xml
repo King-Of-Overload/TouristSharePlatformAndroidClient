@@ -75,7 +75,9 @@
         <activity android:name=".activity.index.LightStrategyActivity" />
         <activity android:name=".activity.destination.ProvinceActivity" />
         <activity android:name=".activity.destination.CityActivity" />
-        <activity android:name=".activity.destination.CityIndexActivity"></activity>
+        <activity android:name=".activity.destination.CityIndexActivity" />
+        <activity android:name=".activity.destination.CityIndexRecommendActivity" />
+        <activity android:name=".activity.destination.TourismAttractionActivity"></activity>
     </application>
 
 </manifest>

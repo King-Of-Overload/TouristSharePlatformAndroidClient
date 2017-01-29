@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/linear_city_index_main"
+    android:visibility="visible"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:background="@color/md_white_1000"
     android:layout_height="match_parent">
-<android.support.v7.widget.CardView
-    android:layout_width="match_parent"
-    android:paddingBottom="4dp"
-    android:layout_height="wrap_content">
-    <zjut.salu.share.widget.NoScrollGridView
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:id="@+id/grid_view_local_index"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:numColumns="5"
-        android:clickable="true"
-        android:background="@color/md_white_1000"
-        android:horizontalSpacing="2dp"
-        android:verticalSpacing="10dp"/>
-</android.support.v7.widget.CardView>
 
-    <android.support.v7.widget.CardView
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="120dp">
-        <LinearLayout
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="horizontal"
-            android:layout_gravity="center_vertical"
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
+            android:paddingBottom="4dp"
             android:layout_height="wrap_content">
+            <zjut.salu.share.widget.NoScrollGridView
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:id="@+id/grid_view_local_index"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:numColumns="5"
+                android:clickable="true"
+                android:background="@color/md_white_1000"
+                android:horizontalSpacing="2dp"
+                android:verticalSpacing="10dp"/>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
             <LinearLayout
-                android:id="@+id/linear_local_summary"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:orientation="horizontal"
-                android:background="@color/bacground"
-                android:layout_weight="1"
-                android:layout_width="@dimen/materialize_baseline_grid_x10"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <LinearLayout
+                    android:id="@+id/linear_local_summary"
+                    android:orientation="horizontal"
+                    android:background="@color/bacground"
+                    android:layout_weight="1"
+                    android:layout_width="@dimen/materialize_baseline_grid_x10"
+                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -71,60 +75,197 @@
 
 
 
-            <LinearLayout
-                android:id="@+id/linear_can_not_miss"
-                android:layout_marginLeft="10dp"
-                android:orientation="horizontal"
-                android:background="@color/bacground"
-                android:layout_weight="1"
-                android:layout_width="@dimen/materialize_baseline_grid_x10"
-                android:layout_height="wrap_content">
                 <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/tv_can_not_miss"
-                        android:layout_marginBottom="10dp"
-                        android:textSize="16sp"
-                        android:gravity="start"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/can_not_miss_text"
-                        />
-                    <TextView
-                        android:textSize="12sp"
+                    android:id="@+id/linear_can_not_miss"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="horizontal"
+                    android:background="@color/bacground"
+                    android:layout_weight="1"
+                    android:layout_width="@dimen/materialize_baseline_grid_x10"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:gravity="center"
+                        android:orientation="vertical"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/value_to_do_text"
-                        />
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/tv_can_not_miss"
+                            android:layout_marginBottom="10dp"
+                            android:textSize="16sp"
+                            android:gravity="start"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/can_not_miss_text"
+                            />
+                        <TextView
+                            android:textSize="12sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/value_to_do_text"
+                            />
 
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:src="@drawable/can_not_miss"
+                        />
                 </LinearLayout>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="100dp"
-                    android:src="@drawable/can_not_miss"
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <zjut.salu.share.widget.NoScrollGridView
+                android:id="@+id/horizontal_lv"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:numColumns="3"
+                android:clickable="true"
+                android:background="@color/md_white_1000"
+                android:horizontalSpacing="2dp"
+                android:verticalSpacing="10dp"/>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:visibility="visible"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_routes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/route__strategy_text"
+                    android:textSize="16sp"
+                    />
+                <zjut.salu.share.widget.HorizontalListView
+                    android:id="@+id/horizontal_lv_route"
+                    android:layout_width="match_parent"
+                    android:background="@color/md_white_1000"
+                    android:layout_height="180dp"
                     />
             </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <FrameLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
 
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/city_index_food_bac"
+                android:scaleType="fitXY"
+                />
+            <View
+                android:background="@color/black_alpha"
+                android:layout_width="match_parent"
+                android:alpha="0.5"
+                android:layout_height="150dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="精选 ☺ 美食"
+                android:layout_gravity="center"
+                android:textSize="20dp"
+                android:textColor="@color/md_white_1000"
+                />
+            <TextView
+                android:id="@+id/tv_look_all_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_white_bg"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/all_food_text"
+                android:textColor="@color/md_white_1000"
+                android:textSize="10sp" />
 
-<android.support.v7.widget.CardView
-    android:layout_marginTop="8dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <zjut.salu.share.widget.NoScrollGridView
-        android:id="@+id/horizontal_lv"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:numColumns="3"
-        android:clickable="true"
-        android:background="@color/md_white_1000"
-        android:horizontalSpacing="2dp"
-        android:verticalSpacing="10dp"/>
-</android.support.v7.widget.CardView>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/triangle"
+                android:layout_gravity="bottom|center"
+                android:scaleType="fitEnd"
+                />
+        </FrameLayout>
 
+        <zjut.salu.share.widget.NoScrollGridView
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="6dp"
+            android:id="@+id/lv_gallery_food"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:numColumns="4"
+            android:clickable="true"
+            android:horizontalSpacing="2dp"
+            android:verticalSpacing="10dp"/>
+
+        <FrameLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/good_view"
+                android:scaleType="fitXY"
+                />
+            <View
+                android:background="@color/black_alpha"
+                android:layout_width="match_parent"
+                android:alpha="0.5"
+                android:layout_height="150dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="精选 ☺ 景点"
+                android:layout_gravity="center"
+                android:textSize="20dp"
+                android:textColor="@color/md_white_1000"
+                />
+            <TextView
+                android:id="@+id/tv_look_all_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_white_bg"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/all_view_text"
+                android:textColor="@color/md_white_1000"
+                android:textSize="10sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/triangle"
+                android:layout_gravity="bottom|center"
+                android:scaleType="fitEnd"
+                />
+        </FrameLayout>
+        <zjut.salu.share.widget.NoScrollGridView
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="6dp"
+            android:id="@+id/lv_gallery_view"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:numColumns="4"
+            android:clickable="true"
+            android:horizontalSpacing="2dp"
+            android:verticalSpacing="10dp"/>
 
 </LinearLayout>
+
+

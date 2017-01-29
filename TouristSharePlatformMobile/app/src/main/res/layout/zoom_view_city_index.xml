@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ImageView android:id="@+id/iv_zoom_view_city_index"
     android:layout_width="match_parent"
     android:layout_height="80dp"

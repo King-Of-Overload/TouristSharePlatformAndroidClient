@@ -103,13 +103,10 @@ public class AllUserStrategyFragment extends Fragment {
     private class GetAllUserStrategyResponseCallback implements Callback{
         @Override
         public void onFailure(Call call, IOException e) {
-            mActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    noNetLayout.setVisibility(View.GONE);
-                    dynamicBox.showExceptionLayout();
-                    ToastUtils.ShortToast(R.string.server_down_text);
-                }
+            mActivity.runOnUiThread(() -> {
+                noNetLayout.setVisibility(View.GONE);
+                dynamicBox.showExceptionLayout();
+                ToastUtils.ShortToast(R.string.server_down_text);
             });
         }
 
@@ -118,28 +115,20 @@ public class AllUserStrategyFragment extends Fragment {
             if(response.isSuccessful()){
                 final String responseResult=response.body().string();
                 Log.i(TAG,responseResult);
-                mActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        noNetLayout.setVisibility(View.GONE);
-                        dynamicBox.hideAll();
-                        if(refreshView.getVisibility()==View.GONE){refreshView.setVisibility(View.VISIBLE);}
-                        if(allUserStrategyListView.getVisibility()==View.GONE){allUserStrategyListView.setVisibility(View.VISIBLE);}
-                        allStrategyList=new ArrayList<UserStrategy>();
-                        Gson gson=new Gson();
-                        allStrategyList=gson.fromJson(responseResult,new TypeToken<List<UserStrategy>>(){}.getType());
-                        adapter=new AllUserStrategyListAdapter(listViewWeakReference.get(),context,allStrategyList);
-                        allUserStrategyListView.setAdapter(adapter);
-                        allUserStrategyListView.setOnItemClickListener(new AllUserStrategyListViewItemClickListener());
-                    }
+                mActivity.runOnUiThread(() -> {
+                    noNetLayout.setVisibility(View.GONE);
+                    dynamicBox.hideAll();
+                    if(refreshView.getVisibility()==View.GONE){refreshView.setVisibility(View.VISIBLE);}
+                    if(allUserStrategyListView.getVisibility()==View.GONE){allUserStrategyListView.setVisibility(View.VISIBLE);}
+                    allStrategyList=new ArrayList<>();
+                    Gson gson=new Gson();
+                    allStrategyList=gson.fromJson(responseResult,new TypeToken<List<UserStrategy>>(){}.getType());
+                    adapter=new AllUserStrategyListAdapter(listViewWeakReference.get(),context,allStrategyList);
+                    allUserStrategyListView.setAdapter(adapter);
+                    allUserStrategyListView.setOnItemClickListener(new AllUserStrategyListViewItemClickListener());
                 });
             }else{
-                mActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        dynamicBox.showExceptionLayout();
-                    }
-                });
+                mActivity.runOnUiThread(() -> dynamicBox.showExceptionLayout());
             }
         }
     }
@@ -163,18 +152,15 @@ public class AllUserStrategyFragment extends Fragment {
     private class AllUserStrategyRefreshListener implements XRefreshView.XRefreshViewListener{
         @Override
         public void onRefresh() {
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    isNetWorkAlive=CommonUtils.isNetworkAvailable(context);
-                    if(isNetWorkAlive==true){
-                        getAllUserStrategyData();
-                        refreshView.stopRefresh();
-                        ToastUtils.ShortToast(R.string.refresh_text);
-                    }else{
-                        refreshView.stopRefresh();
-                        ToastUtils.ShortToast(R.string.no_network_connection);
-                    }
+            new Handler().postDelayed(() -> {
+                isNetWorkAlive=CommonUtils.isNetworkAvailable(context);
+                if(isNetWorkAlive==true){
+                    getAllUserStrategyData();
+                    refreshView.stopRefresh();
+                    ToastUtils.ShortToast(R.string.refresh_text);
+                }else{
+                    refreshView.stopRefresh();
+                    ToastUtils.ShortToast(R.string.no_network_connection);
                 }
             }, 2000);
         }

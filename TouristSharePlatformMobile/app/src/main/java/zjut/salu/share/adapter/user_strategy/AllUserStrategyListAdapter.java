@@ -92,7 +92,7 @@ public class AllUserStrategyListAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder=null;
+        ViewHolder viewHolder;
         if(convertView==null){
             convertView=inflater.inflate(R.layout.item_user_strategy,null);
             viewHolder=new ViewHolder(convertView);

@@ -18,11 +18,13 @@ public class RequestURLs {
     public static final String GET_ALL_USER_STRATEGY_URL=MAIN_URL+"userstrategy_getAllUserStrategy.do";//获取所有用户攻略
     public static final String GET_BOUTIQUE_USER_STRATEGY_URL=MAIN_URL+"userstrategy_getBoutiqueUserStrategy.do";//获取精品用户攻略
     public static final String GET_HIGH_QUALITY_USER_STRATEGY_URL=MAIN_URL+"userstrategy_getHighQualityUserStrategy.do";//获取精品用户攻略
+    public static final String GET_USER_STRATEGY_URL = MAIN_URL + "userstrategy_getSingleUserStrategy.do";//获取单个用户攻略
 
     public static final String GET_BANNER_BEAN_DATA_URL=MAIN_URL+"initialIndexBannerList.do";//获取主页轮播图数据
     public static final String GET_SKILL_ACADEMY_BANNER_DATA_URL=MAIN_URL+"skillacademy_initialSkillAcademyBannerList.do";//获取行摄攻略轮播图数据
 
     public static final String GET_SKILL_ACADEMY_DATA_URL=MAIN_URL+"skillacademy_getSkillAcademyByType.do";//获取技法学院数据
+    public static final String GET_SKILL_ACADEMY = MAIN_URL + "skillacademy_getSingleSkillAcademy.do";//获取单个技法学院对象
 
     public static final String GET_ALL_LOVE_POST_CARD_URL =MAIN_URL+"lovecard_getAllPostCardData.do" ;//获取所有明信片数据
 
@@ -45,4 +47,5 @@ public class RequestURLs {
     public static final String GET_PROVINCES = MAIN_URL+"tripuser_getProvinces.do";//根据大洲名获取相关地区集合
 
     public static final String GET_CITY_BY_PROVINCE_ID = MAIN_URL + "tripuser_getCityByPid.do";//根据地区id获取城市集合
+    public static final String GET_CITY_DATAS = MAIN_URL + "tripuser_getCityRelevantData.do";//获取城市主业相关数据
 }

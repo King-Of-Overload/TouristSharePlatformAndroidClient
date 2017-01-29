@@ -33,6 +33,7 @@ import rx.schedulers.Schedulers;
 import zjut.salu.share.R;
 import zjut.salu.share.activity.HomeActivity;
 import zjut.salu.share.activity.LocaltionWebViewActivity;
+import zjut.salu.share.activity.destination.TourismAttractionActivity;
 import zjut.salu.share.activity.local.RecommendRouteActivity;
 import zjut.salu.share.config.CuteTouristShareConfig;
 import zjut.salu.share.model.LocalInformation;
@@ -64,12 +65,12 @@ public class UserStrategyFragment extends RxLazyFragment{
     private int currentCityId;//当前城市id
     private LocalInformation currentInformation;
 
-    private static final String LOCATION_BRIEF = CuteTouristShareConfig.mInstance.getString(R.string.location_bref_text);
-    private static final String LOCATION_NOT_MISS =CuteTouristShareConfig.mInstance.getString(R.string.not_miss_text);
-    private static final String LOCATION_ARRIVE = CuteTouristShareConfig.mInstance.getString(R.string.arrive_text);
-    private static final String LOCATION_TRAFFIC = CuteTouristShareConfig.mInstance.getString(R.string.traffic_text);
-    private static final String LOCATION_GUIDE = CuteTouristShareConfig.mInstance.getString(R.string.guide_text);
-    private static final String LOCATION_TIPS = CuteTouristShareConfig.mInstance.getString(R.string.tips_text);
+    public static final String LOCATION_BRIEF = CuteTouristShareConfig.mInstance.getString(R.string.location_bref_text);
+    public static final String LOCATION_NOT_MISS =CuteTouristShareConfig.mInstance.getString(R.string.not_miss_text);
+    public static final String LOCATION_ARRIVE = CuteTouristShareConfig.mInstance.getString(R.string.arrive_text);
+    public static final String LOCATION_TRAFFIC = CuteTouristShareConfig.mInstance.getString(R.string.traffic_text);
+    public static final String LOCATION_GUIDE = CuteTouristShareConfig.mInstance.getString(R.string.guide_text);
+    public static final String LOCATION_TIPS = CuteTouristShareConfig.mInstance.getString(R.string.tips_text);
     @Override
     public int getLayoutResId() {
         return R.layout.fragment_user_strategy;
@@ -177,21 +178,45 @@ public class UserStrategyFragment extends RxLazyFragment{
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             switch (position){
                 case 0:{//美食
+                    Intent intent=new Intent(context, TourismAttractionActivity.class);
+                    intent.putExtra("type",0);
+                    intent.putExtra("title","美食");
+                    startActivity(intent);
                     break;
                 }
                 case 1:{//酒店
+                    Intent intent=new Intent(context, TourismAttractionActivity.class);
+                    intent.putExtra("type",1);
+                    intent.putExtra("title","酒店");
+                    startActivity(intent);
                     break;
                 }
                 case 2:{//景点
+                    Intent intent=new Intent(context, TourismAttractionActivity.class);
+                    intent.putExtra("type",2);
+                    intent.putExtra("title","景点");
+                    startActivity(intent);
                     break;
                 }
                 case 3:{//购物
+                    Intent intent=new Intent(context, TourismAttractionActivity.class);
+                    intent.putExtra("type",3);
+                    intent.putExtra("title","购物");
+                    startActivity(intent);
                     break;
                 }
                 case 4:{//娱乐
+                    Intent intent=new Intent(context, TourismAttractionActivity.class);
+                    intent.putExtra("type",4);
+                    intent.putExtra("title","娱乐");
+                    startActivity(intent);
                     break;
                 }
                 case 5:{//生活
+                    Intent intent=new Intent(context, TourismAttractionActivity.class);
+                    intent.putExtra("type",5);
+                    intent.putExtra("title","生活");
+                    startActivity(intent);
                     break;
                 }
             }
