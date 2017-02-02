@@ -48,4 +48,6 @@ public class RequestURLs {
 
     public static final String GET_CITY_BY_PROVINCE_ID = MAIN_URL + "tripuser_getCityByPid.do";//根据地区id获取城市集合
     public static final String GET_CITY_DATAS = MAIN_URL + "tripuser_getCityRelevantData.do";//获取城市主业相关数据
+
+    public static final String GET_TOURISM_DETAIL_CATEGORY_BY_TYPE = MAIN_URL + "tripuser_getTourismCategory.do";//根据类型获取景点分类数据
 }

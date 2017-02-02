@@ -39,6 +39,29 @@
     <dimen name="default_grow_margin">20dp</dimen>
     <dimen name="navigation_subtitle_secondary_text_size">14sp</dimen>
     <dimen name="navigation_avatar_size">74dp</dimen>
-
-
+    <dimen name="home_recommend_head_image_size">22dp</dimen>
+    <dimen name="default_tiny_text_size">12sp</dimen>
+    <dimen name="appbar_parallax_max_height">226dp</dimen>
+    <dimen name="head_image_bg_height">128dp</dimen>
+    <dimen name="app_bar_elevation">3dp</dimen>
+    <dimen name="tab_indicator_default_height">3dp</dimen>
+    <dimen name="floating_action_button_margin">16dp</dimen>
+    <dimen name="fab_margin_height">190dp</dimen>
+    <dimen name="fab_default_elevation">4dp</dimen>
+    <dimen name="floating_action_button_size_half">32dp</dimen>
+    <dimen name="video_details_margin_top">26dp</dimen>
+    <dimen name="default_small_padding">16sp</dimen>
+    <dimen name="video_info_mini_icons_size">12dp</dimen>
+    <dimen name="video_info_count_text_margin_start">4dp</dimen>
+    <dimen name="touch_raise">6dp</dimen>
+    <dimen name="user_avatar_margin">4dp</dimen>
+    <dimen name="user_name_min_width">72dp</dimen>
+    <dimen name="user_avatar_size">38dp</dimen>
+    <dimen name="user_tag_view_height">56dp</dimen>
+    <dimen name="action_bar_default_height">48dp</dimen>
+    <dimen name="mediacontroller_bottom_layout_center_margin">12dp</dimen>
+    <dimen name="mediacontroller_buttons_top_margin">2dp</dimen>
+    <dimen name="mediacontroller_bottom_layout_danmaku_padding">3dp</dimen>
+    <dimen name="circle_progress_view_small_size">56dp</dimen>
+    <dimen name="circle_progress_view_default_border_width">4dp</dimen>
 </resources>

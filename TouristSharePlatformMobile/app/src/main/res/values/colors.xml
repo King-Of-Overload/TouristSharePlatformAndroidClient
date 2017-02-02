@@ -74,4 +74,14 @@
     <color name="orange_500">#FF9800</color>
     <color name="focus_bg_color">@android:color/transparent</color>
     <color name="focus_text_color">#fb7299</color>
+    <color name="yellow_50">#FFD11B</color>
+    <color name="gray_80">#BEBBB4</color>
+    <color name="window_background">#eaeaea</color>
+    <color name="white_80">#FAFAFA</color>
+    <color name="bili_logo_pink_color">#fb7299</color>
+    <color name="pink_text_color">#fb7299</color>
+    <color name="gray_20">#B3B3B3</color>
+    <color name="green_300">#81C784</color>
+    <color name="media_controller_bg">#99000000</color>
+    <color name="white_30">#F2F2F2</color>
 </resources>

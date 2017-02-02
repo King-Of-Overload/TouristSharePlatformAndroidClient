@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--底部fragment按钮的单个布局文件-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:background="@color/md_white_1000"
+    android:padding="5dp"
+    >
+    <LinearLayout
+        android:id="@+id/linear_banngume_btn"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_iv_index"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/main_tab_imgInfo"
+            android:background="#0000"
+            android:clickable="false"
+            android:src="@drawable/ic_category_t15"
+            />
+
+        <TextView
+            android:layout_marginTop="6dp"
+            android:id="@+id/tv_banggumi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_alpha"
+            android:textSize="14sp"
+            android:text="@string/banggumi_text"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_text_btn"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_iv_personal_setting"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/main_tab_imgInfo"
+            android:background="#0000"
+            android:clickable="false"
+            android:src="@drawable/ic_category_t20"
+            />
+
+        <TextView
+            android:id="@+id/tv_text"
+            android:layout_marginTop="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_alpha"
+            android:textSize="14sp"
+            android:text="@string/edit_light_strategy_text"
+            />
+    </LinearLayout>
+
+</LinearLayout>

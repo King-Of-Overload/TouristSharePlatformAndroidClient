@@ -13,7 +13,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import zjut.salu.share.R;
 
-/**
+/**简单列表适配器
  * Created by Alan on 2016/11/8.
  */
 
@@ -65,7 +65,7 @@ public class MyListDropDownAdapter extends BaseAdapter {
         viewHolder.mText.setText(list.get(position));
         if (checkItemPosition != -1) {
             if (checkItemPosition == position) {
-                viewHolder.mText.setTextColor(context.getResources().getColor(R.color.drop_down_selected));
+                viewHolder.mText.setTextColor(context.getResources().getColor(R.color.colorAccent));
                 viewHolder.mText.setBackgroundResource(R.color.check_bg);
             } else {
                 viewHolder.mText.setTextColor(context.getResources().getColor(R.color.drop_down_unselected));

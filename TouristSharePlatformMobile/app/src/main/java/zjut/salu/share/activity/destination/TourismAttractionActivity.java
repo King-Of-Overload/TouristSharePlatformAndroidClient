@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yyydjk.library.DropDownMenu;
 
 import java.lang.ref.WeakReference;
@@ -24,11 +26,18 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.Bind;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import zjut.salu.share.R;
 import zjut.salu.share.adapter.product.MyConstellationAdapter;
 import zjut.salu.share.adapter.product.MyListDropDownAdapter;
 import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.model.TourismCategory;
+import zjut.salu.share.utils.OkHttpUtils;
+import zjut.salu.share.utils.RequestURLs;
+import zjut.salu.share.utils.ToastUtils;
 import zjut.salu.share.widget.CircleProgressView;
 
 public class TourismAttractionActivity extends RxBaseActivity {
@@ -46,14 +55,22 @@ public class TourismAttractionActivity extends RxBaseActivity {
     private WeakReference<Activity> mReference;
     private int currentType=0;//当前板块
     private String title="";//当前标题
+    private String type="";//当前类型
+
     private List<View> popupViews = new ArrayList<>();//弹出视图
     private MyListDropDownAdapter touristMainAdapter=null;
     private MyListDropDownAdapter touristCategoryAdapter=null;
     private MyListDropDownAdapter optionAdapter=null;
 
+    private ListView categoryListView;//详细分类列表
+
     private String[] headers;
     private List<Map<String,Object>> headerList;//美食，旅行
     private List<TourismCategory> tourismCategories=null;//详细分类集合
+    private List<String> tourismCategoryArray;//详细分类字符串集合
+    private String[] options;//其他选项内容
+
+    private OkHttpUtils okHttpUtils;
 
     @Override
     public int getLayoutId() {
@@ -62,6 +79,7 @@ public class TourismAttractionActivity extends RxBaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        okHttpUtils=new OkHttpUtils();
         mReference=new WeakReference<>(this);
         Intent intent=getIntent();
         currentType=intent.getIntExtra("type",0);
@@ -73,8 +91,7 @@ public class TourismAttractionActivity extends RxBaseActivity {
      * 初始化筛选数据
      */
     private void initDropDownList(){
-//        headers=new String[]{"方向/类型","详细分类","其它选项"};
-        headers=new String[]{"方向/类型"};
+        headers=new String[]{"方向/类型","详细分类","其它选项"};
         String[] dropType=new String[]{"food","hotel","view","shop","play","live"};
         String[] dropHeaders=new String[]{getString(R.string.food_text),getString(R.string.hotel_text),getString(R.string.view_text),
                 getString(R.string.shop_text),getString(R.string.play_text),getString(R.string.live_text)};
@@ -91,8 +108,14 @@ public class TourismAttractionActivity extends RxBaseActivity {
         placeListView.setAdapter(touristMainAdapter);
         popupViews.add(placeListView);
         //创建详细分类列表
-        ListView categoryListView=new ListView(mReference.get());
-        //touristCategoryAdapter=new MyListDropDownAdapter(mReference.get(),);
+        categoryListView=new ListView(mReference.get());
+        popupViews.add(categoryListView);
+        //创建其他筛选条件
+        options=new String[]{"默认排序","距离最近","评价最好","人均最低","人均最高"};
+        ListView optionListView=new ListView(mReference.get());
+        optionAdapter=new MyListDropDownAdapter(mReference.get(),Arrays.asList(options));
+        optionListView.setAdapter(optionAdapter);
+        popupViews.add(optionListView);
         //动态生成控件
         contentView=new LinearLayout(mReference.get());
         contentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -143,6 +166,83 @@ public class TourismAttractionActivity extends RxBaseActivity {
         refreshLayout.addView(frameLayout); //frame->refresh
         contentView.addView(refreshLayout);//将刷新控件添加到内容父控件中
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews,contentView);
+        progressView.spin();
+        //获取详细分类的数据
+        acquireTouristDetailListData(title);
+        getListData(type,tourismCategories.get(0).getTmcategoryid(),options[0]);
+    }
+
+    /**
+     * 获取列表数据
+     * @param categoryId  分类id
+     * @param option
+     */
+    private void getListData(String type,int categoryId,String option){
+
+    }
+
+    /**
+     * 获取详细分类数据
+     */
+    private void acquireTouristDetailListData(String title){
+        List<Map<String,Object>> params=new ArrayList<>();
+        switch (title){
+            case "美食":{
+                type="food";
+                break;
+            }
+            case "酒店":{
+                type="hotel";
+                break;
+            }
+            case "景点":{
+                type="view";
+                break;
+            }
+            case "购物":{
+                type="shop";
+                break;
+            }
+            case "娱乐":{
+                type="play";
+                break;
+            }
+            case "生活":{
+                type="live";
+                break;
+            }
+        }
+        Map<String,Object> map=new HashMap<>();
+        map.put("type",type);
+        params.add(map);
+        Observable<String> observable=okHttpUtils.asyncPostRequest(params, RequestURLs.GET_TOURISM_DETAIL_CATEGORY_BY_TYPE);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {}
+
+                    @Override
+                    public void onError(Throwable e) {
+                        runOnUiThread(()->{
+                            loadingFailedIV.setVisibility(View.VISIBLE);
+                            emptyIV.setVisibility(View.INVISIBLE);
+                            ToastUtils.ShortToast(R.string.server_down_text);
+                        });
+                    }
+
+                    @Override
+                    public void onNext(String result) {
+                        Gson gson=new Gson();
+                        tourismCategories=gson.fromJson(result,new TypeToken<List<TourismCategory>>(){}.getType());
+                        tourismCategoryArray=new ArrayList<>();
+                        for(TourismCategory tc:tourismCategories){
+                            tourismCategoryArray.add(tc.getTmcategoryname());
+                        }
+                        touristCategoryAdapter=new MyListDropDownAdapter(mReference.get(),tourismCategoryArray);
+                        categoryListView.setAdapter(touristCategoryAdapter);
+                    }
+                });
     }
 
     @Override
