@@ -14,7 +14,7 @@
         android:drawableTop="@drawable/tabbar_compose_idea"
         android:gravity="center_horizontal"
         android:paddingBottom="12dp"
-        android:text="文字" />
+        android:text="@string/trip_note_text" />
 
     <TextView
         android:id="@+id/more_window_online"
@@ -26,7 +26,7 @@
         android:drawableTop="@drawable/tabbar_compose_photo"
         android:gravity="center_horizontal"
         android:paddingBottom="12dp"
-        android:text="相册"/>
+        android:text="@string/send_album_text"/>
 
     <TextView
         android:id="@+id/more_window_delete"
@@ -37,7 +37,7 @@
         android:drawableTop="@drawable/tabbar_compose_camera"
         android:gravity="center_horizontal"
         android:paddingBottom="12dp"
-        android:text="拍摄"/>
+        android:text="@string/little_banggume_text"/>
 
     <ImageView
         android:id="@+id/center_music_window_close"

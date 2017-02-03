@@ -29,7 +29,7 @@ import zjut.salu.share.utils.FastBlur;
  * Created by Salu on 2016/12/6.
  */
 
-public class MoreWindow extends PopupWindow implements OnClickListener{
+public class MoreWindow extends PopupWindow{
     private String TAG = MoreWindow.class.getSimpleName();
     Activity mContext;
     private int mWidth;
@@ -39,9 +39,10 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
     private Bitmap overlay = null;
 
     private Handler mHandler = new Handler();
-
-    public MoreWindow(Activity context) {
+    private OnClickListener listener;
+    public MoreWindow(Activity context,OnClickListener listener) {
         mContext = context;
+        this.listener=listener;
     }
 
     public void init() {
@@ -120,7 +121,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
             if(child.getId() == R.id.center_music_window_close){
                 continue;
             }
-            child.setOnClickListener(this);
+            child.setOnClickListener(listener);//已修改
             child.setVisibility(View.INVISIBLE);
             mHandler.postDelayed(() -> {
                 child.setVisibility(View.VISIBLE);
@@ -141,7 +142,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
             if(child.getId() == R.id.center_music_window_close){
                 continue;
             }
-            child.setOnClickListener(this);
+            child.setOnClickListener(listener);
             mHandler.postDelayed(() -> {
                 child.setVisibility(View.VISIBLE);
                 ValueAnimator fadeAnim = ObjectAnimator.ofFloat(child, "translationY", 0, 600);
@@ -184,20 +185,20 @@ public class MoreWindow extends PopupWindow implements OnClickListener{
 
     }
 
-    @Override
-    public void onClick(View v) {//
-        switch (v.getId()) {
-            case R.id.more_window_local:
-                break;
-            case R.id.more_window_online:
-                break;
-            case R.id.more_window_delete:
-                break;
-
-            default:
-                break;
-        }
-    }
+//    @Override
+//    public void onClick(View v) {//底部菜单点击事件
+//        switch (v.getId()) {
+//            case R.id.more_window_local:
+//                break;
+//            case R.id.more_window_online:
+//                break;
+//            case R.id.more_window_delete:
+//                break;
+//
+//            default:
+//                break;
+//        }
+//    }
 
     public void destroy() {
         if (null != overlay) {

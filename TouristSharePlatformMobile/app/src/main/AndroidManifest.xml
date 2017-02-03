@@ -79,7 +79,14 @@
         <activity android:name=".activity.destination.CityIndexRecommendActivity" />
         <activity android:name=".activity.destination.TourismAttractionActivity" />
         <activity android:name=".activity.banggumi.BanggumiDetailActivity" />
-        <activity android:name=".activity.banggumi.BanggumiPlayerActivity"></activity>
+        <activity android:name=".activity.banggumi.BanggumiPlayerActivity" />
+        <activity android:name=".activity.lightstrategy.EditLightStrategy"/>
+        <activity
+            android:name="com.foamtrace.photopicker.PhotoPickerActivity"
+            android:theme="@style/PhotoPickerTheme"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name="com.foamtrace.photopicker.PhotoPreviewActivity"
+            android:theme="@style/PhotoPickerTheme"/>
     </application>
 
 </manifest>

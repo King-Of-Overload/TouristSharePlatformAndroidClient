@@ -39,6 +39,9 @@ import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.widget.MediaController;
 import zjut.salu.share.widget.VideoPlayerView;
 
+/**
+ * 视频播放器业务逻辑
+ */
 public class BanggumiPlayerActivity extends RxBaseActivity implements DanmukuSwitchListener, VideoBackListener {
     @Bind(R.id.sv_danmaku) IDanmakuView mDanmakuView;
     @Bind(R.id.playerView) VideoPlayerView mPlayerView;
@@ -127,7 +130,7 @@ public class BanggumiPlayerActivity extends RxBaseActivity implements DanmukuSwi
     public void loadData()
     {
         try {
-            URL url=new URL(RequestURLs.MAIN_URL+"banggumu/testtwo.rmvb");
+            URL url=new URL(RequestURLs.MAIN_URL+"banggumu/10506964-1.flv");
             mPlayerView.setVideoURI(Uri.parse(url.toString()));
             mPlayerView.setOnPreparedListener(mp -> {
                 mLoadingAnim.stop();

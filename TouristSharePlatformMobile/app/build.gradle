@@ -141,4 +141,6 @@ dependencies {
     compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.6.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.1'
     compile 'com.github.ctiao:DanmakuFlameMaster:0.5.6'
+
+    compile 'com.foamtrace:photopicker:1.0'
 }

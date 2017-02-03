@@ -277,4 +277,12 @@
     <string name="video_error_text_unknown">抱歉，该视频无法播放</string>
     <string name="video_error_title">无法播放视频</string>
     <string name="video_error_button">OK</string>
+    <string name="write_text_light_strategy_text">轻游记：写旅行笔记</string>
+    <string name="trip_note_text">旅行笔记</string>
+    <string name="send_album_text">发相册</string>
+    <string name="little_banggume_text">小视频</string>
+    <string name="type_content_text">请键入内容</string>
+    <string name="collect__pic_text">选择照片</string>
+    <string name="take_photo_text">拍一张</string>
+    <string name="no_camera_text">系统无相机</string>
 </resources>
