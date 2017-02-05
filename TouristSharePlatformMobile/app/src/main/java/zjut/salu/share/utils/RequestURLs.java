@@ -53,4 +53,5 @@ public class RequestURLs {
     public static final String GET_TOURISM_DETAIL_CATEGORY_BY_TYPE = MAIN_URL + "tripuser_getTourismCategory.do";//根据类型获取景点分类数据
 
     public static final String UPLOAD_TEXT_LIGHT_STRATEGY = MAIN_URL + "tripuser_uploadTextLightStrategy.do";//上传轻游记之旅行日记
+    public static final String GET_ALL_DIARY_LIGHT_STRATEGY = MAIN_URL + "tripuser_getAllDiaryLightStrategy.do";//获取所有旅行日记
 }

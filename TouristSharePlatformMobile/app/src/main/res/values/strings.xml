@@ -290,4 +290,5 @@
     <string name="light_content_null_text">旅行日记内容为空哦</string>
     <string name="waiting_uploading_now_text">正在发布,请稍后……</string>
     <string name="upload_sucess_text">发布成功!</string>
+    <string name="diary_detail_text">旅行日记详情</string>
 </resources>

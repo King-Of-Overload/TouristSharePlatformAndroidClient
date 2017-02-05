@@ -29,7 +29,7 @@ import zjut.salu.share.utils.StringUtils;
 import zjut.salu.share.widget.MyPullToRefreshView;
 import zjut.salu.share.widget.NineGridLayout;
 
-/**
+/**用户中心九宫格显示适配器
  * Created by Salu on 2016/11/19.
  */
 
@@ -71,7 +71,7 @@ public class UserInfoMainPageAdapter extends BaseAdapter {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-         ViewHolder viewHolder=null;
+         ViewHolder viewHolder;
         if(convertView==null){
             convertView=inflater.inflate(R.layout.item_user_info_main_page,null);
             viewHolder=new ViewHolder(convertView);

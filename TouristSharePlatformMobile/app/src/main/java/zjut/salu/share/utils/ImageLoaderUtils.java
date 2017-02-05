@@ -1,10 +1,13 @@
 package zjut.salu.share.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
@@ -52,6 +55,16 @@ public class ImageLoaderUtils {
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .build();
         return options;
+    }
+
+    public static void loadAvatarWithURL(Context context, String url, DiskCacheStrategy loadType,ImageView view){
+        Glide.with(context)
+                .load(url)
+                .centerCrop()
+                .dontAnimate()
+                .placeholder(R.drawable.ico_user_default)
+                .diskCacheStrategy(loadType)
+                .into(view);
     }
 
 

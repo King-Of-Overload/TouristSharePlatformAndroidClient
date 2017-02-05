@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_diary_light_strategy"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="zjut.salu.share.activity.lightstrategy.DiaryLightStrategyActivity">
+
+    <include layout="@layout/layout_toolbar"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/iv_text_light_strategy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+        <zjut.salu.share.widget.CircleProgressView
+            android:visibility="visible"
+            android:id="@+id/circle_progress"
+            android:layout_width="@dimen/circle_progress_view_default_size"
+            android:layout_height="@dimen/circle_progress_view_default_size"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/default_grow_margin"
+            app:matProg_barColor="?attr/colorPrimary"
+            app:matProg_barWidth="4dp"/>
+    </FrameLayout>
+</LinearLayout>

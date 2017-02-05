@@ -20,6 +20,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 import zjut.salu.share.R;
 import zjut.salu.share.activity.banggumi.BanggumiDetailActivity;
+import zjut.salu.share.activity.lightstrategy.DiaryLightStrategyActivity;
 import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.utils.GlideImageLoader;
 import zjut.salu.share.utils.RequestURLs;
@@ -66,7 +67,6 @@ public class LightStrategyActivity extends RxBaseActivity {
      */
     @OnClick(R.id.linear_banngume_btn)
     public void banggumiClick(View v){
-        //TODO:
         Intent intent=new Intent(mReference.get(), BanggumiDetailActivity.class);
         startActivity(intent);
     }
@@ -76,7 +76,8 @@ public class LightStrategyActivity extends RxBaseActivity {
      */
     @OnClick(R.id.linear_text_btn)
     public void textClick(View v){
-        //TODO:
+        Intent intent=new Intent(mReference.get(),DiaryLightStrategyActivity.class);
+        startActivity(intent);
     }
 
     /**
