@@ -40,5 +40,4 @@ public class AboutAuthorActivity extends RxBaseActivity {
 
     }
 
-
 }

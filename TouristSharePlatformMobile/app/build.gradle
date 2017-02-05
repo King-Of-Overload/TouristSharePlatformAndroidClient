@@ -55,6 +55,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    compile 'com.zhy:okhttputils:2.6.2'
     //compile 'com.github.xxl6097:okhttputils:2.4.1'
 //    compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:design:25.0.1'

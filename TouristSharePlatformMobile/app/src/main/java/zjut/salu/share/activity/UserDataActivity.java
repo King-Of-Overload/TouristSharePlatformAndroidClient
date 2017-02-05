@@ -369,7 +369,7 @@ public class UserDataActivity extends RxBaseActivity{
                     Map<String,Object> map=new HashMap<>();
                     map.put("userid",user.getUserid());
                     params.add(map);
-                    Observable<String> observable=httpUtils.uploadMutipleImages(params,new File(path),RequestURLs.UPLOAD_HEADER_IMAGE_MOBILE,"avatar_file");
+                    Observable<String> observable=httpUtils.uploadSingleImages(params,new File(path),RequestURLs.UPLOAD_HEADER_IMAGE_MOBILE,"avatar_file");
                     observable.subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Observer<String>() {

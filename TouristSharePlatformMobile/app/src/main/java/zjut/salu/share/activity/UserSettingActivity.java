@@ -76,7 +76,7 @@ public class UserSettingActivity extends RxBaseActivity{
      */
     @OnClick(R.id.btn_quit_login)
     public void quitLoginClickEvent(View v){
-        String title="小源提示";
+        String title=getString(R.string.xiaoyuan_alert_text);
         String content="您确定要退出吗?";
         Drawable drawable=getResources().getDrawable(R.drawable.alert_icon);
         int type=SweetAlertDialog.CUSTOM_IMAGE_TYPE;

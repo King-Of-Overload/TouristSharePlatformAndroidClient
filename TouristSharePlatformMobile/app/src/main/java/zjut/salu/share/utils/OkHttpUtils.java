@@ -182,7 +182,7 @@ public class OkHttpUtils {
     /**
      * 单图片上传
      */
-    public Observable<String> uploadMutipleImages(final List<Map<String,Object>> params,File file,final String requestURL,String imgName){
+    public Observable<String> uploadSingleImages(final List<Map<String,Object>> params,File file,final String requestURL,String imgName){
         return Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(final Subscriber<? super String> subscriber) {
@@ -191,7 +191,7 @@ public class OkHttpUtils {
                         client=new OkHttpClient();
                     }
                     RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
-                    RequestBody dataBody=null;
+                    RequestBody dataBody;
                     if(null!=params&&!params.isEmpty()){
                         MultipartBody.Builder builder=new MultipartBody.Builder();
                         builder.setType(MultipartBody.FORM);
