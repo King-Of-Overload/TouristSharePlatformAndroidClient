@@ -13,6 +13,16 @@
         <!--<item name="android:windowTranslucentNavigation">true</item>-->
 
     </style>
+
+    <style name="MediaPickerTheme" parent="Theme.AppCompat">
+        <!-- Support library compatibility -->
+        <item name="windowActionBarOverlay">true</item>
+        <item name="actionMenuTextColor">@color/picker_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:divider">@android:color/white</item>
+    </style>
+
+
     <style name="CollapsingToolbarTitleStyle.About" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/transparent</item>
     </style>

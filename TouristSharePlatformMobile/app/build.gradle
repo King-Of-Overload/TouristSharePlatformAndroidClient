@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -43,11 +44,13 @@ repositories{
 }
 
 dependencies {
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //compile 'com.android.support:appcompat-v7:25.0.0'
+    compile'com.android.support:multidex:1.0.1'
     compile 'com.android.support:appcompat-v7:25.0.1'
     //单元测试
     testCompile 'junit:junit:4.12'
@@ -144,4 +147,7 @@ dependencies {
     compile 'com.github.ctiao:DanmakuFlameMaster:0.5.6'
 
     compile 'com.foamtrace:photopicker:1.0'
+
+    compile 'com.edmodo:cropper:1.0.1'
+    compile 'com.github.mabbas007:TagsEditText:v0.95'
 }

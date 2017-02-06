@@ -42,6 +42,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 import zjut.salu.share.R;
+import zjut.salu.share.activity.banggumi.UploadBanggumeActivity;
 import zjut.salu.share.activity.lightstrategy.EditLightStrategy;
 import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.fragment.BestFragment;
@@ -696,7 +697,6 @@ public class HomeActivity extends RxBaseActivity{
                     case R.id.more_window_local:{//旅行笔记
                         if(PreferenceUtils.getBoolean("loginStatus",false)){
                             Intent intent=new Intent(mReference.get(),EditLightStrategy.class);
-                            intent.putExtra("currentUser",PreferenceUtils.acquireCurrentUser());
                             startActivity(intent);
                         }else{
                             ToastUtils.ShortToast(R.string.please_login_first_text);
@@ -710,6 +710,15 @@ public class HomeActivity extends RxBaseActivity{
                         break;
                     }
                     case R.id.more_window_delete:{//小视频
+                        if(PreferenceUtils.getBoolean("loginStatus",false)){
+                            Intent intent=new Intent(mReference.get(),UploadBanggumeActivity.class);
+                            startActivity(intent);
+                        }else{
+                            ToastUtils.ShortToast(R.string.please_login_first_text);
+                            Intent intent=new Intent(mReference.get(),LoginActivity.class);
+                            intent.putExtra("activity_name",mReference.get().getClass().getName());
+                            startActivity(intent);
+                        }
                         break;
                     }
                 }
@@ -720,20 +729,6 @@ public class HomeActivity extends RxBaseActivity{
         mMoreWindow.showMoreWindow(view,100);
     }
 
-    //    @Override
-//    public void onClick(View v) {//底部菜单点击事件
-//        switch (v.getId()) {
-//            case R.id.more_window_local:
-//                break;
-//            case R.id.more_window_online:
-//                break;
-//            case R.id.more_window_delete:
-//                break;
-//
-//            default:
-//                break;
-//        }
-//    }
 
 }
 

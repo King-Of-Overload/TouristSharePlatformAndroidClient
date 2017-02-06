@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/id_upload"
-        android:title="@string/upload_text"
+        android:title="@string/upload_video_text"
         app:showAsAction="ifRoom"
         android:orderInCategory="100"
         />

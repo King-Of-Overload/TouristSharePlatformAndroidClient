@@ -89,7 +89,12 @@
             android:name="com.foamtrace.photopicker.PhotoPreviewActivity"
             android:theme="@style/PhotoPickerTheme" />
         <activity android:name=".activity.lightstrategy.DiaryLightStrategyActivity" />
-        <activity android:name=".activity.lightstrategy.DiaryLightStrategyDetail"></activity>
+        <activity android:name=".activity.lightstrategy.DiaryLightStrategyDetail" />
+        <activity android:name=".activity.banggumi.UploadBanggumeActivity"/>
+        <activity
+            android:name=".activity.mediapicker.activities.MediaPickerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MediaPickerTheme" />
     </application>
 
 </manifest>

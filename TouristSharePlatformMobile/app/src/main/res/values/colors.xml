@@ -84,4 +84,5 @@
     <color name="green_300">#81C784</color>
     <color name="media_controller_bg">#99000000</color>
     <color name="white_30">#F2F2F2</color>
+    <color name="item_tag_background">@color/white</color>
 </resources>

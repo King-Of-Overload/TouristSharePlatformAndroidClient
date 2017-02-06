@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.multidex.MultiDexApplication;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.WindowManager;
@@ -30,7 +31,7 @@ import zjut.salu.share.utils.greendao.GreenDaoDBHelper;
  * Created by Alan(さる) on 2016/10/16.
  */
 
-public class CuteTouristShareConfig extends Application implements ThemeUtils.switchColor{
+public class CuteTouristShareConfig extends MultiDexApplication implements ThemeUtils.switchColor{
     public static CuteTouristShareConfig mInstance;//配置文件类对象
 
     public static CuteTouristShareConfig getInstance() {

@@ -35,6 +35,9 @@ import zjut.salu.share.utils.DisplayUtil;
 import zjut.salu.share.utils.ImageUtils;
 import zjut.salu.share.utils.SystemBarHelper;
 
+/**
+ * 小视频详情显示页面
+ */
 public class BanggumiDetailActivity extends RxBaseActivity {
     @Bind(R.id.toolbar) Toolbar mToolbar;
 

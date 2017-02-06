@@ -291,4 +291,19 @@
     <string name="waiting_uploading_now_text">正在发布,请稍后……</string>
     <string name="upload_sucess_text">发布成功!</string>
     <string name="diary_detail_text">旅行日记详情</string>
+    <string name="upload_banggume_text">上传旅行小视频</string>
+    <string name="enter_bannggume_title_text">请输入小视频标题</string>
+    <string name="enter_bannggume_content_text">请输入小视频简介</string>
+    <string name="choose_relevant_tags_text">请选择相关标签:</string>
+
+    <string name="waiting">请稍等&#8230;</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="ok">确定</string>
+    <string name="collect_banggume_text">选择视频</string>
+    <string name="no_banggume_selected_text">未选择视频文件</string>
+    <string name="personal_tags_text">没有合适的标签,自定义吧:</string>
+    <string name="enter_personal_tag_text">填写自定义标签,按回车隔开</string>
+    <string name="upload_text">发布</string>
+    <string name="upload_video_text">上传视频</string>
 </resources>
