@@ -180,7 +180,6 @@ public class EditLightStrategy extends RxBaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_edit_light_strategy,menu);
-
         return true;
     }
 

@@ -306,4 +306,6 @@
     <string name="enter_personal_tag_text">填写自定义标签,按回车隔开</string>
     <string name="upload_text">发布</string>
     <string name="upload_video_text">上传视频</string>
+    <string name="personal_tag_or_default_tags_not_null_text">不要忘了带上一个标签哦</string>
+    <string name="enter_video_file_text">不要忘了添加视频文件哦</string>
 </resources>

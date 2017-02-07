@@ -31,6 +31,7 @@ import zjut.salu.share.activity.mediapicker.MediaOptions;
 import zjut.salu.share.activity.mediapicker.activities.MediaPickerActivity;
 import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.utils.LogUtil;
+import zjut.salu.share.utils.ToastUtils;
 
 /**
  * 上传视频控制层
@@ -48,6 +49,7 @@ public class UploadBanggumeActivity extends RxBaseActivity implements TagsEditTe
 
     private WeakReference<Activity> mReference;
     private List<String> personalEditTagsList;//自定义标签集合
+    private String bannggumeURL;//视频地址
     @Override
     public int getLayoutId() {
         return R.layout.activity_upload_banggume;
@@ -83,6 +85,7 @@ public class UploadBanggumeActivity extends RxBaseActivity implements TagsEditTe
      */
     private void initTagFlow(){
         //TODO:需要对数据重新载入
+
         List<String> tags=new ArrayList<>();
         tags.add("有咩酱");tags.add("有咩酱");tags.add("有咩酱");tags.add("有咩酱");tags.add("有咩酱");tags.add("郑合惠子");
         flowLayout.setAdapter(new TagAdapter<String>(tags) {
@@ -107,8 +110,8 @@ public class UploadBanggumeActivity extends RxBaseActivity implements TagsEditTe
             if(resultCode==RESULT_OK){
                 List<MediaItem> mediaItemList=MediaPickerActivity.getMediaItemSelected(data);
                 MediaItem item=mediaItemList.get(0);
-                String path=item.getPathOrigin(mReference.get());
-                LogUtil.d(path);//  /storage/emulated/0/ttpod/mv/Rainbow - Sweet Dream - 标清.mp4
+                bannggumeURL=item.getPathOrigin(mReference.get());
+                LogUtil.d(bannggumeURL);//  /storage/emulated/0/ttpod/mv/Rainbow - Sweet Dream - 标清.mp4
             }
         }
     }
@@ -157,6 +160,22 @@ public class UploadBanggumeActivity extends RxBaseActivity implements TagsEditTe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.id_upload:{
+                if(titleET.getText().toString().equals("")){
+                    ToastUtils.ShortToast(R.string.enter_bannggume_title_text);
+                }else if(contentET.getText().toString().equals("")){
+                    ToastUtils.ShortToast(R.string.enter_bannggume_content_text);
+                }else if(personalEditTagsList.size()==0){//TODO:还需要判断系统标签
+                    ToastUtils.ShortToast(R.string.personal_tag_or_default_tags_not_null_text);
+                }else if(null==bannggumeURL||bannggumeURL.equals("")){
+                    ToastUtils.ShortToast(R.string.enter_video_file_text);
+                }else{
+                    //TODO:进行视频上传操作
+                }
+                break;
+            }
+        }
         return super.onOptionsItemSelected(item);
     }
 }
