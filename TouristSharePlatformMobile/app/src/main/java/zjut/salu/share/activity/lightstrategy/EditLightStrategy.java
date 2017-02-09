@@ -57,7 +57,7 @@ import static android.os.Environment.getExternalStorageDirectory;
  */
 public class EditLightStrategy extends RxBaseActivity {
     public static final int REQUEST_CAMERA_CODE = 11;
-    private static final int REQUEST_PREVIEW_CODE = 22;
+    public static final int REQUEST_PREVIEW_CODE = 22;
     @Bind(R.id.toolbar)Toolbar toolbar;
     @Bind(R.id.gridView)GridView gridView;
     @Bind(R.id.tv_content)EditText contentET;
@@ -201,11 +201,11 @@ public class EditLightStrategy extends RxBaseActivity {
                     //TODO:发送
                     progressView.setVisibility(View.VISIBLE);
                     progressView.spin();
-                    ToastUtils.LongToast(R.string.waiting_uploading_now_text);
+                    ToastUtils.ShortToast(R.string.waiting_uploading_now_text);
                     PostFormBuilder builder=OkHttpUtils.post();
                     for (String filePath:imagePaths){
                         File file=new File(filePath);//获取单个文件
-                        builder.addFile("diaryImage", StringUtils.formatDate(new Date(),"yyyyMMddHHmmss")+file.getName(),file);
+                        builder.addFile("diaryImages", StringUtils.formatDate(new Date(),"yyyyMMddHHmmss")+file.getName(),file);
                     }
                     builder.url(RequestURLs.UPLOAD_TEXT_LIGHT_STRATEGY);
                     builder.addParams("strategyContent",contentET.getText().toString());
@@ -223,7 +223,7 @@ public class EditLightStrategy extends RxBaseActivity {
                         @Override
                         public void onResponse(String response, int id) {
                             if(response.equals("success")){
-                                ToastUtils.ShortToast(R.string.upload_sucess_text);
+                                ToastUtils.LongToast(R.string.upload_sucess_text);
                                 finish();//关闭页面
                             }
                         }

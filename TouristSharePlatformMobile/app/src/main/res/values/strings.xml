@@ -289,12 +289,12 @@
     <string name="image_null_text">您还没有上传图片哦</string>
     <string name="light_content_null_text">旅行日记内容为空哦</string>
     <string name="waiting_uploading_now_text">正在发布,请稍后……</string>
-    <string name="upload_sucess_text">发布成功!</string>
+    <string name="upload_sucess_text">发布成功，么么哒!</string>
     <string name="diary_detail_text">旅行日记详情</string>
     <string name="upload_banggume_text">上传旅行小视频</string>
     <string name="enter_bannggume_title_text">请输入小视频标题</string>
     <string name="enter_bannggume_content_text">请输入小视频简介</string>
-    <string name="choose_relevant_tags_text">请选择相关标签:</string>
+    <string name="choose_relevant_tags_text">请选择相关标签:&#160;&#160;&#160;</string>
 
     <string name="waiting">请稍等&#8230;</string>
     <string name="cancel">取消</string>
@@ -308,4 +308,7 @@
     <string name="upload_video_text">上传视频</string>
     <string name="personal_tag_or_default_tags_not_null_text">不要忘了带上一个标签哦</string>
     <string name="enter_video_file_text">不要忘了添加视频文件哦</string>
+    <string name="not_fit_change_text">不合适?换一批</string>
+    <string name="collect_banggume_cover_text">选择封面</string>
+    <string name="has_chosen_video_text">已选择视频文件:</string>
 </resources>

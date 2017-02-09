@@ -68,7 +68,11 @@ public class DiaryLightStrategyActivity extends RxBaseActivity{
 
                     @Override
                     public void onError(Throwable e) {
-                        runOnUiThread(()->ToastUtils.ShortToast(R.string.server_down_text));
+                        runOnUiThread(()->{
+                            ToastUtils.ShortToast(R.string.server_down_text);
+                            progressView.stopSpinning();
+                        });
+
                     }
 
                     @Override
@@ -79,16 +83,17 @@ public class DiaryLightStrategyActivity extends RxBaseActivity{
                         for (DiaryLightStrategy s:diaryLightStrategies){
                             SpaceBean bean=new SpaceBean();
                             bean.setClickedNum(s.getClicknum());
-                            bean.setContent(s.getDiarycontent());
+                            bean.setDescription(s.getDiarycontent());
                             bean.setId(s.getDiaryid());
                             bean.setIsessence(s.getIsesence());
                             bean.setTime(s.getDiarytime());
                             bean.setUser(s.getUser());
                             List<String> imgList=new ArrayList<>();
-                            for(DiaryLightStrategyImage img:s.getImages()){
-                                imgList.add(RequestURLs.MAIN_URL+img.getDiaryimgurl());
+                            for(String img:s.getImages()){
+                                imgList.add(RequestURLs.MAIN_URL+img);
                             }
                             bean.setImageList(imgList);
+                            beanList.add(bean);
                         }
                         adapter=new UserInfoMainPageAdapter(beanList,mReference.get());
                         listView.setAdapter(adapter);

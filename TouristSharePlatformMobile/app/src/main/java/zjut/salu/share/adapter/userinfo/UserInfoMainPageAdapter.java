@@ -1,5 +1,6 @@
 package zjut.salu.share.adapter.userinfo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,11 +38,13 @@ public class UserInfoMainPageAdapter extends BaseAdapter {
     private List<SpaceBean> list=null;
     private LayoutInflater inflater=null;
     private ImageLoader imageLoader=null;
+    private Context context;
 
     public UserInfoMainPageAdapter(List<SpaceBean> list, Context context) {
         this.list = list;
         inflater=LayoutInflater.from(context);
         imageLoader=ImageLoader.getInstance();
+        this.context=context;
     }
 
     @Override
@@ -93,7 +96,7 @@ public class UserInfoMainPageAdapter extends BaseAdapter {
                 imgs.add(i);
             }
         }
-        viewHolder.nineGridLayout.setImagesData(imgs);
+        viewHolder.nineGridLayout.setImagesData(imgs,(Activity)context);
         return convertView;
     }
 }

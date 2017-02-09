@@ -8,20 +8,35 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import zjut.salu.share.R;
+import zjut.salu.share.adapter.userinfo.UserInfoMainPageAdapter;
 import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.model.NineImage;
+import zjut.salu.share.model.SpaceBean;
 import zjut.salu.share.model.lightstrategy.DiaryLightStrategy;
 import zjut.salu.share.model.lightstrategy.DiaryLightStrategyImage;
 import zjut.salu.share.utils.ImageLoaderUtils;
+import zjut.salu.share.utils.LogUtil;
+import zjut.salu.share.utils.OkHttpUtils;
 import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.utils.StringUtils;
+import zjut.salu.share.utils.ToastUtils;
 import zjut.salu.share.widget.NineGridLayout;
 
 /**
@@ -44,6 +59,7 @@ public class DiaryLightStrategyDetail extends RxBaseActivity {
     @Override
     public void initViews(Bundle savedInstanceState) {
         WeakReference<Activity> mReference = new WeakReference<>(this);
+        OkHttpUtils okHttpUtils = new OkHttpUtils();
         Intent intent=getIntent();
         DiaryLightStrategy diaryLightStrategy= (DiaryLightStrategy) intent.getSerializableExtra("diary_light_strategy");
         ImageLoaderUtils.loadAvatarWithURL(mReference.get(), RequestURLs.MAIN_URL+diaryLightStrategy.getUser().getHeaderimage()
@@ -54,12 +70,27 @@ public class DiaryLightStrategyDetail extends RxBaseActivity {
         List<NineImage> imgs=new ArrayList<>();
         for(int i=0;i<diaryLightStrategy.getImages().size();i++){
             NineImage nineImage=new NineImage();
-            DiaryLightStrategyImage strategyImage=diaryLightStrategy.getImages().get(i);
-            nineImage.setUrl(RequestURLs.MAIN_URL+strategyImage.getDiaryimgurl());
+            String strategyImage=diaryLightStrategy.getImages().get(i);
+            nineImage.setUrl(RequestURLs.MAIN_URL+strategyImage);
             nineImage.setPosition(i+"");
             imgs.add(nineImage);
         }
-        nineGridLayout.setImagesData(imgs);
+        nineGridLayout.setImagesData(imgs,mReference.get());
+        Map<String,Object> params=new HashMap<>();
+        params.put("diaryid",diaryLightStrategy.getDiaryid());
+        Observable<String> observable= okHttpUtils.asyncGetRequest(RequestURLs.INCREASE_DIARY_LIGHT_STRATEGY,params);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {}
+                    @Override
+                    public void onError(Throwable e) {}
+
+                    @Override
+                    public void onNext(String result) {LogUtil.d("success");}
+                });
+
     }
 
     @Override

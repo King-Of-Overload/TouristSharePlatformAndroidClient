@@ -32,6 +32,8 @@ public class NineGridLayout extends ViewGroup{
     private List listData;
     private int totalWidth;
 
+    private Activity activity;
+
     public NineGridLayout(Context context) {
         super(context);
     }
@@ -85,7 +87,7 @@ public class NineGridLayout extends ViewGroup{
         @Override
         public void onClick(View v) {
             //跳转到查看大图界面
-            Activity activity=UserInfoActivity.getUserInfoReference().get();
+            //Activity activity=UserInfoActivity.getUserInfoReference().get();
             Intent intent = new Intent(activity,UserInfoBigImageActivity.class);
             Bundle bundle=new Bundle();
             NineImage position= (NineImage) v.getTag();
@@ -125,7 +127,8 @@ public class NineGridLayout extends ViewGroup{
     }
 
 
-    public void setImagesData(List<NineImage> lists) {
+    public void setImagesData(List<NineImage> lists,Activity activity) {
+        this.activity=activity;
         if (lists == null || lists.isEmpty()) {
             return;
         }

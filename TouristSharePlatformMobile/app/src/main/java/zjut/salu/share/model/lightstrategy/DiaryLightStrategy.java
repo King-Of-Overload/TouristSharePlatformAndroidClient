@@ -14,10 +14,18 @@ public class DiaryLightStrategy implements Serializable{
     private String diaryid;
     private String diarycontent;
     private TripUser user;
-    private List<DiaryLightStrategyImage> images;
+    private List<String> images;
     private Date diarytime;
     private int clicknum;
     private int isesence;//是否热门
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
 
     public String getDiaryid() {
         return diaryid;
@@ -41,14 +49,6 @@ public class DiaryLightStrategy implements Serializable{
 
     public void setUser(TripUser user) {
         this.user = user;
-    }
-
-    public List<DiaryLightStrategyImage> getImages() {
-        return images;
-    }
-
-    public void setImages(List<DiaryLightStrategyImage> images) {
-        this.images = images;
     }
 
     public Date getDiarytime() {
