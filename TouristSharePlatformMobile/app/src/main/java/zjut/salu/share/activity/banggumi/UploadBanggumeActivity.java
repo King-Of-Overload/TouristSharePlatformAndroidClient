@@ -1,5 +1,6 @@
 package zjut.salu.share.activity.banggumi;
 
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import com.dinuscxj.progressbar.CircleProgressBar;
 import com.foamtrace.photopicker.PhotoPickerActivity;
 import com.foamtrace.photopicker.PhotoPreviewActivity;
 import com.foamtrace.photopicker.SelectModel;
@@ -24,6 +26,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
+import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.request.RequestCall;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -47,6 +50,7 @@ import butterknife.Bind;
 import butterknife.OnClick;
 import mabbas007.tagsedittext.TagsEditText;
 import okhttp3.Call;
+import okhttp3.Response;
 import rx.Observable;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -174,6 +178,7 @@ public class UploadBanggumeActivity extends RxBaseActivity implements TagsEditTe
 
                     @Override
                     public void onNext(String result) {
+                        chosenTags=new ArrayList<>();
                         Gson gson=new Gson();
                         tags=gson.fromJson(result,new TypeToken<List<BanggumeTag>>(){}.getType());
                         setFlowAdapter();
@@ -303,6 +308,7 @@ public class UploadBanggumeActivity extends RxBaseActivity implements TagsEditTe
                 }else if(null==bannggumeURL||bannggumeURL.equals("")){
                     ToastUtils.ShortToast(R.string.enter_video_file_text);
                 }else{
+                    progressView.setVisibility(View.VISIBLE);
                     progressView.spin();
                     ToastUtils.ShortToast(R.string.waiting_uploading_now_text);
                     PostFormBuilder builder= OkHttpUtils.post();
@@ -336,11 +342,13 @@ public class UploadBanggumeActivity extends RxBaseActivity implements TagsEditTe
                         public void onError(Call call, Exception e, int id) {
                             ToastUtils.ShortToast(R.string.server_down_text);
                             progressView.stopSpinning();
+                            progressView.setVisibility(View.INVISIBLE);
                         }
 
                         @Override
                         public void onResponse(String response, int id) {
                             if(response.equals("success")){
+                                progressView.setVisibility(View.INVISIBLE);
                                 ToastUtils.LongToast(R.string.upload_sucess_text);
                                 finish();
                             }
@@ -352,7 +360,6 @@ public class UploadBanggumeActivity extends RxBaseActivity implements TagsEditTe
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     private void loadAdapter(ArrayList<String> paths){
         if(imagePaths == null){

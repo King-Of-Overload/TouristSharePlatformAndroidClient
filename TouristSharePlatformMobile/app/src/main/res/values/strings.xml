@@ -311,4 +311,12 @@
     <string name="not_fit_change_text">不合适?换一批</string>
     <string name="collect_banggume_cover_text">选择封面</string>
     <string name="has_chosen_video_text">已选择视频文件:</string>
+    <string name="enter_search_content">输入搜索内容，喵</string>
+    <string name="trip_banggume_text">旅行小视频</string>
+    <string name="menu_banggume_hot_range_text">热度排序</string>
+    <string name="menu_banggume_new_range_text">最新投稿</string>
+    <string name="menu_banggume_collect_range_text">最多收藏</string>
+    <string name="menu_banggume_comment_range_text">最多评论</string>
+    <string name="menu_banggume_issense_range_text">精选内容</string>
+    <string name="menu_banggume_all_range_text">全部</string>
 </resources>

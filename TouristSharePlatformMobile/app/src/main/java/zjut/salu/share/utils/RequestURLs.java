@@ -57,4 +57,5 @@ public class RequestURLs {
     public static final String INCREASE_DIARY_LIGHT_STRATEGY = MAIN_URL + "tripuser_increaseDiaryLightStrategyClickNum.do";//旅行日记点击量
     public static final String UPLOAD_BANGGUME_LIGHT_STRATEGY = MAIN_URL + "tripuser_uploadBanggumeLightStrategy.do";//上传轻游记之视频文件
     public static final String GET_BANGGUME_TAGS = MAIN_URL + "tripuser_getBanggumeTags.do";//获取小视频tag
+    public static final String GET_BANGGUME_URL = MAIN_URL + "tripuser_getBanggumes.do";//有条件获取小视频列表
 }

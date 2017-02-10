@@ -19,6 +19,7 @@ import java.util.Arrays;
 import butterknife.Bind;
 import butterknife.OnClick;
 import zjut.salu.share.R;
+import zjut.salu.share.activity.banggumi.BanggumeActivity;
 import zjut.salu.share.activity.banggumi.BanggumiDetailActivity;
 import zjut.salu.share.activity.lightstrategy.DiaryLightStrategyActivity;
 import zjut.salu.share.base.RxBaseActivity;
@@ -67,7 +68,7 @@ public class LightStrategyActivity extends RxBaseActivity {
      */
     @OnClick(R.id.linear_banngume_btn)
     public void banggumiClick(View v){
-        Intent intent=new Intent(mReference.get(), BanggumiDetailActivity.class);
+        Intent intent=new Intent(mReference.get(), BanggumeActivity.class);
         startActivity(intent);
     }
 

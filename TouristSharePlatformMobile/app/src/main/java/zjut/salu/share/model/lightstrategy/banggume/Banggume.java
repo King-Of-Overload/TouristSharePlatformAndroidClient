@@ -1,6 +1,7 @@
 package zjut.salu.share.model.lightstrategy.banggume;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import zjut.salu.share.model.TripUser;
 
@@ -18,6 +19,15 @@ public class Banggume implements Serializable {
     private String bangumecover;
     private TripUser user;
     private int isesence;
+    private Date bangumedate;
+
+    public Date getBangumedate() {
+        return bangumedate;
+    }
+
+    public void setBangumedate(Date bangumedate) {
+        this.bangumedate = bangumedate;
+    }
 
     public String getBangumeid() {
         return bangumeid;

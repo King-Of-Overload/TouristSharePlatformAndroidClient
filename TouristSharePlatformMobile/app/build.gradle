@@ -150,4 +150,6 @@ dependencies {
 
     compile 'com.edmodo:cropper:1.0.1'
     compile 'com.github.mabbas007:TagsEditText:v0.95'
+
+    compile 'com.dinuscxj:circleprogressbar:1.1.1'
 }

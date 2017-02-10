@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/id_action_search"
+        android:icon="@drawable/ic_toolbar_menu_search"
+        android:orderInCategory="100"
+        android:title="搜索"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_banggume_all"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/menu_banggume_all_range_text"
+        />
+    <item
+        android:id="@+id/menu_banggume_hot"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/menu_banggume_hot_range_text"
+        />
+    <item
+        android:id="@+id/menu_banggume_new"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/menu_banggume_new_range_text"
+        />
+    <item
+        android:id="@+id/menu_banggume_collect"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/menu_banggume_collect_range_text"
+        />
+    <item
+        android:id="@+id/menu_banggume_comment"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/menu_banggume_comment_range_text"
+        />
+    <item
+        android:id="@+id/menu_banggume_issense"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/menu_banggume_issense_range_text"
+        />
+</menu>

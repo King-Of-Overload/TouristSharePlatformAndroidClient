@@ -155,7 +155,6 @@
 
     </LinearLayout>
 </zjut.salu.share.widget.MyScrollView>
-
         <zjut.salu.share.widget.CircleProgressView
             android:visibility="invisible"
             android:id="@+id/circle_progress"
@@ -164,6 +163,16 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/default_grow_margin"
             app:matProg_barColor="?attr/colorPrimary"
-            app:matProg_barWidth="4dp" />
+            app:matProg_barWidth="4dp"/>
+        <!--<com.dinuscxj.progressbar.CircleProgressBar-->
+            <!--android:visibility="invisible"-->
+            <!--android:id="@+id/circle_progress"-->
+            <!--android:layout_marginTop="@dimen/default_grow_margin"-->
+            <!--app:style="solid"-->
+            <!--android:layout_gravity="center"-->
+            <!--app:progress_text_color="@color/blue_color"-->
+            <!--app:progress_stroke_width="3dp"-->
+            <!--android:layout_width="@dimen/circle_progress_view_default_size"-->
+            <!--android:layout_height="@dimen/circle_progress_view_default_size" />-->
     </FrameLayout>
 </LinearLayout>
