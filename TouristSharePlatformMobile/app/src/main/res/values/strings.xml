@@ -319,4 +319,5 @@
     <string name="menu_banggume_comment_range_text">最多评论</string>
     <string name="menu_banggume_issense_range_text">精选内容</string>
     <string name="menu_banggume_all_range_text">全部</string>
+    <string name="relate_tags_text">相关标签：</string>
 </resources>

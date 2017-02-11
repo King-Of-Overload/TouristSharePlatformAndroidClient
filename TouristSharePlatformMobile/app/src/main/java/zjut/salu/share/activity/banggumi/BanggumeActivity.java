@@ -1,5 +1,6 @@
 package zjut.salu.share.activity.banggumi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -83,8 +84,20 @@ public class BanggumeActivity extends RxBaseActivity {
         return R.layout.activity_banggume;
     }
 
+    public static void launch(Activity activity, BanggumeTag banggumeTag,String currentOption,String searchValue){
+        Intent mIntent = new Intent(activity, BanggumeActivity.class);
+        mIntent.putExtra("banggumeTag",banggumeTag);
+        mIntent.putExtra("currentOption",currentOption);
+        mIntent.putExtra("searchValue",searchValue);
+        activity.startActivity(mIntent);
+    }
+
     @Override
     public void initViews(Bundle savedInstanceState) {
+        Intent intent=getIntent();
+        banggumeTag= (BanggumeTag) intent.getSerializableExtra("banggumeTag");
+        currentOption=intent.getStringExtra("currentOption");
+        searchValue=intent.getStringExtra("searchValue");
         initSearchView();
         mReference=new WeakReference<>(this);
         imageLoader=ImageLoader.getInstance();
@@ -108,17 +121,21 @@ public class BanggumeActivity extends RxBaseActivity {
      * 加载列表数据
      */
     private void loadListData(){
-        Map<String,Object> params=new HashMap<>();
-        if(null!=banggumeTag&&!banggumeTag.getBanggumetagname().equals("")){
-            params.put("banggumeTag",gson.toJson(banggumeTag));
+        List<Map<String,Object>> params=new ArrayList<>();
+        Map<String,Object> map=new HashMap<>();
+        if(null!=banggumeTag){
+            if(null!=banggumeTag.getBanggumetagname()){
+                map.put("banggumeTag",gson.toJson(banggumeTag));
+            }
         }
         if(null!=currentOption&&!currentOption.equals("")){
-            params.put("currentOption",currentOption);
+            map.put("currentOption",currentOption);
         }
         if(null!=searchValue&&!searchValue.equals("")){
-            params.put("searchValue",searchValue);
+            map.put("searchValue",searchValue);
         }
-        Observable<String> observable=okHttpUtils.asyncGetRequest(RequestURLs.GET_BANGGUME_URL,params);
+        params.add(map);
+        Observable<String> observable=okHttpUtils.asyncPostRequest(params,RequestURLs.GET_BANGGUME_URL);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
@@ -127,6 +144,7 @@ public class BanggumeActivity extends RxBaseActivity {
                         runOnUiThread(()->{
                             progressView.stopSpinning();
                             loadingFailedIV.setVisibility(View.INVISIBLE);
+                            refreshLayout.setRefreshing(false);
                         });
                     }
 
@@ -137,6 +155,7 @@ public class BanggumeActivity extends RxBaseActivity {
                             ToastUtils.ShortToast(R.string.server_down_text);
                             loadingFailedIV.setVisibility(View.VISIBLE);
                             emptyIV.setVisibility(View.INVISIBLE);
+                            refreshLayout.setRefreshing(false);
                         });
                     }
 
@@ -147,7 +166,8 @@ public class BanggumeActivity extends RxBaseActivity {
                         recyclerView.setLayoutManager(new LinearLayoutManager(mReference.get()));
                         recyclerView.setAdapter(adapter);
                         adapter.setOnItemClickListener((position, holder) -> {
-                            //TODO:跳转到banggume详情界面
+                            Banggume banggume=banggumeList.get(position);
+                            BanggumiDetailActivity.launch(mReference.get(),banggume);
                         });
                         recyclerView.addOnScrollListener(new MyRecycleViewScrollListener());
                     }
@@ -159,7 +179,7 @@ public class BanggumeActivity extends RxBaseActivity {
      */
     private void initTagFlow(){
         Map<String,Object> params=new HashMap<>();
-        params.put("num",8+"");
+        params.put("num",12+"");
         Observable<String> observable=okHttpUtils.asyncGetRequest(RequestURLs.GET_BANGGUME_TAGS,params);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -184,6 +204,7 @@ public class BanggumeActivity extends RxBaseActivity {
                             while(iterator.hasNext()){
                                 banggumeTag=tags.get(iterator.next());
                             }
+                            loadListData();
                             LogUtil.d(banggumeTag.getBanggumetagname());
                         });
                     }
@@ -269,7 +290,8 @@ public class BanggumeActivity extends RxBaseActivity {
             {
 
                 //TotalStationSearchActivity.launch(HomeActivity.this, query);
-                return false;
+                loadListData();
+                return true;
             }
 
             @Override

@@ -14,8 +14,10 @@ import java.util.List;
 
 import zjut.salu.share.R;
 import zjut.salu.share.adapter.helper.AbsRecyclerViewAdapter;
+import zjut.salu.share.config.CuteTouristShareConfig;
 import zjut.salu.share.model.lightstrategy.banggume.Banggume;
 import zjut.salu.share.utils.ImageLoaderOptionUtils;
+import zjut.salu.share.utils.NumberUtil;
 import zjut.salu.share.utils.RequestURLs;
 
 /**小视频列表显示适配器
@@ -48,10 +50,8 @@ public class BanggumeListRecycleAdapter extends AbsRecyclerViewAdapter{
             DisplayImageOptions options= ImageLoaderOptionUtils.getImgOptions();
             imageLoader.displayImage(RequestURLs.MAIN_URL+banggume.getBangumecover(),itemViewHolder.coverIV,options);
             itemViewHolder.titleTV.setText(banggume.getBangumename());
-            itemViewHolder.upNameTV.setText(banggume.getUser().getUsername());
-            itemViewHolder.tagTV.setText(banggume.getBangumetags());
-            itemViewHolder.clickNumTV.setText(banggume.getClicknum());
-            itemViewHolder.commentTV.setText("66");//TODO:此处需要修改评论数
+            itemViewHolder.clickNumTV.setText(NumberUtil.converString(banggume.getClicknum()));
+            itemViewHolder.commentTV.setText(NumberUtil.converString(66));
         }
     }
 
@@ -64,18 +64,14 @@ public class BanggumeListRecycleAdapter extends AbsRecyclerViewAdapter{
     private class ItemViewHolder extends ClickableViewHolder{
         ImageView coverIV;
         TextView titleTV;
-        TextView upNameTV;
-        TextView tagTV;
         TextView clickNumTV;
         TextView commentTV;
          ItemViewHolder(View itemView) {
             super(itemView);
-             coverIV=$(R.id.iv_banggume);
-             titleTV=$(R.id.tv_title);
-             upNameTV=$(R.id.tv_up);
-             tagTV=$(R.id.tv_tag_banggume);
-             clickNumTV=$(R.id.tv_click_num);
-             commentTV=$(R.id.tv_comment_num);
+             coverIV=$(R.id.item_img);
+             titleTV=$(R.id.item_title);
+             clickNumTV=$(R.id.item_play);
+             commentTV=$(R.id.item_review);
         }
     }
 

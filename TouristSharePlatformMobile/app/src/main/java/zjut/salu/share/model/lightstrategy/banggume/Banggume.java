@@ -2,6 +2,7 @@ package zjut.salu.share.model.lightstrategy.banggume;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import zjut.salu.share.model.TripUser;
 
@@ -20,6 +21,16 @@ public class Banggume implements Serializable {
     private TripUser user;
     private int isesence;
     private Date bangumedate;
+
+    private List<BanggumeTag> banggimeTagList;
+
+    public List<BanggumeTag> getBanggimeTagList() {
+        return banggimeTagList;
+    }
+
+    public void setBanggimeTagList(List<BanggumeTag> banggimeTagList) {
+        this.banggimeTagList = banggimeTagList;
+    }
 
     public Date getBangumedate() {
         return bangumedate;

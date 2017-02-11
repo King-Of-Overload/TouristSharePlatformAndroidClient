@@ -32,6 +32,7 @@ import rx.schedulers.Schedulers;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import zjut.salu.share.R;
 import zjut.salu.share.base.RxBaseActivity;
+import zjut.salu.share.model.lightstrategy.banggume.Banggume;
 import zjut.salu.share.myinterface.DanmukuSwitchListener;
 import zjut.salu.share.myinterface.VideoBackListener;
 import zjut.salu.share.utils.ConstantUtil;
@@ -62,6 +63,8 @@ public class BanggumiPlayerActivity extends RxBaseActivity implements DanmukuSwi
 
     private String title;
 
+    private Banggume banggume;
+
     private int LastPosition = 0;
 
     private String startText = "初始化播放器...";
@@ -78,6 +81,7 @@ public class BanggumiPlayerActivity extends RxBaseActivity implements DanmukuSwi
         {
             cid = intent.getStringExtra(ConstantUtil.BANGGUMI_ID);
             title = intent.getStringExtra(ConstantUtil.BANGGUMI_TITLE);
+            banggume= (Banggume) intent.getSerializableExtra("banggume");
         }
         initAnimation();
         initMediaPlayer();
@@ -130,7 +134,7 @@ public class BanggumiPlayerActivity extends RxBaseActivity implements DanmukuSwi
     public void loadData()
     {
         try {
-            URL url=new URL(RequestURLs.MAIN_URL+"banggumu/10506964-1.flv");
+            URL url=new URL(RequestURLs.MAIN_URL+banggume.getBangumeurl());
             mPlayerView.setVideoURI(Uri.parse(url.toString()));
             mPlayerView.setOnPreparedListener(mp -> {
                 mLoadingAnim.stop();
@@ -360,69 +364,14 @@ public class BanggumiPlayerActivity extends RxBaseActivity implements DanmukuSwi
         onBackPressed();
     }
 
-    public static void launch(Activity activity, String cid, String title)
+    public static void launch(Activity activity, String cid, String title, Banggume banggume)
     {
 
         Intent mIntent = new Intent(activity, BanggumiPlayerActivity.class);
         mIntent.putExtra(ConstantUtil.BANGGUMI_ID, cid);
         mIntent.putExtra(ConstantUtil.BANGGUMI_TITLE, title);
+        mIntent.putExtra("banggume",banggume);
         activity.startActivity(mIntent);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

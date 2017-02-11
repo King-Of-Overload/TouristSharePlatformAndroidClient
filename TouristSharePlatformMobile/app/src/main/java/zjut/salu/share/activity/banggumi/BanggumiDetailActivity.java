@@ -1,5 +1,7 @@
 package zjut.salu.share.activity.banggumi;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,21 +20,33 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.flyco.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
+import retrofit2.http.PATCH;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import zjut.salu.share.R;
 import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.event.AppBarStateChangeEvent;
 import zjut.salu.share.fragment.banggumi.BanggumeIndroductionFragment;
 import zjut.salu.share.fragment.banggumi.BanggumiCommentFragment;
+import zjut.salu.share.model.lightstrategy.banggume.Banggume;
 import zjut.salu.share.utils.CommonUtils;
 import zjut.salu.share.utils.DeviceUtils;
 import zjut.salu.share.utils.DisplayUtil;
 import zjut.salu.share.utils.ImageUtils;
+import zjut.salu.share.utils.OkHttpUtils;
+import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.utils.SystemBarHelper;
 
 /**
@@ -59,8 +73,16 @@ public class BanggumiDetailActivity extends RxBaseActivity {
 
     private List<Fragment> fragments = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
-    private String av;//标题
+    //private String av;//标题
     private String imgUrl;
+    private Banggume banggume;
+    private OkHttpUtils okHttpUtils;
+
+    public static void launch(Activity activity, Banggume banggume){
+        Intent mIntent = new Intent(activity, BanggumiDetailActivity.class);
+        mIntent.putExtra("banggume",banggume);
+        activity.startActivity(mIntent);
+    }
     @Override
     public int getLayoutId() {
         return R.layout.activity_banggumi_detail;
@@ -68,25 +90,22 @@ public class BanggumiDetailActivity extends RxBaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        //TODO:加载数据
-        av="【有咩酱】Hide and Seek";
-        mVideoPreview.setImageResource(R.drawable.bangumi_cover_test);
-        //加载封面
-        /*
-         Glide.with(VideoDetailsActivity.this)
-                .load(UrlHelper.getClearVideoPreviewUrl(imgUrl))
+        okHttpUtils=new OkHttpUtils();
+        Intent intent=getIntent();
+        banggume= (Banggume) intent.getSerializableExtra("banggume");
+         Glide.with(BanggumiDetailActivity.this)//加载封面
+                .load(RequestURLs.MAIN_URL+banggume.getBangumecover())
                 .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.drawable.bili_default_image_tv)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .placeholder(R.drawable.ico_user_default)
                 .dontAnimate()
                 .into(mVideoPreview);
-         */
+        increaseBanggumeClickNum();//更新点击量
         mFAB.setClickable(false);
         mFAB.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.gray_20)));
         mFAB.setTranslationY(-getResources().getDimension(R.dimen.floating_action_button_size_half));
-        //TODO:悬浮按钮点击事件跳转到播放界面
         mFAB.setOnClickListener(v -> BanggumiPlayerActivity.launch(BanggumiDetailActivity.this,
-                "此处填写视频id", "Hide and Seek"));
+                banggume.getBangumeid(), banggume.getBangumename(),banggume));
         mAppBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> setViewsTranslation(verticalOffset));
         mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeEvent()
         {
@@ -117,16 +136,32 @@ public class BanggumiDetailActivity extends RxBaseActivity {
         finishTask();
     }
 
+    private void increaseBanggumeClickNum(){//更新点击量
+        Map<String,Object> params=new HashMap<>();
+        params.put("banggumeId",banggume.getBangumeid());
+        Observable<String> observable=okHttpUtils.asyncGetRequest(RequestURLs.INCREASE_BANGGUME, params);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {}
+                    @Override
+                    public void onError(Throwable e) {}
+                    @Override
+                    public void onNext(String s) {}
+                });
+    }
+
     @Override
     public void finishTask() {
         mFAB.setClickable(true);
         mFAB.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorAccent)));
         mCollapsingToolbarLayout.setTitle("");
-        BanggumeIndroductionFragment indroductionFragment=BanggumeIndroductionFragment.newInstance(av);
+        BanggumeIndroductionFragment indroductionFragment=BanggumeIndroductionFragment.newInstance(banggume.getBangumename(),banggume);
         fragments.add(indroductionFragment);
-        BanggumiCommentFragment commentFragment=BanggumiCommentFragment.newInstance("此处传入视频id");
+        BanggumiCommentFragment commentFragment=BanggumiCommentFragment.newInstance(banggume.getBangumeid());
         fragments.add(commentFragment);
-        setPageTitle("6666");//初始化fragment侧滑标题
+        setPageTitle("6666");//初始化fragment侧滑标题，评论数
     }
 
     /**
@@ -214,7 +249,7 @@ public class BanggumiDetailActivity extends RxBaseActivity {
         //设置StatusBar透明
         SystemBarHelper.immersiveStatusBar(this);
         SystemBarHelper.setHeightAndPadding(this, mToolbar);
-        mAvText.setText(av);
+        mAvText.setText(banggume.getBangumename());
         mToolbar.setNavigationIcon(R.drawable.action_button_back_pressed_light);
         mToolbar.setNavigationOnClickListener(v->finish());
     }

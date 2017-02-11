@@ -251,7 +251,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/default_tiny_padding"
             android:layout_marginStart="@dimen/default_tiny_padding"
-            app:max_select="-1" />
+            app:max_select="1" />
 
         <View
             android:layout_width="match_parent"
@@ -274,7 +274,9 @@
 
         </RelativeLayout>
 
-
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
         <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle"
         android:layout_width="match_parent"
@@ -282,6 +284,23 @@
         android:clipToPadding="false"
         android:overScrollMode="never"
         android:scrollbars="none" />
+    <ImageView
+        android:id="@+id/iv_loading_failed_friend_focus"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/loading_failed"
+        />
+    <ImageView
+        android:id="@+id/iv_empty_friend_focus"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/empty"
+        />
+</FrameLayout>
 
 
     </LinearLayout>

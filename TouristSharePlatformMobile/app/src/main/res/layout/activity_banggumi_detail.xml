@@ -68,6 +68,8 @@
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/default_medium_text_size"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:visibility="gone" />
 
 

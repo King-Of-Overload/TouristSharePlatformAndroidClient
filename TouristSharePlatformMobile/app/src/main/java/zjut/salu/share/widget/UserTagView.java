@@ -3,6 +3,7 @@ package zjut.salu.share.widget;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
@@ -17,6 +18,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import zjut.salu.share.R;
+import zjut.salu.share.activity.UserInfoActivity;
+import zjut.salu.share.utils.PreferenceUtils;
 
 /**用户Tag自定义View
  * Created by Salu on 2017/1/29.
@@ -108,7 +111,7 @@ public class UserTagView extends FrameLayout{
         return this.userNameText;
     }
 
-    public void setUpWithInfo(Activity activity, String name, String avatarUrl)
+    public void setUpWithInfo(Activity activity, String name, String avatarUrl,String userid)
     {
 
         this.activity = activity;
@@ -123,6 +126,17 @@ public class UserTagView extends FrameLayout{
                 .placeholder(R.drawable.ico_user_default)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(avatarView);
+        avatarView.setOnClickListener(v -> {
+            Intent intent=new Intent(activity, UserInfoActivity.class);
+            intent.putExtra("userid",userid);
+            String currentUser= PreferenceUtils.getString("userid","");
+            if(currentUser.equals(userid)){
+                intent.putExtra("isCurrentUser",true);
+            }else{
+                intent.putExtra("isCurrentUser",false);
+            }
+            activity.startActivity(intent);
+        });
     }
 
     @Override

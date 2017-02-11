@@ -58,4 +58,7 @@ public class RequestURLs {
     public static final String UPLOAD_BANGGUME_LIGHT_STRATEGY = MAIN_URL + "tripuser_uploadBanggumeLightStrategy.do";//上传轻游记之视频文件
     public static final String GET_BANGGUME_TAGS = MAIN_URL + "tripuser_getBanggumeTags.do";//获取小视频tag
     public static final String GET_BANGGUME_URL = MAIN_URL + "tripuser_getBanggumes.do";//有条件获取小视频列表
+    public static final String INCREASE_BANGGUME = MAIN_URL + "tripuser_increaseBanggumeClickNum.do";//小视频点击量增加
+    public static final String LOAD_RELATE_BANGGUME = MAIN_URL + "tripuser_loadRelateBanggume.do";//加载相关小视频信息
+    public static final String LOAD_LIGHT_STRATEGY_INDEX_DATA = MAIN_URL + "tripuser_loadLightStrategyIndexData.do";//加载轻游记主页数据
 }

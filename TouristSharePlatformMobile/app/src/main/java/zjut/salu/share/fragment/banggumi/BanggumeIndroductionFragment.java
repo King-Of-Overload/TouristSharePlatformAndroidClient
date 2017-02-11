@@ -1,17 +1,50 @@
 package zjut.salu.share.fragment.banggumi;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import butterknife.Bind;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import zjut.salu.share.R;
+import zjut.salu.share.activity.banggumi.BanggumeActivity;
+import zjut.salu.share.activity.banggumi.BanggumiDetailActivity;
+import zjut.salu.share.adapter.lightstrategy.BanggumeListRecycleAdapter;
+import zjut.salu.share.event.MyRecycleViewScrollListener;
 import zjut.salu.share.fragment.RxLazyFragment;
+import zjut.salu.share.model.lightstrategy.banggume.Banggume;
+import zjut.salu.share.model.lightstrategy.banggume.BanggumeTag;
 import zjut.salu.share.utils.ConstantUtil;
+import zjut.salu.share.utils.LogUtil;
 import zjut.salu.share.utils.NumberUtil;
+import zjut.salu.share.utils.OkHttpUtils;
 import zjut.salu.share.utils.RequestURLs;
+import zjut.salu.share.utils.ToastUtils;
 import zjut.salu.share.widget.UserTagView;
 
 /**视频详情fragment
@@ -29,15 +62,25 @@ public class BanggumeIndroductionFragment extends RxLazyFragment{
     @Bind(R.id.tags_layout) TagFlowLayout mTagFlowLayout;
     @Bind(R.id.recycle) RecyclerView mRecyclerView;
     @Bind(R.id.layout_video_related) RelativeLayout mVideoRelatedLayout;
+    @Bind(R.id.iv_loading_failed_friend_focus)ImageView loadingFailedIV;
+    @Bind(R.id.iv_empty_friend_focus)ImageView emptyIV;
 
     private String av;
+    private Banggume banggume;
+    private List<Banggume> relateBanggumeList;
+    private Context context;
+    private OkHttpUtils okHttpUtils;
+    private BanggumeListRecycleAdapter adapter;
+    private WeakReference<RecyclerView> recyclerReference;
+    private ImageLoader imageLoader;
 
-    public static BanggumeIndroductionFragment newInstance(String aid)
+    public static BanggumeIndroductionFragment newInstance(String aid, Banggume banggume)
     {
 
         BanggumeIndroductionFragment fragment = new BanggumeIndroductionFragment();
         Bundle bundle = new Bundle();
         bundle.putString(ConstantUtil.BANGGUMI_TITLE, aid);
+        bundle.putSerializable("banggume",banggume);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -53,9 +96,12 @@ public class BanggumeIndroductionFragment extends RxLazyFragment{
     @Override
     public void finishCreateView(Bundle state)
     {
-
+        context=getActivity();
+        recyclerReference=new WeakReference<>(mRecyclerView);
+        imageLoader=ImageLoader.getInstance();
+        okHttpUtils=new OkHttpUtils();
         av = getArguments().getString(ConstantUtil.BANGGUMI_TITLE);
-        //TODO: loadData();访问网络
+        banggume= (Banggume) getArguments().getSerializable("banggume");
         loadData();
     }
 
@@ -63,8 +109,7 @@ public class BanggumeIndroductionFragment extends RxLazyFragment{
     @Override
     protected void loadData()
     {
-
-        //TODO:
+        //TODO:联网获取额外数据
         finishTask();
     }
 
@@ -75,47 +120,95 @@ public class BanggumeIndroductionFragment extends RxLazyFragment{
         //设置视频标题
         mTitleText.setText(av);
         //设置视频播放数量
-        mPlayTimeText.setText(NumberUtil.converString(1234));
+        mPlayTimeText.setText(NumberUtil.converString(banggume.getClicknum()));
         //设置视频弹幕数量
-        mReviewCountText.setText(NumberUtil.converString(1234));
+        mReviewCountText.setText(NumberUtil.converString(1234));//TODO:评论数
         //设置Up主信息
-        mDescText.setText("一直觉得这首歌很难表现能表达里面的情感，可能每个人的理解都不一样，我自己认为是循序渐进的迷失自我→打开心结→找到自我的过程，所以试着这样去表现了，一开始有点苦瓜脸希望别介意....UP主舞技还有很多不足，与大家一起努力，共勉。");
+        mDescText.setText(banggume.getBangumecontent());
         mAuthorTagView.setUpWithInfo(getActivity(),
-                "有咩酱",
-                RequestURLs.MAIN_URL+"images/headerImages/zhenghehuizi.jpg");
+                banggume.getUser().getUsername(),
+                RequestURLs.MAIN_URL+banggume.getUser().getHeaderimage(),banggume.getUser().getUserid());
         //设置分享 收藏 投币数量
         mShareNum.setText(NumberUtil.converString(66));
-        mFavNum.setText(NumberUtil.converString(66));
+        mFavNum.setText(NumberUtil.converString(66));//TODO:收藏数量
         //设置视频tags
         setVideoTags();
         //设置视频相关
         setVideoRelated();
     }
 
-
+    /**
+     * 加载相关小视频
+     */
     private void setVideoRelated()
     {
-        //TODO:加载相关视频 recycleview
+        Gson gson=new Gson();
+        List<Map<String,Object>> params=new ArrayList<>();
+        Map<String,Object> map=new HashMap<>();
+        map.put("banggumeId",banggume.getBangumeid());
+        map.put("tags",banggume.getBangumetags());
+        map.put("userid",banggume.getUser().getUserid());
+        params.add(map);
+        Observable<String> observable=okHttpUtils.asyncPostRequest(params,RequestURLs.LOAD_RELATE_BANGGUME);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {
+                        ((Activity)context).runOnUiThread(()->{
+                            loadingFailedIV.setVisibility(View.INVISIBLE);
+                        });
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ((Activity)context).runOnUiThread(()->{
+                            ToastUtils.ShortToast(R.string.server_down_text);
+                            loadingFailedIV.setVisibility(View.VISIBLE);
+                            emptyIV.setVisibility(View.INVISIBLE);
+                        });
+                    }
+
+                    @Override
+                    public void onNext(String result) {
+                        Gson gson=new Gson();
+                        relateBanggumeList=gson.fromJson(result,new TypeToken<List<Banggume>>(){}.getType());
+                        adapter=new BanggumeListRecycleAdapter(recyclerReference.get(),relateBanggumeList,imageLoader);
+                        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+                        mRecyclerView.setAdapter(adapter);
+                        adapter.setOnItemClickListener((position, holder) -> {
+                            Banggume banggume=relateBanggumeList.get(position);
+                            BanggumiDetailActivity.launch((Activity) context,banggume);
+                        });
+                        mRecyclerView.addOnScrollListener(new MyRecycleViewScrollListener());
+                        if(relateBanggumeList.size()==0){
+                            emptyIV.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
     }
 
+    /**
+     * 加载视频tag
+     */
     private void setVideoTags()
     {
-
-        //TODO:获取tag信息 List<String> tags = mVideoDetailsInfo.getTags();
-//        mTagFlowLayout.setAdapter(new TagAdapter<String>(tags)
-//        {
-//
-//            @Override
-//            public View getView(FlowLayout parent, int position, String s)
-//            {
-//
-//                TextView mTags = (TextView) LayoutInflater.from(getActivity())
-//                        .inflate(R.layout.layout_tags_item, parent, false);
-//                mTags.setText(s);
-//
-//                return mTags;
-//            }
-//        });
+        List<BanggumeTag> tags=banggume.getBanggimeTagList();
+        mTagFlowLayout.setAdapter(new TagAdapter<BanggumeTag>(tags) {
+            @Override
+            public View getView(FlowLayout parent, int position, BanggumeTag banggumeTag) {
+                TextView mTags = (TextView) LayoutInflater.from(getActivity())
+                        .inflate(R.layout.layout_tags_item, parent, false);
+                mTags.setText(banggumeTag.getBanggumetagname());
+                return mTags;
+            }
+        });
+        mTagFlowLayout.setOnSelectListener(selectPosSet -> {
+            Iterator<Integer> iterator=selectPosSet.iterator();
+            while(iterator.hasNext()){
+                BanggumeActivity.launch((Activity) context,tags.get(iterator.next()),"","");
+            }
+        });
     }
 
     @OnClick(R.id.btn_share)

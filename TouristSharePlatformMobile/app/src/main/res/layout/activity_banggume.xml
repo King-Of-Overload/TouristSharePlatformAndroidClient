@@ -6,21 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/bacground"
     android:fitsSystemWindows="true"
     tools:context="zjut.salu.share.activity.banggumi.BanggumeActivity">
 
     <include layout="@layout/layout_toolbar"/>
-    <FrameLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <android.support.v4.widget.SwipeRefreshLayout
-                android:id="@+id/swipe_view"
+        android:layout_height="wrap_content">
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
             <com.zhy.view.flowlayout.TagFlowLayout
                 android:id="@+id/tags_layout"
                 android:layout_width="match_parent"
@@ -30,13 +31,13 @@
                 android:layout_marginTop="6dp"
                 app:max_select="1"
                 />
+
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            </android.support.v4.widget.SwipeRefreshLayout>
-        </LinearLayout>
+                    android:layout_height="match_parent"/>
+                  </LinearLayout>
         <zjut.salu.share.widget.CircleProgressView
             android:id="@+id/circle_progress"
             android:layout_width="@dimen/circle_progress_view_default_size"
@@ -62,4 +63,5 @@
             android:src="@drawable/empty"
             />
     </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
