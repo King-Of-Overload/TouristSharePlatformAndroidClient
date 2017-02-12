@@ -8,7 +8,12 @@
         android:orderInCategory="100"
         android:title="离线缓存"
         app:showAsAction="always" />
-
+    <item
+        android:id="@+id/id_action_qr_code"
+        android:icon="@drawable/qrcode"
+        android:orderInCategory="100"
+        android:title="扫描二维码"
+        app:showAsAction="always" />
     <item
         android:id="@+id/id_action_search"
         android:icon="@drawable/ic_toolbar_menu_search"

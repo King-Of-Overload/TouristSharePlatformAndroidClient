@@ -24,6 +24,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 import zjut.salu.share.R;
+import zjut.salu.share.activity.qrcode.MyQRCodeActivity;
 import zjut.salu.share.base.AbsBaseActivity;
 import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.exception.MyException;
@@ -70,6 +71,8 @@ public class UserSettingActivity extends RxBaseActivity{
     public void initToolBar() {
 
     }
+
+
 
     /**
      * 退出登录按钮
@@ -145,6 +148,14 @@ public class UserSettingActivity extends RxBaseActivity{
             Log.i("clickLoginCancel","点击了取消");
             sweetAlertDialog.dismiss();
         }
+    }
+
+    /**
+     * 我的二维码
+     */
+    @OnClick(R.id.rl_layout_btn_my_qrcode)
+    public void myQRCodeClick(View v){
+        MyQRCodeActivity.launch(mReference.get());
     }
 
     /**

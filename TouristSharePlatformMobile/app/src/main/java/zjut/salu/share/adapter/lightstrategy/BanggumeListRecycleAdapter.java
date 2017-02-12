@@ -50,6 +50,9 @@ public class BanggumeListRecycleAdapter extends AbsRecyclerViewAdapter{
             DisplayImageOptions options= ImageLoaderOptionUtils.getImgOptions();
             imageLoader.displayImage(RequestURLs.MAIN_URL+banggume.getBangumecover(),itemViewHolder.coverIV,options);
             itemViewHolder.titleTV.setText(banggume.getBangumename());
+            itemViewHolder.upNameTV.setText(banggume.getUser().getUsername());
+            String tag=CuteTouristShareConfig.mInstance.getString(R.string.relate_tags_text)+banggume.getBangumetags();
+            itemViewHolder.tagTV.setText(tag);
             itemViewHolder.clickNumTV.setText(NumberUtil.converString(banggume.getClicknum()));
             itemViewHolder.commentTV.setText(NumberUtil.converString(66));
         }
@@ -61,17 +64,23 @@ public class BanggumeListRecycleAdapter extends AbsRecyclerViewAdapter{
         return banggumeList.size();
     }
 
+
+
     private class ItemViewHolder extends ClickableViewHolder{
         ImageView coverIV;
         TextView titleTV;
+        TextView upNameTV;
+        TextView tagTV;
         TextView clickNumTV;
         TextView commentTV;
-         ItemViewHolder(View itemView) {
+        ItemViewHolder(View itemView) {
             super(itemView);
-             coverIV=$(R.id.item_img);
-             titleTV=$(R.id.item_title);
-             clickNumTV=$(R.id.item_play);
-             commentTV=$(R.id.item_review);
+            coverIV=$(R.id.iv_banggume);
+            titleTV=$(R.id.tv_title);
+            upNameTV=$(R.id.tv_up);
+            tagTV=$(R.id.tv_tag_banggume);
+            clickNumTV=$(R.id.tv_click_num);
+            commentTV=$(R.id.tv_comment_num);
         }
     }
 

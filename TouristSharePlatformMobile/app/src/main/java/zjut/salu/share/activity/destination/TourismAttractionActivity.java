@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -57,6 +58,9 @@ public class TourismAttractionActivity extends RxBaseActivity {
     private String title="";//当前标题
     private String type="";//当前类型
 
+    private int currentCategoryId;//当前分类id
+    private String currentOption;//当前选项
+
     private List<View> popupViews = new ArrayList<>();//弹出视图
     private MyListDropDownAdapter touristMainAdapter=null;
     private MyListDropDownAdapter touristCategoryAdapter=null;
@@ -71,6 +75,8 @@ public class TourismAttractionActivity extends RxBaseActivity {
     private String[] options;//其他选项内容
 
     private OkHttpUtils okHttpUtils;
+
+    private Boolean firstLoad=true;
 
     @Override
     public int getLayoutId() {
@@ -106,15 +112,28 @@ public class TourismAttractionActivity extends RxBaseActivity {
         ListView placeListView=new ListView(mReference.get());
         touristMainAdapter=new MyListDropDownAdapter(mReference.get(), Arrays.asList(dropHeaders));
         placeListView.setAdapter(touristMainAdapter);
+        touristMainAdapter.setCheckItem(currentType);
+        placeListView.setOnItemClickListener((parent, view, position, id) -> {//方向/类型点击事件
+            touristMainAdapter.setCheckItem(position);
+            currentType=position;
+            type=dropType[position];
+            firstLoad=true;
+            acquireTouristDetailListData(dropHeaders[position]);
+        });
         popupViews.add(placeListView);
         //创建详细分类列表
         categoryListView=new ListView(mReference.get());
         popupViews.add(categoryListView);
         //创建其他筛选条件
         options=new String[]{"默认排序","距离最近","评价最好","人均最低","人均最高"};
+        currentOption=options[0];
         ListView optionListView=new ListView(mReference.get());
         optionAdapter=new MyListDropDownAdapter(mReference.get(),Arrays.asList(options));
         optionListView.setAdapter(optionAdapter);
+        optionListView.setOnItemClickListener((parent, view, position, id) -> {//其他选项点击事件
+            optionAdapter.setCheckItem(position);
+            currentOption=options[position];
+        });
         popupViews.add(optionListView);
         //动态生成控件
         contentView=new LinearLayout(mReference.get());
@@ -130,8 +149,7 @@ public class TourismAttractionActivity extends RxBaseActivity {
                 android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
         refreshLayout.setOnRefreshListener(()->{
             if(refreshLayout.isRefreshing()){
-                //TODO:刷新回调
-                //getProvinceData(destinationName);//刷新时回调
+                getListData(type,currentCategoryId,currentOption);
             }
         });
         //创建framelayout
@@ -169,7 +187,6 @@ public class TourismAttractionActivity extends RxBaseActivity {
         progressView.spin();
         //获取详细分类的数据
         acquireTouristDetailListData(title);
-        getListData(type,tourismCategories.get(0).getTmcategoryid(),options[0]);
     }
 
     /**
@@ -178,7 +195,7 @@ public class TourismAttractionActivity extends RxBaseActivity {
      * @param option
      */
     private void getListData(String type,int categoryId,String option){
-
+        
     }
 
     /**
@@ -241,6 +258,17 @@ public class TourismAttractionActivity extends RxBaseActivity {
                         }
                         touristCategoryAdapter=new MyListDropDownAdapter(mReference.get(),tourismCategoryArray);
                         categoryListView.setAdapter(touristCategoryAdapter);
+                        categoryListView.setOnItemClickListener((parent, view, position, id) -> {//详细分类点击事件
+                            touristCategoryAdapter.setCheckItem(position);
+                            currentCategoryId=tourismCategories.get(position).getTmcategoryid();
+                        });
+                        if(firstLoad){
+                            getListData(type,tourismCategories.get(0).getTmcategoryid(),options[0]);//获取列表数据
+                            firstLoad=false;
+                        }else{
+                            getListData(type,currentCategoryId,currentOption);//获取列表数据
+                        }
+
                     }
                 });
     }

@@ -20,7 +20,7 @@
             android:orientation="vertical"
             >
             <RelativeLayout
-                android:id="@+id/rl_layout_btn_my_collection"
+                android:id="@+id/rl_layout_btn_my_qrcode"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="15dp"

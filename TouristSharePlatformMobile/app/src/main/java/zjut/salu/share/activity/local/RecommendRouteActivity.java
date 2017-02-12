@@ -124,7 +124,7 @@ public class RecommendRouteActivity extends RxBaseActivity {
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                             }));
-                            recyclerView.addOnScrollListener(new MyRecycleViewScrollListener());
+                            recyclerView.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
                         }else{
                             emptyIV.setVisibility(View.VISIBLE);
                         }

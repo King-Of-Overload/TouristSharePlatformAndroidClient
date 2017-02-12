@@ -119,7 +119,7 @@ public class BestStrategyChildFragment extends RxLazyFragment{
                             intent.putExtra("user_strategy",bestStrategyList.get(position));
                             startActivity(intent);
                         }));
-                        mRecyclerView.addOnScrollListener(new MyRecycleViewScrollListener());
+                        mRecyclerView.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
                     }
                 });
     }

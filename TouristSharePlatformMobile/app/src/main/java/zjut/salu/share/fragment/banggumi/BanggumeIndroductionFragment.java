@@ -180,7 +180,7 @@ public class BanggumeIndroductionFragment extends RxLazyFragment{
                             Banggume banggume=relateBanggumeList.get(position);
                             BanggumiDetailActivity.launch((Activity) context,banggume);
                         });
-                        mRecyclerView.addOnScrollListener(new MyRecycleViewScrollListener());
+                        mRecyclerView.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
                         if(relateBanggumeList.size()==0){
                             emptyIV.setVisibility(View.VISIBLE);
                         }

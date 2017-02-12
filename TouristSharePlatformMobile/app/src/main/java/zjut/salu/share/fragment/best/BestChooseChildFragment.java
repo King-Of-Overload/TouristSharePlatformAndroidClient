@@ -122,7 +122,7 @@ public class BestChooseChildFragment extends RxLazyFragment {
                             intent.putExtra("best_topic",bestChooseList.get(position));
                             startActivity(intent);//跳转到专题详情页面
                         }));
-                        mRecyclerView.addOnScrollListener(new MyRecycleViewScrollListener());//优化性能，添加滑动监听器
+                        mRecyclerView.addOnScrollListener(new MyRecycleViewScrollListener(null,null));//优化性能，添加滑动监听器
                     }
                 });
 

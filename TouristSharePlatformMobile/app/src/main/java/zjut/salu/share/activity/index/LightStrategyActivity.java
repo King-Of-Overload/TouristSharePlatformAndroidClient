@@ -3,12 +3,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextPaint;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,6 +49,9 @@ import zjut.salu.share.utils.GlideImageLoader;
 import zjut.salu.share.utils.OkHttpUtils;
 import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.widget.CircleProgressView;
+import zjut.salu.share.widget.MyScrollView;
+import zjut.salu.share.widget.layout.FullyGridLayoutManager;
+import zjut.salu.share.widget.scrollview.RecycleScrollView;
 
 /**
  * 轻游记模块
@@ -61,6 +68,7 @@ public class LightStrategyActivity extends RxBaseActivity {
     @Bind(R.id.recycle_view_new)RecyclerView newRecycleView;
     @Bind(R.id.iv_loading_failed_recommend)ImageView recommendLoadingFailedIV;
     @Bind(R.id.iv_loading_failed_new)ImageView newLoadingFailedIV;
+    @Bind(R.id.scrollview)RecycleScrollView scrollView;
 
 
     private String[] images;
@@ -81,19 +89,25 @@ public class LightStrategyActivity extends RxBaseActivity {
     public void initViews(Bundle savedInstanceState) {
         mReference=new WeakReference<>(this);
         imageLoader=ImageLoader.getInstance();
+        okHttpUtils=new OkHttpUtils();
         progressView.spin();
         startBanner();//初始化轮播图
         refreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light, android.R.color.holo_orange_light, android.R.color.holo_red_light);
         refreshLayout.setOnRefreshListener(()->{
-            if(refreshLayout.isRefreshing()){
-               //TODO:刷新时回调
-            }
+                if(refreshLayout.isRefreshing()){
+                    loadListData();
+                }
         });
         TextPaint paint=banggumiTV.getPaint();
         paint.setFakeBoldText(true);
         paint=textTV.getPaint();
         paint.setFakeBoldText(true);
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+                if (refreshLayout != null) {
+                    refreshLayout.setEnabled(scrollView.getScrollY() == 0);
+                }
+            });
         loadListData();
     }
 
@@ -108,6 +122,7 @@ public class LightStrategyActivity extends RxBaseActivity {
                             refreshLayout.setRefreshing(false);
                             recommendLoadingFailedIV.setVisibility(View.INVISIBLE);
                             newLoadingFailedIV.setVisibility(View.INVISIBLE);
+                            progressView.stopSpinning();
                         });
                     }
 
@@ -117,6 +132,7 @@ public class LightStrategyActivity extends RxBaseActivity {
                             refreshLayout.setRefreshing(false);
                             recommendLoadingFailedIV.setVisibility(View.VISIBLE);
                             newLoadingFailedIV.setVisibility(View.VISIBLE);
+                            progressView.stopSpinning();
                         });
                     }
 
@@ -127,13 +143,14 @@ public class LightStrategyActivity extends RxBaseActivity {
                             Gson gson=new Gson();
                             recommendList=gson.fromJson(jsonObject.getString("recommend"),new TypeToken<List<Banggume>>(){}.getType());
                             newestList=gson.fromJson(jsonObject.getString("newest"),new TypeToken<List<Banggume>>(){}.getType());
-                            GridLayoutManager gridLayoutManager=new GridLayoutManager(mReference.get(),2);
+                            FullyGridLayoutManager gridLayoutManager=new FullyGridLayoutManager(mReference.get(),2);
                             recommendRecycleView.setHasFixedSize(true);
                             recommendRecycleView.setNestedScrollingEnabled(true);
                             recommendRecycleView.setLayoutManager(gridLayoutManager);
                             newRecycleView.setHasFixedSize(true);
                             newRecycleView.setNestedScrollingEnabled(true);
-                            newRecycleView.setLayoutManager(gridLayoutManager);
+                            FullyGridLayoutManager gridLayoutManager2=new FullyGridLayoutManager(mReference.get(),2);
+                            newRecycleView.setLayoutManager(gridLayoutManager2);
                             recommendAdapter=new BanggumeIndexRecycleAdapter(recommendRecycleView,recommendList,imageLoader);
                             recommendRecycleView.setAdapter(recommendAdapter);
                             newAdapter=new BanggumeIndexRecycleAdapter(newRecycleView,newestList,imageLoader);
@@ -146,14 +163,21 @@ public class LightStrategyActivity extends RxBaseActivity {
                                 Banggume banggume=newestList.get(position);
                                 BanggumiDetailActivity.launch(mReference.get(),banggume);
                             });
-                            recommendRecycleView.addOnScrollListener(new MyRecycleViewScrollListener());
-                            newRecycleView.addOnScrollListener(new MyRecycleViewScrollListener());
+                            recommendRecycleView.addOnScrollListener(new MyRecycleViewScrollListener(refreshLayout,scrollView));
+                            newRecycleView.addOnScrollListener(new MyRecycleViewScrollListener(refreshLayout,scrollView));
+                            setRecycleNoScroll();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
                     }
                 });
+    }
+
+    private void setRecycleNoScroll()
+    {
+        recommendRecycleView.setOnTouchListener((v, event) -> false);
+        newRecycleView.setOnTouchListener((v, event) -> false);
     }
 
     /**

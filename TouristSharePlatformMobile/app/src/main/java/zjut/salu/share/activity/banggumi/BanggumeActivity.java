@@ -169,7 +169,7 @@ public class BanggumeActivity extends RxBaseActivity {
                             Banggume banggume=banggumeList.get(position);
                             BanggumiDetailActivity.launch(mReference.get(),banggume);
                         });
-                        recyclerView.addOnScrollListener(new MyRecycleViewScrollListener());
+                        recyclerView.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
                     }
                 });
     }

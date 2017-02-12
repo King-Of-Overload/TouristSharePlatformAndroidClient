@@ -122,7 +122,7 @@ public class CityActivity extends RxBaseActivity {
                                 intent.putExtra("city_name",city.getCityname());
                                 startActivity(intent);
                             }));
-                            recyclerView.addOnScrollListener(new MyRecycleViewScrollListener());
+                            recyclerView.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
                         }else{
                             emptyIV.setVisibility(View.VISIBLE);
                         }

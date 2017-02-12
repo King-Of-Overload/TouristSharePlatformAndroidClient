@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">芳草寻源</string>
-    <string name="splash_copyright">copyright © 2016-2017 芳草寻源のさる</string>
+    <string name="splash_copyright">copyright © 2016-2017 芳草寻源のしみず</string>
     <string name="app_author">さる</string>
     <string name="login_title">登录芳草寻源</string>
     <string name="text_login_username_et__hint">请输入芳草寻源账号名</string>
@@ -58,7 +58,7 @@
     <string name="app_version">V1.0</string>
     <string name="quit_login_text">退出登录</string>
     <string name="user_setting_title_text">设置</string>
-    <string name="author_name_text">さる(Alan Lu)</string>
+    <string name="author_name_text">(清水雅治)しみずまさはる</string>
     <string name="github_text">GitHub:</string>
     <string name="github_url_text">https://github.com/King-Of-Overload</string>
     <string name="sina_wei_blog_text">新浪微博:</string>
@@ -320,4 +320,5 @@
     <string name="menu_banggume_issense_range_text">精选内容</string>
     <string name="menu_banggume_all_range_text">全部</string>
     <string name="relate_tags_text">相关标签：</string>
+    <string name="scan_scan_text">用芳草寻源客户端扫一扫上面的二维码，关注我哦</string>
 </resources>

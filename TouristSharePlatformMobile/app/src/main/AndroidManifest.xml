@@ -18,6 +18,10 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <!-- 允许读取手机状态 用于创建BmobInstallation -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 相机 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 振动 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".config.CuteTouristShareConfig"
@@ -95,7 +99,9 @@
             android:name=".activity.mediapicker.activities.MediaPickerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MediaPickerTheme" />
-        <activity android:name=".activity.banggumi.BanggumeActivity"></activity>
+        <activity android:name=".activity.banggumi.BanggumeActivity" />
+        <activity android:name=".activity.qrcode.MyQRCodeActivity" />
+        <activity android:name=".activity.qrcode.libzxing.activity.CaptureActivity" />
     </application>
 
 </manifest>

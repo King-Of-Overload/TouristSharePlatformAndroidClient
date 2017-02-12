@@ -19,7 +19,8 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <zjut.salu.share.widget.MyScrollView
+            <zjut.salu.share.widget.scrollview.RecycleScrollView
+                android:id="@+id/scrollview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
@@ -78,7 +79,7 @@
                             />
                     </FrameLayout>
                 </LinearLayout>
-            </zjut.salu.share.widget.MyScrollView>
+            </zjut.salu.share.widget.scrollview.RecycleScrollView>
             <zjut.salu.share.widget.CircleProgressView
                 android:id="@+id/circle_progress_common"
                 android:layout_width="@dimen/circle_progress_view_default_size"

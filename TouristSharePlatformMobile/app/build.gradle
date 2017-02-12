@@ -44,13 +44,12 @@ repositories{
 }
 
 dependencies {
-
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     //compile 'com.android.support:appcompat-v7:25.0.0'
-    compile'com.android.support:multidex:1.0.1'
+    compile 'com.android.support:multidex:1.0.1'
     compile 'com.android.support:appcompat-v7:25.0.1'
     //单元测试
     testCompile 'junit:junit:4.12'
@@ -60,7 +59,8 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     compile 'com.zhy:okhttputils:2.6.2'
     //compile 'com.github.xxl6097:okhttputils:2.4.1'
-//    compile 'com.android.support:design:23.4.0'
+
+    //    compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:design:25.0.1'
     compile 'com.android.support:cardview-v7:23.4.0'
     //Gson jsoup
@@ -96,7 +96,6 @@ dependencies {
     //飞机样式
     compile 'com.yalantis:pulltorefresh:1.0.0'
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
-
     //下拉放大
     compile 'com.github.frank-zhu:pullzoomview:1.0.0'
     //popup menu
@@ -106,7 +105,7 @@ dependencies {
     compile('com.mikepenz:materialdrawer:5.7.0@aar') {
         transitive = true
     }
-   // transfer picture to any style
+    // transfer picture to any style
     compile 'cn.lankton:anyshape:1.0.0'
     //chose list
     compile 'com.github.dongjunkun:DropDownMenu:1.0.3'
@@ -115,7 +114,7 @@ dependencies {
     //floating_search_view
     compile 'com.github.arimorty:floatingsearchview:2.0.3'
     //delete_list_view
-    compile "com.daimajia.swipelayout:library:1.2.0@aar"
+    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
     //rxjava
     compile 'com.trello:rxlifecycle-components:0.6.1'
     compile 'io.reactivex:rxjava:1.1.0'
@@ -139,17 +138,14 @@ dependencies {
     //sqlite ORM
     compile 'org.greenrobot:greendao:3.2.0'
     compile 'com.bilibili:magicasakura:0.1.1@aar'
-
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.6.0'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.6.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.1'
     compile 'com.github.ctiao:DanmakuFlameMaster:0.5.6'
-
     compile 'com.foamtrace:photopicker:1.0'
-
     compile 'com.edmodo:cropper:1.0.1'
     compile 'com.github.mabbas007:TagsEditText:v0.95'
-
     compile 'com.dinuscxj:circleprogressbar:1.1.1'
+    compile files('libs/zxing.jar')
 }

@@ -17,4 +17,13 @@
     <item name="no_data" type="id"/>
     <item name="overlay" type="id"/>
     <item name="thumbnail" type="id"/>
+
+
+
+    <item name="decode" type="id"/>
+    <item name="decode_failed" type="id"/>
+    <item name="decode_succeeded" type="id"/>
+    <item name="quit" type="id"/>
+    <item name="restart_preview" type="id"/>
+    <item name="return_scan_result" type="id"/>
 </resources>

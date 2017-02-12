@@ -44,6 +44,7 @@ import okhttp3.Response;
 import zjut.salu.share.R;
 import zjut.salu.share.activity.banggumi.UploadBanggumeActivity;
 import zjut.salu.share.activity.lightstrategy.EditLightStrategy;
+import zjut.salu.share.activity.qrcode.libzxing.activity.CaptureActivity;
 import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.fragment.BestFragment;
 import zjut.salu.share.fragment.IndexFragment;
@@ -681,9 +682,27 @@ public class HomeActivity extends RxBaseActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-
+            case R.id.id_action_download:{//离线缓存按钮
+                break;
+            }
+            case R.id.id_action_qr_code:{//二维码扫描
+                //打开扫描界面扫描条形码或二维码
+                Intent openCameraIntent = new Intent(mReference.get(), CaptureActivity.class);
+                startActivityForResult(openCameraIntent, 0);
+                break;
+            }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Bundle bundle = data.getExtras();
+            String scanResult = bundle.getString("result");
+            //TODO:获取到用户id，访问网络验证用户，并跳转到用户的页面
+        }
     }
 
     /**

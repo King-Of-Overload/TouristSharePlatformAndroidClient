@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -14,6 +15,9 @@ import java.util.List;
 import zjut.salu.share.R;
 import zjut.salu.share.adapter.helper.AbsRecyclerViewAdapter;
 import zjut.salu.share.model.lightstrategy.banggume.Banggume;
+import zjut.salu.share.utils.ImageLoaderOptionUtils;
+import zjut.salu.share.utils.NumberUtil;
+import zjut.salu.share.utils.RequestURLs;
 
 /**小视频主页适配器
  * Created by Salu on 2017/2/11.
@@ -37,6 +41,20 @@ public class BanggumeIndexRecycleAdapter extends AbsRecyclerViewAdapter {
     }
 
     @Override
+    public void onBindViewHolder(ClickableViewHolder holder, int position) {
+        super.onBindViewHolder(holder, position);
+        if(holder instanceof ItemViewHolder){
+            ItemViewHolder itemViewHolder= (ItemViewHolder) holder;
+            Banggume banggume=banggumeList.get(position);
+            DisplayImageOptions options= ImageLoaderOptionUtils.getImgOptions();
+            imageLoader.displayImage(RequestURLs.MAIN_URL+banggume.getBangumecover(),itemViewHolder.coverIV,options);
+            itemViewHolder.titleTV.setText(banggume.getBangumename());
+            itemViewHolder.clickNumTV.setText(NumberUtil.converString(banggume.getClicknum()));
+            itemViewHolder.commentTV.setText("66");//TODO:评论数，需要修改
+        }
+    }
+
+    @Override
     public int getItemCount() {
         return banggumeList.size();
     }
@@ -44,18 +62,14 @@ public class BanggumeIndexRecycleAdapter extends AbsRecyclerViewAdapter {
     private class ItemViewHolder extends ClickableViewHolder{
         ImageView coverIV;
         TextView titleTV;
-        TextView upNameTV;
-        TextView tagTV;
         TextView clickNumTV;
         TextView commentTV;
         ItemViewHolder(View itemView) {
             super(itemView);
-            coverIV=$(R.id.iv_banggume);
-            titleTV=$(R.id.tv_title);
-            upNameTV=$(R.id.tv_up);
-            tagTV=$(R.id.tv_tag_banggume);
-            clickNumTV=$(R.id.tv_click_num);
-            commentTV=$(R.id.tv_comment_num);
+            coverIV=$(R.id.item_img);
+            titleTV=$(R.id.item_title);
+            clickNumTV=$(R.id.item_play);
+            commentTV=$(R.id.item_review);
         }
     }
 }

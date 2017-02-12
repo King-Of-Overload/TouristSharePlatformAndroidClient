@@ -129,7 +129,7 @@ public class FriendFollowFragment extends RxLazyFragment {
                                     intent.putExtra("userid",clickedUser.getUserid());
                                     startActivity(intent);
                                 });
-                                recyclerView.addOnScrollListener(new MyRecycleViewScrollListener());
+                                recyclerView.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
                             }
                             refreshLayout.setRefreshing(false);
                             progressView.stopSpinning();

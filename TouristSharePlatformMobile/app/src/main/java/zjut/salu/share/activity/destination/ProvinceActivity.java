@@ -120,7 +120,7 @@ public class ProvinceActivity extends RxBaseActivity {
                                 intent.putExtra("province_id",province.getProvinceid());
                                 startActivity(intent);
                             }));
-                            recyclerView.addOnScrollListener(new MyRecycleViewScrollListener());
+                            recyclerView.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
                         }else{
                             emptyIV.setVisibility(View.VISIBLE);
                         }
