@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference;
 import butterknife.Bind;
 import zjut.salu.share.R;
 import zjut.salu.share.base.RxBaseActivity;
-import zjut.salu.share.model.CityIndexRecommend;
+import zjut.salu.share.model.city.CityIndexRecommend;
 import zjut.salu.share.utils.CommonUtils;
 import zjut.salu.share.utils.ToastUtils;
 import zjut.salu.share.utils.WebViewUtils;

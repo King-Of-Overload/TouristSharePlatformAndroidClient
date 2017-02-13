@@ -16,7 +16,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zjut.salu.share.R;
-import zjut.salu.share.model.CityIndexRecommend;
+import zjut.salu.share.model.city.CityIndexRecommend;
 import zjut.salu.share.utils.ImageLoaderOptionUtils;
 import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.widget.CommonCircleImageView;

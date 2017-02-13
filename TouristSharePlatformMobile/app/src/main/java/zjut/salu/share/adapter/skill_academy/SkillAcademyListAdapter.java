@@ -20,7 +20,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zjut.salu.share.R;
-import zjut.salu.share.model.SkillAcademy;
+import zjut.salu.share.model.skillacademy.SkillAcademy;
 import zjut.salu.share.utils.RequestURLs;
 
 /**行摄攻略列表显示适配器

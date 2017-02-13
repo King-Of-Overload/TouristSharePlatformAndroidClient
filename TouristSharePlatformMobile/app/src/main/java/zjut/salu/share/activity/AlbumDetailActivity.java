@@ -37,7 +37,7 @@ import zjut.salu.share.adapter.albums.AlbumDetailRecycleAdapter;
 import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.event.AppBarStateChangeEvent;
 import zjut.salu.share.model.TripUser;
-import zjut.salu.share.model.UserPhotos;
+import zjut.salu.share.model.photo.UserPhotos;
 import zjut.salu.share.params.SpacesItemDecoration;
 import zjut.salu.share.utils.CommonUtils;
 import zjut.salu.share.utils.OkHttpUtils;

@@ -61,4 +61,5 @@ public class RequestURLs {
     public static final String INCREASE_BANGGUME = MAIN_URL + "tripuser_increaseBanggumeClickNum.do";//小视频点击量增加
     public static final String LOAD_RELATE_BANGGUME = MAIN_URL + "tripuser_loadRelateBanggume.do";//加载相关小视频信息
     public static final String LOAD_LIGHT_STRATEGY_INDEX_DATA = MAIN_URL + "tripuser_loadLightStrategyIndexData.do";//加载轻游记主页数据
+    public static final String LOAD_TOURISM_DATA = MAIN_URL + "tripuser_loadTourismData.do";//根据条件加载名胜、景点等详情
 }

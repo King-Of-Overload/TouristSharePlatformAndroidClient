@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.WindowManager;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.bilibili.magicasakura.utils.ThemeUtils;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -63,6 +64,9 @@ public class CuteTouristShareConfig extends MultiDexApplication implements Theme
             e.printStackTrace();
         }
         Bmob.initialize(this,pro.getProperty("applicationid"));
+        //在使用SDK各组件之前初始化context信息，传入ApplicationContext
+        //注意该方法要再setContentView方法之前实现
+        SDKInitializer.initialize(mInstance);
     }
 
     /**

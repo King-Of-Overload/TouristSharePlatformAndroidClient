@@ -31,7 +31,7 @@ import okhttp3.Response;
 import zjut.salu.share.R;
 import zjut.salu.share.adapter.albums.AlbumListAdapter;
 import zjut.salu.share.base.RxBaseActivity;
-import zjut.salu.share.model.UserAlbums;
+import zjut.salu.share.model.photo.UserAlbums;
 import zjut.salu.share.utils.CommonUtils;
 import zjut.salu.share.utils.DynamicBoxUtils;
 import zjut.salu.share.utils.OkHttpUtils;

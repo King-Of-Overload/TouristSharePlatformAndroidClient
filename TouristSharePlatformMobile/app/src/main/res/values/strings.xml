@@ -321,4 +321,5 @@
     <string name="menu_banggume_all_range_text">全部</string>
     <string name="relate_tags_text">相关标签：</string>
     <string name="scan_scan_text">用芳草寻源客户端扫一扫上面的二维码，关注我哦</string>
+    <string name="point_text">分</string>
 </resources>

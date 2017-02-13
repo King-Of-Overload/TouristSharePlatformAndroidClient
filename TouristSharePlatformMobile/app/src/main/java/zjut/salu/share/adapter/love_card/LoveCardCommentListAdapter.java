@@ -16,7 +16,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zjut.salu.share.R;
-import zjut.salu.share.model.LovePostCardComment;
+import zjut.salu.share.model.lovecard.LovePostCardComment;
 import zjut.salu.share.utils.ImageLoaderUtils;
 import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.utils.StringUtils;

@@ -1,22 +1,25 @@
 package zjut.salu.share.activity.destination;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 import com.yyydjk.library.DropDownMenu;
 
 import java.lang.ref.WeakReference;
@@ -32,10 +35,11 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import zjut.salu.share.R;
-import zjut.salu.share.adapter.product.MyConstellationAdapter;
 import zjut.salu.share.adapter.product.MyListDropDownAdapter;
+import zjut.salu.share.adapter.tourism.TourismAttractionAdapter;
 import zjut.salu.share.base.RxBaseActivity;
-import zjut.salu.share.model.TourismCategory;
+import zjut.salu.share.model.local.TourismAttraction;
+import zjut.salu.share.model.local.TourismCategory;
 import zjut.salu.share.utils.OkHttpUtils;
 import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.utils.ToastUtils;
@@ -73,10 +77,14 @@ public class TourismAttractionActivity extends RxBaseActivity {
     private List<TourismCategory> tourismCategories=null;//详细分类集合
     private List<String> tourismCategoryArray;//详细分类字符串集合
     private String[] options;//其他选项内容
+    private List<TourismAttraction> attractionList;//地点集合
 
     private OkHttpUtils okHttpUtils;
+    private ImageLoader imageLoader;
+    private TourismAttractionAdapter attractionAdapter;
 
     private Boolean firstLoad=true;
+    private BDLocation location;
 
     @Override
     public int getLayoutId() {
@@ -86,11 +94,34 @@ public class TourismAttractionActivity extends RxBaseActivity {
     @Override
     public void initViews(Bundle savedInstanceState) {
         okHttpUtils=new OkHttpUtils();
+        imageLoader=ImageLoader.getInstance();
         mReference=new WeakReference<>(this);
         Intent intent=getIntent();
         currentType=intent.getIntExtra("type",0);
         title=intent.getStringExtra("title");
+        initGPSData();
         initDropDownList();//初始化筛选条件
+    }
+
+    private void initGPSData() {
+        LocationClient locationClient = new LocationClient(mReference.get());
+        LocationClientOption option = new LocationClientOption();
+        option.setOpenGps(true);
+        option.setCoorType("bd09ll");
+        option.setPriority(LocationClientOption.GpsFirst);
+        option.setProdName("TouristSharePlatformAndroid");
+        locationClient.setLocOption(option);
+        //注册位置监听器
+        locationClient.registerLocationListener(new BDLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation bdLocation) {
+                location = bdLocation;
+            }
+
+            @Override
+            public void onConnectHotSpotMessage(String s, int i) {
+            }
+        });
     }
 
     /**
@@ -195,7 +226,47 @@ public class TourismAttractionActivity extends RxBaseActivity {
      * @param option
      */
     private void getListData(String type,int categoryId,String option){
-        
+        Map<String,Object> params=new HashMap<>();
+        params.put("type",type);
+        params.put("categoryId",categoryId+"");
+        params.put("option",option);
+        Observable<String> observable=okHttpUtils.asyncGetRequest(RequestURLs.LOAD_TOURISM_DATA,params);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {
+                        runOnUiThread(()->{
+                            progressView.stopSpinning();
+                            progressView.setVisibility(View.INVISIBLE);
+                        });
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        runOnUiThread(()->{
+                            loadingFailedIV.setVisibility(View.VISIBLE);
+                            progressView.stopSpinning();
+                            progressView.setVisibility(View.INVISIBLE);
+                        });
+                    }
+
+                    @Override
+                    public void onNext(String result) {
+                        Gson gson=new Gson();
+                        attractionList=gson.fromJson(result,new TypeToken<List<TourismAttraction>>(){}.getType());
+                        attractionAdapter=new TourismAttractionAdapter(mReference.get(),attractionList,imageLoader,location);
+                        listView.setAdapter(attractionAdapter);
+                        listView.setOnScrollListener(new PauseOnScrollListener(imageLoader,true,true));
+                        listView.setOnItemClickListener((parent, view, position, id) -> {
+                            //TODO:点击事件
+                        });
+                        if(attractionList.size()==0){
+                            emptyIV.setVisibility(View.VISIBLE);
+                        }else{
+                            emptyIV.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                });
     }
 
     /**
@@ -242,8 +313,6 @@ public class TourismAttractionActivity extends RxBaseActivity {
                     @Override
                     public void onError(Throwable e) {
                         runOnUiThread(()->{
-                            loadingFailedIV.setVisibility(View.VISIBLE);
-                            emptyIV.setVisibility(View.INVISIBLE);
                             ToastUtils.ShortToast(R.string.server_down_text);
                         });
                     }

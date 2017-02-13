@@ -43,7 +43,7 @@ import butterknife.Bind;
 import zjut.salu.share.R;
 import zjut.salu.share.base.AbsBaseActivityWithBar;
 import zjut.salu.share.base.RxBaseActivity;
-import zjut.salu.share.model.SkillAcademy;
+import zjut.salu.share.model.skillacademy.SkillAcademy;
 import zjut.salu.share.utils.CommonUtils;
 import zjut.salu.share.utils.DeviceUtils;
 import zjut.salu.share.utils.DomUtils;

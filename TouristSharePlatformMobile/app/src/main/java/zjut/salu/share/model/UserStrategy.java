@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import zjut.salu.share.model.city.City;
+
 /**用户攻略游记pojo
  * Created by Alan on 2016/10/29.
  */

@@ -18,7 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import zjut.salu.share.R;
 import zjut.salu.share.adapter.helper.AbsRecyclerViewAdapter;
-import zjut.salu.share.model.UserPhotos;
+import zjut.salu.share.model.photo.UserPhotos;
 import zjut.salu.share.utils.ImageLoaderOptionUtils;
 import zjut.salu.share.utils.RequestURLs;
 

@@ -14,7 +14,8 @@
     <!-- 存储卡的权限 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- 写文件的权限 -->
+    <!-- 读写文件的权限 -->
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <!-- 允许读取手机状态 用于创建BmobInstallation -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -22,15 +23,18 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- 振动 -->
     <uses-permission android:name="android.permission.VIBRATE" />
-
+    <uses-permission android:name="android.permission.GET_TASKS" />
     <application
-        android:name=".config.CuteTouristShareConfig"
+    android:name=".config.CuteTouristShareConfig"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="ebeFIMTp7fSurTw5Oztden7SkDP4G9zo" />
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar">

@@ -3,6 +3,8 @@ package zjut.salu.share.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import zjut.salu.share.model.city.City;
+
 /**推荐路线实体
  * Created by Salu on 2017/1/16.
  */

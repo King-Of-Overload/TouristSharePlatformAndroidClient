@@ -2,6 +2,8 @@ package zjut.salu.share.model;
 
 import java.io.Serializable;
 
+import zjut.salu.share.model.lovecard.LovePostCard;
+
 /**参加明信片活动的人
  * Created by Alan on 2016/11/6.
  */

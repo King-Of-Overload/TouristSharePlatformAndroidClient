@@ -2,6 +2,8 @@ package zjut.salu.share.model;
 
 import java.io.Serializable;
 
+import zjut.salu.share.model.city.City;
+
 /**
  * Created by Alan on 2016/10/21.
  */

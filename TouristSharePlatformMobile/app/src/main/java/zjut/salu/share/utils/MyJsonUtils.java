@@ -13,8 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import zjut.salu.share.model.OrderItem;
-import zjut.salu.share.model.Product;
+import zjut.salu.share.model.product.OrderItem;
+import zjut.salu.share.model.product.Product;
 
 /**
  * Created by Alan on 2016/10/28.

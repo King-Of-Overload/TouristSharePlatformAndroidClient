@@ -21,7 +21,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zjut.salu.share.R;
-import zjut.salu.share.model.OrderItem;
+import zjut.salu.share.model.product.OrderItem;
 import zjut.salu.share.utils.RequestURLs;
 
 /**用户未付款的订单适配器

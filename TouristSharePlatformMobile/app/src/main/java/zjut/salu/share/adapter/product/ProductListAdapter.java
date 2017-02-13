@@ -20,7 +20,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zjut.salu.share.R;
-import zjut.salu.share.model.Product;
+import zjut.salu.share.model.product.Product;
 import zjut.salu.share.utils.ImageLoaderUtils;
 import zjut.salu.share.utils.RequestURLs;
 

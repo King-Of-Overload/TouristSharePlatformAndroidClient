@@ -26,7 +26,7 @@ import okhttp3.Response;
 import zjut.salu.share.R;
 import zjut.salu.share.adapter.love_card.LoveCardListAdapter;
 import zjut.salu.share.base.RxBaseActivity;
-import zjut.salu.share.model.LovePostCard;
+import zjut.salu.share.model.lovecard.LovePostCard;
 import zjut.salu.share.utils.CommonUtils;
 import zjut.salu.share.utils.DynamicBoxUtils;
 import zjut.salu.share.utils.OkHttpUtils;

@@ -19,7 +19,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import zjut.salu.share.R;
 import zjut.salu.share.config.CuteTouristShareConfig;
-import zjut.salu.share.model.UserAlbums;
+import zjut.salu.share.model.photo.UserAlbums;
 import zjut.salu.share.utils.ImageLoaderOptionUtils;
 import zjut.salu.share.utils.RequestURLs;
 

@@ -10,8 +10,7 @@ import java.util.List;
 
 import zjut.salu.share.R;
 import zjut.salu.share.adapter.helper.AbsRecyclerViewAdapter;
-import zjut.salu.share.model.City;
-import zjut.salu.share.model.Provinces;
+import zjut.salu.share.model.city.City;
 
 /**城市列表adapter
  * Created by Salu on 2017/1/19.

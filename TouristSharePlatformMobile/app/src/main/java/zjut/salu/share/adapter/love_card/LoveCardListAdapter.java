@@ -19,7 +19,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zjut.salu.share.R;
-import zjut.salu.share.model.LovePostCard;
+import zjut.salu.share.model.lovecard.LovePostCard;
 import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.widget.PullSeparateListView;
 
