@@ -322,4 +322,11 @@
     <string name="relate_tags_text">相关标签：</string>
     <string name="scan_scan_text">用芳草寻源客户端扫一扫上面的二维码，关注我哦</string>
     <string name="point_text">分</string>
+    <string name="km_text">km</string>
+    <string name="attraction_detail_text">地点详情</string>
+    <string name="food_recommend_text">商品推荐</string>
+    <string name="guideing_text">导航</string>
+    <string name="dianping_text">点评</string>
+    <string name="share_text">分享</string>
+    <string name="wenlu_text">问路卡</string>
 </resources>

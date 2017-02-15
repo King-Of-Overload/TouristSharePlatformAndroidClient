@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--底部fragment按钮的单个布局文件-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:gravity="center_vertical"
+    android:padding="5dp"
+    >
+    <LinearLayout
+        android:id="@+id/linear_index_tab"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_iv_index"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/main_tab_imgInfo"
+            android:background="#0000"
+            android:clickable="false"
+            android:src="@drawable/ic_collect"
+            />
+
+        <TextView
+            android:id="@+id/tv_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_alpha"
+            android:textSize="12sp"
+            android:text="想去 428"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_user_strategy_tab"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_iv_user_strategy"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:contentDescription="@string/main_tab_imgInfo"
+            android:background="#0000"
+            android:clickable="false"
+            android:src="@drawable/ic_plane_off"
+            />
+
+        <TextView
+            android:id="@+id/tv_user_strategy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_alpha"
+            android:textSize="12sp"
+            android:text="去过 133"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_user_best_tab"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_iv_best"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/main_tab_imgInfo"
+            android:background="#0000"
+            android:clickable="false"
+            android:src="@drawable/user_menu_comment"
+            />
+
+        <TextView
+            android:id="@+id/tv_user_best"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_alpha"
+            android:textSize="12sp"
+            android:text="点评 45"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -95,6 +95,7 @@ public class TourismAttractionActivity extends RxBaseActivity {
         return R.layout.activity_tourism_attraction;
     }
 
+
     @Override
     public void initViews(Bundle savedInstanceState) {
         okHttpUtils=new OkHttpUtils();
@@ -114,13 +115,16 @@ public class TourismAttractionActivity extends RxBaseActivity {
         option.setPriority(LocationClientOption.GpsFirst);
         option.setProdName("TouristSharePlatformAndroid");
         //option.setScanSpan(5000);
-        locationClient.setLocOption(option);
+        locationClient.setLocOption(option);//lat:32.38952 long:119.441625
         //注册位置监听器
         locationClient.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
                 location = bdLocation;
-                initDropDownList();
+                if(!getLocation){
+                    getLocation=true;
+                    runOnUiThread(()->initDropDownList());
+                }
             }
 
             @Override
@@ -220,8 +224,9 @@ public class TourismAttractionActivity extends RxBaseActivity {
         frameLayout.addView(progressView); //progress->frame
         frameLayout.addView(loadingFailedIV); //fail=>frame
         frameLayout.addView(emptyIV);//empty->frame
-        refreshLayout.addView(frameLayout); //frame->refresh
-        contentView.addView(refreshLayout);//将刷新控件添加到内容父控件中
+        //refreshLayout.addView(frameLayout); //frame->refresh
+        //contentView.addView(refreshLayout);//将刷新控件添加到内容父控件中
+        contentView.addView(frameLayout);
         dropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews,contentView);
         progressView.spin();
         //获取详细分类的数据
@@ -267,6 +272,7 @@ public class TourismAttractionActivity extends RxBaseActivity {
                         listView.setOnScrollListener(new PauseOnScrollListener(imageLoader,true,true));
                         listView.setOnItemClickListener((parent, view, position, id) -> {
                             //TODO:点击事件
+                            TourismDetailActivity.launch(mReference.get(),attractionList.get(position),location.getLongitude(),location.getLatitude());
                         });
                         if(attractionList.size()==0){
                             emptyIV.setVisibility(View.VISIBLE);

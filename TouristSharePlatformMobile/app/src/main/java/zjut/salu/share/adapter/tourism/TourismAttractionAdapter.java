@@ -79,8 +79,8 @@ public class TourismAttractionAdapter extends BaseAdapter{
         paint.setFakeBoldText(true);
         viewHolder.ratingBar.setMax(5);
         viewHolder.ratingBar.setNumStars(5);
-        viewHolder.ratingBar.setRating(4.8f);//TODO:设置评分
-        String point=4.8+ CuteTouristShareConfig.mInstance.getString(R.string.point_text);
+        viewHolder.ratingBar.setRating(4.6f);//TODO:设置评分
+        String point=4.6+ CuteTouristShareConfig.mInstance.getString(R.string.point_text);
         viewHolder.pointTV.setText(point);
         String currency=attraction.getTourismprice()+attraction.getCurrencytype();
         viewHolder.moneyTV.setText(currency);
@@ -91,7 +91,8 @@ public class TourismAttractionAdapter extends BaseAdapter{
         converter.coord(new LatLng(attraction.getLocation().getLatitude().doubleValue(),attraction.getLocation().getLongitude().doubleValue()));
         LatLng desLatLng = converter.convert();
         double distance=DistanceUtil.getDistance(currentLatlng,desLatLng);
-        viewHolder.distanceTV.setText(String.valueOf(distance));
+        String d=String.valueOf((int)distance)+CuteTouristShareConfig.mInstance.getString(R.string.km_text);
+        viewHolder.distanceTV.setText(d);
         viewHolder.categoryTV.setText(attraction.getTourismCategory().getTmcategoryname());
         return convertView;
     }

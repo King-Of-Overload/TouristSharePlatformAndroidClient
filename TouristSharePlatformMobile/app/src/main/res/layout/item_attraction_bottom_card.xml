@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--底部fragment按钮的单个布局文件-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center_vertical"
+    android:background="@color/white"
+    android:layout_gravity="bottom"
+    android:padding="5dp"
+    >
+    <LinearLayout
+        android:id="@+id/linear_index_tab"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_iv_index"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/main_tab_imgInfo"
+            android:background="#0000"
+            android:clickable="false"
+            android:src="@drawable/ic_topic_collect"
+            />
+
+        <TextView
+            android:id="@+id/tv_index"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_alpha"
+            android:textSize="12sp"
+            android:text="@string/collect_text"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_user_strategy_tab"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_iv_user_strategy"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/main_tab_imgInfo"
+            android:background="#0000"
+            android:clickable="false"
+            android:src="@drawable/ic_write_comment"
+            />
+
+        <TextView
+            android:id="@+id/tv_user_strategy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_alpha"
+            android:textSize="12sp"
+            android:text="@string/dianping_text"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_user_best_tab"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_iv_best"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/main_tab_imgInfo"
+            android:background="#0000"
+            android:clickable="false"
+            android:src="@drawable/ic_share"
+            />
+
+        <TextView
+            android:id="@+id/tv_user_best"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_alpha"
+            android:textSize="12sp"
+            android:text="@string/share_text"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_personal_setting_tab"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_iv_personal_setting"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/main_tab_imgInfo"
+            android:background="#0000"
+            android:clickable="false"
+            android:src="@drawable/ic_card"
+            />
+
+        <TextView
+            android:id="@+id/tv_personal_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_alpha"
+            android:textSize="12sp"
+            android:text="@string/wenlu_text"
+            />
+    </LinearLayout>
+
+</LinearLayout>
