@@ -129,12 +129,20 @@ public class BanggumeIndroductionFragment extends RxLazyFragment{
                 banggume.getUser().getUsername(),
                 RequestURLs.MAIN_URL+banggume.getUser().getHeaderimage(),banggume.getUser().getUserid());
         //设置分享 收藏 投币数量
-        mShareNum.setText(NumberUtil.converString(66));
-        mFavNum.setText(NumberUtil.converString(66));//TODO:收藏数量
+        mShareNum.setText(NumberUtil.converString(banggume.getBanggumesharenum()));
+        mFavNum.setText(NumberUtil.converString(banggume.getBanggumecollectnum()));
         //设置视频tags
         setVideoTags();
         //设置视频相关
         setVideoRelated();
+    }
+
+    /**
+     * 缓存按钮点击事件
+     */
+    @OnClick(R.id.ib_download)
+    public void downloadBanggumeClick(View v){
+        
     }
 
     /**

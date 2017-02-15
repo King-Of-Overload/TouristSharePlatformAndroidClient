@@ -1,16 +1,24 @@
 package zjut.salu.share.model.lightstrategy.banggume;
 
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Keep;
+import org.greenrobot.greendao.annotation.Transient;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import zjut.salu.share.model.TripUser;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**小视频实体类
  * Created by Alan-Mac on 2017/02/07.
  */
-
+@Entity(generateConstructors = false)
 public class Banggume implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
     private String bangumeid;
     private String bangumename;
     private String bangumecontent;
@@ -18,11 +26,41 @@ public class Banggume implements Serializable {
     private int clicknum;
     private String bangumetags;
     private String bangumecover;
-    private TripUser user;
+    @Transient private TripUser user;
     private int isesence;
     private Date bangumedate;
+    private int banggumesharenum;
+    private int banggumedownloadnum;
+    private int banggumecollectnum;
 
-    private List<BanggumeTag> banggimeTagList;
+    @Transient private List<BanggumeTag> banggimeTagList;
+
+    public Banggume() {
+    }
+
+    public int getBanggumesharenum() {
+        return banggumesharenum;
+    }
+
+    public void setBanggumesharenum(int banggumesharenum) {
+        this.banggumesharenum = banggumesharenum;
+    }
+
+    public int getBanggumedownloadnum() {
+        return banggumedownloadnum;
+    }
+
+    public void setBanggumedownloadnum(int banggumedownloadnum) {
+        this.banggumedownloadnum = banggumedownloadnum;
+    }
+
+    public int getBanggumecollectnum() {
+        return banggumecollectnum;
+    }
+
+    public void setBanggumecollectnum(int banggumecollectnum) {
+        this.banggumecollectnum = banggumecollectnum;
+    }
 
     public List<BanggumeTag> getBanggimeTagList() {
         return banggimeTagList;

@@ -2,6 +2,7 @@ package zjut.salu.share.activity.destination;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -43,6 +44,8 @@ import zjut.salu.share.model.local.TourismCategory;
 import zjut.salu.share.utils.OkHttpUtils;
 import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.utils.ToastUtils;
+import zjut.salu.share.utils.location.LocationSubscriber;
+import zjut.salu.share.utils.location.RxLocation;
 import zjut.salu.share.widget.CircleProgressView;
 
 public class TourismAttractionActivity extends RxBaseActivity {
@@ -85,6 +88,7 @@ public class TourismAttractionActivity extends RxBaseActivity {
 
     private Boolean firstLoad=true;
     private BDLocation location;
+    private Boolean getLocation=false;
 
     @Override
     public int getLayoutId() {
@@ -100,7 +104,6 @@ public class TourismAttractionActivity extends RxBaseActivity {
         currentType=intent.getIntExtra("type",0);
         title=intent.getStringExtra("title");
         initGPSData();
-        initDropDownList();//初始化筛选条件
     }
 
     private void initGPSData() {
@@ -110,18 +113,23 @@ public class TourismAttractionActivity extends RxBaseActivity {
         option.setCoorType("bd09ll");
         option.setPriority(LocationClientOption.GpsFirst);
         option.setProdName("TouristSharePlatformAndroid");
+        //option.setScanSpan(5000);
         locationClient.setLocOption(option);
         //注册位置监听器
         locationClient.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
                 location = bdLocation;
+                initDropDownList();
             }
 
             @Override
             public void onConnectHotSpotMessage(String s, int i) {
             }
+
+
         });
+        locationClient.start();
     }
 
     /**

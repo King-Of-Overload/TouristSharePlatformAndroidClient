@@ -70,8 +70,10 @@ public class TourismAttractionAdapter extends BaseAdapter{
         }
         TourismAttraction attraction=attractionList.get(position);
         DisplayImageOptions options= ImageLoaderOptionUtils.getImgOptions();
-        imageLoader.displayImage(RequestURLs.MAIN_URL+attraction.getTourismCoverses().get(0).getTourismurl(),viewHolder.coverIV,
-                options);
+        if(null!=attraction.getTourismCoverses()&&attraction.getTourismCoverses().size()>0){
+            imageLoader.displayImage(RequestURLs.MAIN_URL+attraction.getTourismCoverses().get(0).getTourismurl(),viewHolder.coverIV,
+                    options);
+        }
         viewHolder.nameTV.setText(attraction.getTourismname());
         TextPaint paint=viewHolder.nameTV.getPaint();
         paint.setFakeBoldText(true);
