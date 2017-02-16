@@ -139,12 +139,15 @@
                     android:textColor="@color/pink_text_color" />
 
                 <ImageButton
+                    android:id="@+id/ib_collect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/daily_video_action_bg"
-                    android:src="@drawable/ic_collect" />
+                    android:src="@drawable/ic_collect"
+                    />
 
                 <TextView
+                    android:id="@+id/tv_collect"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/default_tiny_padding"

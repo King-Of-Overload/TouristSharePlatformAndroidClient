@@ -45,6 +45,7 @@ import zjut.salu.share.R;
 import zjut.salu.share.activity.banggumi.UploadBanggumeActivity;
 import zjut.salu.share.activity.lightstrategy.EditLightStrategy;
 import zjut.salu.share.activity.qrcode.libzxing.activity.CaptureActivity;
+import zjut.salu.share.activity.user.UserFavoritiesActivity;
 import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.fragment.BestFragment;
 import zjut.salu.share.fragment.IndexFragment;
@@ -302,6 +303,15 @@ public class HomeActivity extends RxBaseActivity{
                     switch (tag){
                         case 3:{
                             //TODO:我的收藏
+                            new Handler().postDelayed(() -> {
+                                if(loginStatus){
+                                    UserFavoritiesActivity.launch(mReference.get());
+                                }else{
+                                    Intent intent=new Intent(mReference.get(),LoginActivity.class);
+                                    intent.putExtra("activity_name", mReference.get().getClass().getName());
+                                    startActivity(intent);
+                                }
+                            },500);
                             break;
                         }
                         case 4:{

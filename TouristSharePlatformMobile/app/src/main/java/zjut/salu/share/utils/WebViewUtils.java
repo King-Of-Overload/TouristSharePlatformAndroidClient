@@ -82,4 +82,28 @@ public class WebViewUtils {
         htmlContent= DomUtils.getHtmlData(htmlContent);
         webView.loadData(htmlContent,"text/html;charset=utf-8","utf-8");
     }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    public static void displayHTMLWithProgressBar(String url, WebView webView, CircleProgressView progressView){
+        WebSettings settings=webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setAppCacheEnabled(true);// 设置启动缓存
+        settings.setDefaultTextEncodingName("utf-8");
+        if (DeviceUtils.hasKitKat()) {
+            settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);//适应内容大小
+            settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);
+        } else {
+            settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+        }
+        webView.loadUrl(url);
+        webView.setWebViewClient(new WebViewClient()
+        {
+            @Override
+            public void onPageFinished(WebView view,String url)
+            {
+                progressView.stopSpinning();
+                progressView.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
 }

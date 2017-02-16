@@ -329,4 +329,17 @@
     <string name="dianping_text">点评</string>
     <string name="share_text">分享</string>
     <string name="wenlu_text">问路卡</string>
+    <string name="negative_text">不用了</string>
+    <string name="call_phone_to_text">确定拨打电话:</string>
+    <string name="ma_text">吗</string>
+    <string name="web_detail_text">网页详情</string>
+    <string name="my_favorities_text">我的收藏</string>
+    <string name="category_text">来自分类:</string>
+    <string name="light_strategy_banggume_text">轻游记之小视频</string>
+    <string name="strategy_text">游记攻略</string>
+    <string name="trip_album_text">旅行相册</string>
+    <string name="love_post_card_text">爱的明信片</string>
+    <string name="load_error_text">ㄟ( ▔, ▔ )ㄏ 啊呀讨厌,出错了</string>
+    <string name="no_content_text">ㄟ( ▔, ▔ )ㄏ 啥都没有</string>
+    <string name="has_collect_text">已收藏</string>
 </resources>

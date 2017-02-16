@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_ask_route"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/card_bg"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="zjut.salu.share.activity.destination.AskRouteActivity">
+
+    <TextView
+        android:layout_gravity="center"
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="春日大社"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/white"
+        android:textSize="55sp"
+        android:layout_marginBottom="60dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="京都市峡景区到万通小路町路京都市峡景区到万通小路町路"
+        android:textColor="@color/white"
+        android:textSize="28sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_foreign_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="春日大社"
+        android:layout_gravity="center|bottom"
+        android:gravity="bottom"
+        android:textSize="28sp"
+        android:textColor="@color/white"
+        />
+
+</LinearLayout>

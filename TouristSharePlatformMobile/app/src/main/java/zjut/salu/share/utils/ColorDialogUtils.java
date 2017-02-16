@@ -15,7 +15,7 @@ import cn.refactor.lib.colordialog.PromptDialog;
  *ColorDialog支持三种显示形式: Text Mode, Image Mode, Text & Image Mode
  *PromptDialog提供默认五种显示形式: Success, Info, Error, Warning, Help
  *提供默认的进出动画, 支持自定义动画
- *PromptDialog UI来自于Dribbble的设计师 @Diego Faria, Alan(さる)在此表示感谢
+ *PromptDialog UI来自于Dribbble的设计师 @Diego Faria, しみずまさはる在此表示感谢
  */
 
 public class ColorDialogUtils {

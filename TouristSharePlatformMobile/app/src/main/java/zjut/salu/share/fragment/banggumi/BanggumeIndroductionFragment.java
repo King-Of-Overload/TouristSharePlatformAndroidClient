@@ -2,11 +2,13 @@ package zjut.salu.share.fragment.banggumi;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,9 +34,11 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import zjut.salu.share.R;
+import zjut.salu.share.activity.LoginActivity;
 import zjut.salu.share.activity.banggumi.BanggumeActivity;
 import zjut.salu.share.activity.banggumi.BanggumiDetailActivity;
 import zjut.salu.share.adapter.lightstrategy.BanggumeListRecycleAdapter;
+import zjut.salu.share.config.CuteTouristShareConfig;
 import zjut.salu.share.event.MyRecycleViewScrollListener;
 import zjut.salu.share.fragment.RxLazyFragment;
 import zjut.salu.share.model.lightstrategy.banggume.Banggume;
@@ -43,6 +47,7 @@ import zjut.salu.share.utils.ConstantUtil;
 import zjut.salu.share.utils.LogUtil;
 import zjut.salu.share.utils.NumberUtil;
 import zjut.salu.share.utils.OkHttpUtils;
+import zjut.salu.share.utils.PreferenceUtils;
 import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.utils.ToastUtils;
 import zjut.salu.share.widget.UserTagView;
@@ -65,6 +70,9 @@ public class BanggumeIndroductionFragment extends RxLazyFragment{
     @Bind(R.id.iv_loading_failed_friend_focus)ImageView loadingFailedIV;
     @Bind(R.id.iv_empty_friend_focus)ImageView emptyIV;
 
+    @Bind(R.id.ib_collect)ImageButton collectBtn;
+    @Bind(R.id.tv_collect)TextView collectTV;
+
     private String av;
     private Banggume banggume;
     private List<Banggume> relateBanggumeList;
@@ -73,6 +81,8 @@ public class BanggumeIndroductionFragment extends RxLazyFragment{
     private BanggumeListRecycleAdapter adapter;
     private WeakReference<RecyclerView> recyclerReference;
     private ImageLoader imageLoader;
+
+    private Boolean focusStatus=false;
 
     public static BanggumeIndroductionFragment newInstance(String aid, Banggume banggume)
     {
@@ -105,11 +115,45 @@ public class BanggumeIndroductionFragment extends RxLazyFragment{
         loadData();
     }
 
+    /**
+     * 检查收藏情况
+     */
+    private void checkCollectStatus() {
+        Map<String,Object> params=new HashMap<>();
+        params.put("entityid",banggume.getBangumeid());
+        params.put("userid",PreferenceUtils.getString("userid",null));
+        Observable<String> observable=okHttpUtils.asyncGetRequest(RequestURLs.CHECK_COLLECT_STATUS,params);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {}
+                    @Override
+                    public void onError(Throwable e) {}
+
+                    @Override
+                    public void onNext(String result) {
+                        if(result.equals("yes")){
+                            focusStatus=true;
+                            collectBtn.setImageDrawable(CuteTouristShareConfig.mInstance.getResources().getDrawable(R.drawable.ic_uncollect));
+                            collectTV.setText(R.string.has_collect_text);
+                        }else{
+                            focusStatus=false;
+                            collectBtn.setImageDrawable(CuteTouristShareConfig.mInstance.getResources().getDrawable(R.drawable.ic_collect));
+                            collectTV.setText(R.string.collect_text);
+                        }
+                    }
+                });
+    }
+
 
     @Override
     protected void loadData()
     {
         //TODO:联网获取额外数据
+        if(PreferenceUtils.getBoolean("loginStatus",false)){
+            checkCollectStatus();
+        }
         finishTask();
     }
 
@@ -135,6 +179,57 @@ public class BanggumeIndroductionFragment extends RxLazyFragment{
         setVideoTags();
         //设置视频相关
         setVideoRelated();
+    }
+
+    /**
+     * 收藏按钮
+     */
+    @OnClick(R.id.ib_collect)
+    public void collectClick(View v){
+        if(!PreferenceUtils.getBoolean("loginStatus",false)){
+            ToastUtils.ShortToast(R.string.please_login_first_text);
+            Intent intent=new Intent(context,LoginActivity.class);
+            intent.putExtra("activity_name",context.getClass().getName());
+            startActivity(intent);
+            return;
+        }
+        Map<String,Object> params=new HashMap<>();
+        params.put("entityid",banggume.getBangumeid());
+        params.put("userid",PreferenceUtils.getString("userid",null));
+        params.put("type","banggume");
+        Observable<String> observable=null;
+        if(focusStatus){//已关注,则取消关注
+            observable=okHttpUtils.asyncGetRequest(RequestURLs.CANCEL_FAVORITE,params);
+        }else{//未关注,则关注
+            observable=okHttpUtils.asyncGetRequest(RequestURLs.ADD_FAVORITE,params);
+        }
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {}
+
+                    @Override
+                    public void onError(Throwable e) {}
+
+                    @Override
+                    public void onNext(String result) {
+                        if(result.equals("success")){
+                            if(focusStatus){//之前收藏,现在已经取消
+                                focusStatus=false;
+                                collectBtn.setImageResource(R.drawable.ic_collect);
+                                collectTV.setText(R.string.collect_text);
+                            }else{
+                                focusStatus=true;
+                                collectBtn.setImageResource(R.drawable.ic_uncollect);
+                                collectTV.setText(R.string.has_collect_text);
+                            }
+                        }else{
+                         ToastUtils.ShortToast(R.string.server_down_text);
+                        }
+                    }
+                });
+
     }
 
     /**

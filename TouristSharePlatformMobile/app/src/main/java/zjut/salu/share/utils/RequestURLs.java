@@ -62,4 +62,11 @@ public class RequestURLs {
     public static final String LOAD_RELATE_BANGGUME = MAIN_URL + "tripuser_loadRelateBanggume.do";//加载相关小视频信息
     public static final String LOAD_LIGHT_STRATEGY_INDEX_DATA = MAIN_URL + "tripuser_loadLightStrategyIndexData.do";//加载轻游记主页数据
     public static final String LOAD_TOURISM_DATA = MAIN_URL + "tripuser_loadTourismData.do";//根据条件加载名胜、景点等详情
+    public static final String GET_CUISION_DATA = MAIN_URL + "tripuser_getAllCuisionData.do";//根据id获取菜品集合
+    public static final String GET_USER_FAVORITIES = MAIN_URL + "tripuser_getUserFavoritesData.do";//获取收藏集合
+    public static final String GET_SINGLE_BANGGUME = MAIN_URL + "tripuser_getSingleBanggume.do";//获取单个小视频
+    public static final String CANCEL_FAVORITE = MAIN_URL + "tripuser_deleteUserFavorite.do";//取消收藏
+
+    public static final String ADD_FAVORITE = MAIN_URL + "tripuser_addUserFavorite.do";//添加收藏
+    public static final String CHECK_COLLECT_STATUS = MAIN_URL + "tripuser_collectStatusCheck.do";//检查收藏状态
 }
