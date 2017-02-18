@@ -37,6 +37,7 @@ import zjut.salu.share.R;
 import zjut.salu.share.activity.LoginActivity;
 import zjut.salu.share.activity.banggumi.BanggumeActivity;
 import zjut.salu.share.activity.banggumi.BanggumiDetailActivity;
+import zjut.salu.share.activity.user.DownloadActivity;
 import zjut.salu.share.adapter.lightstrategy.BanggumeListRecycleAdapter;
 import zjut.salu.share.config.CuteTouristShareConfig;
 import zjut.salu.share.event.MyRecycleViewScrollListener;
@@ -113,6 +114,14 @@ public class BanggumeIndroductionFragment extends RxLazyFragment{
         av = getArguments().getString(ConstantUtil.BANGGUMI_TITLE);
         banggume= (Banggume) getArguments().getSerializable("banggume");
         loadData();
+    }
+
+    /**
+     * 缓存按钮
+     */
+    @OnClick(R.id.ib_download)
+    public void downloadClick(View v){
+        DownloadActivity.launch((Activity) context,banggume);
     }
 
     /**

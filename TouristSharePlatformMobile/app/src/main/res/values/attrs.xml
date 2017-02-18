@@ -32,4 +32,26 @@
         <attr name="foldNumber" format="integer" />
     </declare-styleable>
 
+
+    <!--进度条-->
+    <declare-styleable name="NumberProgressBar">
+        <attr name="pg_current" format="integer"/>
+        <attr name="pg_max" format="integer"/>
+        <attr name="pg_unreached_color" format="color"/>
+        <attr name="pg_reached_color" format="color"/>
+        <attr name="pg_reached_bar_height" format="dimension"/>
+        <attr name="pg_unreached_bar_height" format="dimension"/>
+        <attr name="pg_text_size" format="dimension"/>
+        <attr name="pg_text_color" format="color"/>
+        <attr name="pg_text_offset" format="dimension"/>
+        <attr name="pg_text_visibility" format="enum">
+            <enum name="visible" value="0"/>
+            <enum name="invisible" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="Themes">
+        <attr name="numberProgressBarStyle" format="reference"/>
+    </declare-styleable>
+
 </resources>

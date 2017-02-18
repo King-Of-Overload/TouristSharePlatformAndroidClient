@@ -7,7 +7,7 @@ import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import zjut.salu.share.R;
 
-/**
+/**imageloader选项类
  * Created by Salu on 2016/11/17.
  */
 

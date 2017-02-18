@@ -134,7 +134,12 @@ public class BanggumiPlayerActivity extends RxBaseActivity implements DanmukuSwi
     public void loadData()
     {
         try {
-            URL url=new URL(RequestURLs.MAIN_URL+banggume.getBangumeurl());
+            URL url;
+            if(null==banggume.getPhonestoragepath()||("").equals(banggume.getPhonestoragepath())){
+               url=new URL(RequestURLs.MAIN_URL+banggume.getBangumeurl());
+            }else{
+                url=new URL(banggume.getPhonestoragepath());
+            }
             mPlayerView.setVideoURI(Uri.parse(url.toString()));
             mPlayerView.setOnPreparedListener(mp -> {
                 mLoadingAnim.stop();

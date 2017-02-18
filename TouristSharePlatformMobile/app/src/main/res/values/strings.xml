@@ -342,4 +342,16 @@
     <string name="load_error_text">ㄟ( ▔, ▔ )ㄏ 啊呀讨厌,出错了</string>
     <string name="no_content_text">ㄟ( ▔, ▔ )ㄏ 啥都没有</string>
     <string name="has_collect_text">已收藏</string>
+    <string name="offline_download_text">离线缓存</string>
+    <string name="download_finish_text">下载完成</string>
+    <string name="downloading_text">正在下载</string>
+    <string name="all_start">全部开始</string>
+    <string name="edit">编辑</string>
+    <string name="main_storage_text">主存储:</string>
+    <string name="available_text">可用:</string>
+    <string name="no_cache_text">小源没有找到你的缓存哟</string>
+    <string name="file_not_exist_text">很抱歉，文件不存在了</string>
+    <string name="start_cache_text">开始缓存</string>
+    <string name="cache_complete_text">缓存完成</string>
+    <string name="cache_has_text">已缓存</string>
 </resources>

@@ -133,7 +133,9 @@
         <activity android:name=".activity.destination.AskRouteActivity" />
         <activity android:name=".activity.destination.MapViewActivity" />
         <activity android:name=".activity.destination.CuisionActivity" />
-        <activity android:name=".activity.user.UserFavoritiesActivity"></activity>
+        <activity android:name=".activity.user.UserFavoritiesActivity" />
+        <activity android:name=".activity.user.OffLineDownloadActivity" />
+        <activity android:name=".activity.user.DownloadActivity"></activity>
     </application>
 
 </manifest>

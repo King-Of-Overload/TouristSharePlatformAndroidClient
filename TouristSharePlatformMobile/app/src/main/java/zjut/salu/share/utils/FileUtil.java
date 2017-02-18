@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -21,6 +22,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**文件工具类
@@ -28,6 +30,51 @@ import java.util.List;
  */
 
 public class FileUtil {
+
+    /**
+     * 获取指定文件大小
+     * @param file 文件
+     * @return
+     * @throws Exception 　　
+     */
+    public static long getFileSize(File file) throws Exception {
+        long size = 0;
+        if (file.exists()) {
+            FileInputStream fis = null;
+            fis = new FileInputStream(file);
+            size = fis.available();
+        } else {
+            file.createNewFile();
+            Log.e("获取文件大小", "文件不存在!");
+        }
+        return size;
+    }
+
+
+    /**
+     * 转换文件大小
+     * @param fileS
+     * @return
+     *
+     */
+    public static String FormetFileSize(long fileS) {
+        DecimalFormat df = new DecimalFormat("#.00");
+        String fileSizeString = "";
+        String wrongSize = "0B";
+        if (fileS == 0) {
+            return wrongSize;
+        }
+        if (fileS < 1024) {
+            fileSizeString = df.format((double) fileS) + "B";
+        } else if (fileS < 1048576) {
+            fileSizeString = df.format((double) fileS / 1024) + "KB";
+        } else if (fileS < 1073741824) {
+            fileSizeString = df.format((double) fileS / 1048576) + "MB";
+        } else {
+            fileSizeString = df.format((double) fileS / 1073741824) + "GB";
+        }
+        return fileSizeString;
+    }
     /**
      * 保存位图
      * @param bitmap
@@ -112,6 +159,24 @@ public class FileUtil {
 
         return new File(context.getFilesDir(), fileName).exists();
 
+    }
+
+    /**
+     * 文件是否存在
+     * @param file
+     * @return
+     */
+    public static boolean exists(File file){
+        try{
+            if(!file.exists()){
+                return false;
+            }
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     /**

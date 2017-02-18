@@ -36,6 +36,8 @@ public class BanggumeDao extends AbstractDao<Banggume, String> {
         public final static Property Banggumesharenum = new Property(9, int.class, "banggumesharenum", false, "BANGGUMESHARENUM");
         public final static Property Banggumedownloadnum = new Property(10, int.class, "banggumedownloadnum", false, "BANGGUMEDOWNLOADNUM");
         public final static Property Banggumecollectnum = new Property(11, int.class, "banggumecollectnum", false, "BANGGUMECOLLECTNUM");
+        public final static Property Phonestoragepath = new Property(12, String.class, "phonestoragepath", false, "PHONESTORAGEPATH");
+        public final static Property Size = new Property(13, int.class, "size", false, "SIZE");
     }
 
 
@@ -62,7 +64,9 @@ public class BanggumeDao extends AbstractDao<Banggume, String> {
                 "\"BANGUMEDATE\" INTEGER," + // 8: bangumedate
                 "\"BANGGUMESHARENUM\" INTEGER NOT NULL ," + // 9: banggumesharenum
                 "\"BANGGUMEDOWNLOADNUM\" INTEGER NOT NULL ," + // 10: banggumedownloadnum
-                "\"BANGGUMECOLLECTNUM\" INTEGER NOT NULL );"); // 11: banggumecollectnum
+                "\"BANGGUMECOLLECTNUM\" INTEGER NOT NULL ," + // 11: banggumecollectnum
+                "\"PHONESTORAGEPATH\" TEXT," + // 12: phonestoragepath
+                "\"SIZE\" INTEGER NOT NULL );"); // 13: size
     }
 
     /** Drops the underlying database table. */
@@ -114,6 +118,12 @@ public class BanggumeDao extends AbstractDao<Banggume, String> {
         stmt.bindLong(10, entity.getBanggumesharenum());
         stmt.bindLong(11, entity.getBanggumedownloadnum());
         stmt.bindLong(12, entity.getBanggumecollectnum());
+ 
+        String phonestoragepath = entity.getPhonestoragepath();
+        if (phonestoragepath != null) {
+            stmt.bindString(13, phonestoragepath);
+        }
+        stmt.bindLong(14, entity.getSize());
     }
 
     @Override
@@ -159,6 +169,12 @@ public class BanggumeDao extends AbstractDao<Banggume, String> {
         stmt.bindLong(10, entity.getBanggumesharenum());
         stmt.bindLong(11, entity.getBanggumedownloadnum());
         stmt.bindLong(12, entity.getBanggumecollectnum());
+ 
+        String phonestoragepath = entity.getPhonestoragepath();
+        if (phonestoragepath != null) {
+            stmt.bindString(13, phonestoragepath);
+        }
+        stmt.bindLong(14, entity.getSize());
     }
 
     @Override
@@ -187,6 +203,8 @@ public class BanggumeDao extends AbstractDao<Banggume, String> {
         entity.setBanggumesharenum(cursor.getInt(offset + 9));
         entity.setBanggumedownloadnum(cursor.getInt(offset + 10));
         entity.setBanggumecollectnum(cursor.getInt(offset + 11));
+        entity.setPhonestoragepath(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setSize(cursor.getInt(offset + 13));
      }
     
     @Override

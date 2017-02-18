@@ -133,4 +133,19 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+
+    <!--离线缓存进度条Style-->
+    <style name="NumberProgressBar_Beauty_Red">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="pg_max">100</item>
+        <item name="pg_current">0</item>
+        <item name="pg_unreached_color">@color/gray_light</item>
+        <item name="pg_reached_color">@color/colorPrimary</item>
+        <item name="pg_text_size">10sp</item>
+        <item name="pg_text_color">#FF3D7F</item>
+        <item name="pg_reached_bar_height">20dp</item>
+        <item name="pg_unreached_bar_height">20dp</item>
+    </style>
+
 </resources>

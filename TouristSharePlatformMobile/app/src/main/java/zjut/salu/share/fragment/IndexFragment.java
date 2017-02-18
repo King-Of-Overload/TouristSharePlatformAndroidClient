@@ -128,7 +128,6 @@ public class IndexFragment extends RxLazyFragment {
      */
     private void initHeaderBanner(){
         okHttpUtils.startAsyncGetRequest(RequestURLs.GET_BANNER_BEAN_DATA_URL,new GetBannerDataResponseCallback());
-
     }
 
 

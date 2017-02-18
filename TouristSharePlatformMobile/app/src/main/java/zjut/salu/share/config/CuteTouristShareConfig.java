@@ -12,12 +12,16 @@ import android.view.WindowManager;
 
 import com.baidu.mapapi.SDKInitializer;
 import com.bilibili.magicasakura.utils.ThemeUtils;
+import com.liulishuo.filedownloader.FileDownloader;
+import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
+import com.liulishuo.filedownloader.services.DownloadMgrInitialParams;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.Proxy;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +33,7 @@ import zjut.salu.share.utils.ThemeHelper;
 import zjut.salu.share.utils.greendao.GreenDaoDBHelper;
 
 /**芳草寻源的所有业务逻辑配置皆在此哦
- * Created by Alan(さる) on 2016/10/16.
+ * Created by Alan(しみずまさはる) on 2016/10/16.
  */
 
 public class CuteTouristShareConfig extends MultiDexApplication implements ThemeUtils.switchColor{
@@ -67,6 +71,14 @@ public class CuteTouristShareConfig extends MultiDexApplication implements Theme
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
         //注意该方法要再setContentView方法之前实现
         SDKInitializer.initialize(getApplicationContext());
+        //下载器初始化
+        FileDownloader.init(getApplicationContext(), new DownloadMgrInitialParams.InitCustomMaker()
+                .connectionCreator(new FileDownloadUrlConnection
+                        .Creator(new FileDownloadUrlConnection.Configuration()
+                        .connectTimeout(15_000) // set connection timeout.
+                        .readTimeout(15_000) // set read timeout.
+                        .proxy(Proxy.NO_PROXY) // set proxy
+                )));
     }
 
     /**

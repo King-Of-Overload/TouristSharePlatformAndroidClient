@@ -45,6 +45,7 @@ import zjut.salu.share.R;
 import zjut.salu.share.activity.banggumi.UploadBanggumeActivity;
 import zjut.salu.share.activity.lightstrategy.EditLightStrategy;
 import zjut.salu.share.activity.qrcode.libzxing.activity.CaptureActivity;
+import zjut.salu.share.activity.user.OffLineDownloadActivity;
 import zjut.salu.share.activity.user.UserFavoritiesActivity;
 import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.fragment.BestFragment;
@@ -693,6 +694,7 @@ public class HomeActivity extends RxBaseActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.id_action_download:{//离线缓存按钮
+                OffLineDownloadActivity.launch(mReference.get());
                 break;
             }
             case R.id.id_action_qr_code:{//二维码扫描
@@ -712,6 +714,7 @@ public class HomeActivity extends RxBaseActivity{
             Bundle bundle = data.getExtras();
             String scanResult = bundle.getString("result");
             //TODO:获取到用户id，访问网络验证用户，并跳转到用户的页面
+
         }
     }
 

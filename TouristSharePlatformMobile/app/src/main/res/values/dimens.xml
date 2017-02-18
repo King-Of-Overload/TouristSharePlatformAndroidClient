@@ -71,4 +71,11 @@
     <dimen name="card_default_height">190dp</dimen>
     <dimen name="card_image_default_height">120dp</dimen>
     <dimen name="card_title_margin">5dp</dimen>
+    <dimen name="bottom_layout_height">60dp</dimen>
+    <dimen name="main__item_layout_minHeight">100dp</dimen>
+    <dimen name="main__item_file_name_text_size">18sp</dimen>
+    <dimen name="main__item_downloaded_size_text_size">12sp</dimen>
+    <dimen name="main__item_total_size_text_size">12sp</dimen>
+    <dimen name="main__item_download_percent_text_size">12sp</dimen>
+    <dimen name="main__item_extra_text_text_size">12sp</dimen>
 </resources>

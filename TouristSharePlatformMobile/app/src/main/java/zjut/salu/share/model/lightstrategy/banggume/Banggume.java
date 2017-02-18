@@ -35,6 +35,26 @@ public class Banggume implements Serializable {
 
     @Transient private List<BanggumeTag> banggimeTagList;
 
+    private String phonestoragepath;
+
+    private int size;
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    public String getPhonestoragepath() {
+        return phonestoragepath;
+    }
+
+    public void setPhonestoragepath(String phonestoragepath) {
+        this.phonestoragepath = phonestoragepath;
+    }
+
     public Banggume() {
     }
 
