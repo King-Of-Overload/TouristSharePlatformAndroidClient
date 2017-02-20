@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -20,11 +22,17 @@ import java.util.HashMap;
 import butterknife.Bind;
 import master.flame.danmaku.controller.DrawHandler;
 import master.flame.danmaku.controller.IDanmakuView;
+import master.flame.danmaku.danmaku.loader.ILoader;
+import master.flame.danmaku.danmaku.loader.IllegalDataException;
+import master.flame.danmaku.danmaku.loader.android.DanmakuLoaderFactory;
 import master.flame.danmaku.danmaku.model.BaseDanmaku;
 import master.flame.danmaku.danmaku.model.DanmakuTimer;
+import master.flame.danmaku.danmaku.model.IDanmakus;
 import master.flame.danmaku.danmaku.model.IDisplayer;
 import master.flame.danmaku.danmaku.model.android.DanmakuContext;
+import master.flame.danmaku.danmaku.model.android.Danmakus;
 import master.flame.danmaku.danmaku.parser.BaseDanmakuParser;
+import master.flame.danmaku.danmaku.parser.IDataSource;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -35,10 +43,13 @@ import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.model.lightstrategy.banggume.Banggume;
 import zjut.salu.share.myinterface.DanmukuSwitchListener;
 import zjut.salu.share.myinterface.VideoBackListener;
+import zjut.salu.share.utils.BiliDanmukuParser;
 import zjut.salu.share.utils.ConstantUtil;
 import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.widget.MediaController;
 import zjut.salu.share.widget.VideoPlayerView;
+
+
 
 /**
  * 视频播放器业务逻辑
@@ -59,6 +70,8 @@ public class BanggumiPlayerActivity extends RxBaseActivity implements DanmukuSwi
 
     private DanmakuContext danmakuContext;
 
+    private BaseDanmakuParser mParser;//解析器对象
+
     private String cid;
 
     private String title;
@@ -69,6 +82,8 @@ public class BanggumiPlayerActivity extends RxBaseActivity implements DanmukuSwi
 
     private String startText = "初始化播放器...";
 
+    private WeakReference<Activity> reference;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_banggumi_player;
@@ -76,6 +91,7 @@ public class BanggumiPlayerActivity extends RxBaseActivity implements DanmukuSwi
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        reference=new WeakReference<>(this);
         Intent intent = getIntent();
         if (intent != null)
         {
@@ -88,8 +104,7 @@ public class BanggumiPlayerActivity extends RxBaseActivity implements DanmukuSwi
     }
 
     @SuppressLint("UseSparseArrays")
-    private void initMediaPlayer()
-    {
+    private void initMediaPlayer() {
         //配置播放器
         MediaController mMediaController = new MediaController(this);
         mMediaController.setTitle(title);
@@ -108,11 +123,11 @@ public class BanggumiPlayerActivity extends RxBaseActivity implements DanmukuSwi
         //配置弹幕库
         mDanmakuView.enableDanmakuDrawingCache(true);
         //设置最大显示行数
-        HashMap<Integer,Integer> maxLinesPair = new HashMap<>();
+        HashMap<Integer, Integer> maxLinesPair = new HashMap<>();
         //滚动弹幕最大显示5行
         maxLinesPair.put(BaseDanmaku.TYPE_SCROLL_RL, 5);
         //设置是否禁止重叠
-        HashMap<Integer,Boolean> overlappingEnablePair = new HashMap<>();
+        HashMap<Integer, Boolean> overlappingEnablePair = new HashMap<>();
         overlappingEnablePair.put(BaseDanmaku.TYPE_SCROLL_RL, true);
         overlappingEnablePair.put(BaseDanmaku.TYPE_FIX_TOP, true);
         //设置弹幕样式
@@ -123,8 +138,64 @@ public class BanggumiPlayerActivity extends RxBaseActivity implements DanmukuSwi
                 .setScaleTextSize(0.8f)
                 .setMaximumLines(maxLinesPair)
                 .preventOverlapping(overlappingEnablePair);
+        if (mDanmakuView != null) {
+            mParser = createParser(this.getResources().openRawResource(R.raw.comments)); //创建解析器对象，从raw资源目录下解析comments.xml文本
+            mDanmakuView.setCallback(new master.flame.danmaku.controller.DrawHandler.Callback() {
+                @Override
+                public void updateTimer(DanmakuTimer timer) {
+                }
 
-        loadData();
+                @Override
+                public void drawingFinished() {
+
+                }
+
+                @Override
+                public void danmakuShown(BaseDanmaku danmaku) {
+
+                }
+
+                @Override
+                public void prepared() {
+                    mDanmakuView.start();
+                }
+            });
+
+            mDanmakuView.prepare(mParser, danmakuContext);
+            mDanmakuView.showFPS(false); //是否显示FPS
+            mDanmakuView.enableDanmakuDrawingCache(true);
+            loadData();
+        }
+    }
+
+    /**
+     * 创建解析器对象，解析输入流
+     * @param stream
+     * @return
+     */
+    private BaseDanmakuParser createParser(InputStream stream) {
+
+        if (stream == null) {
+            return new BaseDanmakuParser() {
+
+                @Override
+                protected Danmakus parse() {
+                    return new Danmakus();
+                }
+            };
+        }
+
+        ILoader loader = DanmakuLoaderFactory.create(DanmakuLoaderFactory.TAG_BILI);
+
+        try {
+            loader.load(stream);
+        } catch (IllegalDataException e) {
+            e.printStackTrace();
+        }
+        BaseDanmakuParser parser=new BiliDanmukuParser();
+        IDataSource<?> dataSource = loader.getDataSource();
+        parser.load(dataSource);
+        return parser;
     }
 
     /**

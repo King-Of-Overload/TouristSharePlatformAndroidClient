@@ -61,7 +61,7 @@ public abstract class AbsRecyclerViewAdapter extends  RecyclerView.Adapter<AbsRe
         void onItemClick(int position, ClickableViewHolder holder);
     }
 
-    interface OnItemLongClickListener
+    public interface OnItemLongClickListener
     {
 
         boolean onItemLongClick(int position, ClickableViewHolder holder);

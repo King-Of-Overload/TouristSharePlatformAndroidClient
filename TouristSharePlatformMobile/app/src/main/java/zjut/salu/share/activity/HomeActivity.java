@@ -19,8 +19,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -41,6 +47,10 @@ import cn.refactor.lib.colordialog.ColorDialog;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import zjut.salu.share.R;
 import zjut.salu.share.activity.banggumi.UploadBanggumeActivity;
 import zjut.salu.share.activity.lightstrategy.EditLightStrategy;
@@ -48,6 +58,7 @@ import zjut.salu.share.activity.qrcode.libzxing.activity.CaptureActivity;
 import zjut.salu.share.activity.user.OffLineDownloadActivity;
 import zjut.salu.share.activity.user.UserFavoritiesActivity;
 import zjut.salu.share.base.RxBaseActivity;
+import zjut.salu.share.config.CuteTouristShareConfig;
 import zjut.salu.share.fragment.BestFragment;
 import zjut.salu.share.fragment.IndexFragment;
 import zjut.salu.share.fragment.PersonalSettingFragment;
@@ -62,6 +73,8 @@ import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.utils.StringUtils;
 import zjut.salu.share.utils.ThemeHelper;
 import zjut.salu.share.utils.ToastUtils;
+import zjut.salu.share.utils.huanxindb.DemoDBManager;
+import zjut.salu.share.utils.huanxindb.EaseUser;
 import zjut.salu.share.widget.CommonCircleImageView;
 import zjut.salu.share.widget.MoreWindow;
 import zjut.salu.share.widget.dialog.CardPickerDialog;
@@ -423,12 +436,38 @@ public class HomeActivity extends RxBaseActivity{
                     runOnUiThread(() -> {
                         if(checkStatus.equals("legal")){//合法
                             try {
+
                                 String userid=jsonObject.getString("userid");
                                 String loginStatusCode=jsonObject.getString("loginStatusCode");
                                 String loginTime=jsonObject.getString("loginTime");
                                 String username=jsonObject.getString("username");
                                 String headerImage=jsonObject.getString("headerImage");
                                 String sex=jsonObject.getString("sex");
+                                DemoDBManager.getInstance().closeDB();
+                                // reset current user name before login
+                                CuteTouristShareConfig.getInstance().setCurrentUserName(userid);
+                                // 调用sdk登陆方法登陆聊天服务器
+                                EMClient.getInstance().login(userid,PreferenceUtils.getString("password",null), new EMCallBack() {
+                                    @Override
+                                    public void onSuccess() {
+                                        // ** 第一次登录或者之前logout后再登录，加载所有本地群和回话
+                                        // ** manually load all local groups and
+                                        EMClient.getInstance().groupManager().loadAllGroups();
+                                        EMClient.getInstance().chatManager().loadAllConversations();
+                                        getFriends();
+                                    }
+
+                                    @Override
+                                    public void onError(int code, String error) {
+                                        runOnUiThread(() -> Toast.makeText(getApplicationContext(), getString(R.string.Login_failed) + error,
+                                                Toast.LENGTH_SHORT).show());
+                                    }
+
+                                    @Override
+                                    public void onProgress(int progress, String status) {
+
+                                    }
+                                });
                                 PreferenceUtils.put("loginStatus",true);//修改登录状态
                                 PreferenceUtils.put("username",username);
                                 PreferenceUtils.put("userid",userid);
@@ -455,7 +494,25 @@ public class HomeActivity extends RxBaseActivity{
     }
 
 
+    private  void  getFriends(){
+        try {
+            List<String> usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
+            Map<String ,EaseUser>users=new HashMap<String ,EaseUser>();
+            for(String username:usernames){
+                EaseUser user=new EaseUser(username);
+                users.put(username, user);
 
+
+            }
+
+            CuteTouristShareConfig.getInstance().setContactList(users);
+
+
+        } catch (HyphenateException e) {
+            e.printStackTrace();
+        }
+
+    }
     /**
      * 因登录时间过期注销登录回调方法
      * 清除所有preference，提示过期，重新登录
@@ -714,7 +771,46 @@ public class HomeActivity extends RxBaseActivity{
             Bundle bundle = data.getExtras();
             String scanResult = bundle.getString("result");
             //TODO:获取到用户id，访问网络验证用户，并跳转到用户的页面
+            Map<String,Object> params=new HashMap<>();
+            params.put("userid",scanResult);
+            Observable<String> observable=okHttpUtils.asyncGetRequest(RequestURLs.VALIDATE_USER,params);
+            observable.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<String>() {
+                        @Override
+                        public void onCompleted() {}
+                        @Override
+                        public void onError(Throwable e) {
+                        }
 
+                        @Override
+                        public void onNext(String result) {
+                            try {
+                                JSONObject object=new JSONObject(result);
+                                if(object.getString("result").equals("success")){
+                                    String userStr=object.getString("user");
+                                    Gson gson=new Gson();
+                                    TripUser user=gson.fromJson(userStr,TripUser.class);
+                                    Intent intent=new Intent(mReference.get(),PersonalInfoActivity.class);
+                                    if(PreferenceUtils.getBoolean("loginStatus",false)){
+                                        if(PreferenceUtils.acquireCurrentUser().getUserid().equals(user.getUserid())){
+                                            intent.putExtra("isCurrentUser",true);
+                                        }else{
+                                            intent.putExtra("isCurrentUser",false);
+                                            intent.putExtra("user",user);
+                                        }
+                                        startActivity(intent);
+                                    }else{
+                                        ToastUtils.ShortToast(R.string.please_login_first_text);
+                                    }
+                                }else{
+                                    ToastUtils.ShortToast(R.string.user_does_not_exits_text);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
         }
     }
 

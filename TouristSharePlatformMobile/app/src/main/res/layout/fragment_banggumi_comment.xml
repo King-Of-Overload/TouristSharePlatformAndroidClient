@@ -1,10 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/recycle"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
-    android:overScrollMode="never"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:scrollbars="none" />
+    android:overScrollMode="never">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_gravity="right"
+        android:id="@+id/tv_add_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_pin_bg"
+        android:gravity="center"
+        android:text="@string/add_comment_text"
+        android:textColor="@color/focus_text_color" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+        <zjut.salu.share.widget.MyNestedListView
+            android:descendantFocusability="blocksDescendants"
+            android:id="@+id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:scrollbars="none"/>
+
+
+</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/comment_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp"
+        android:layout_gravity="bottom"
+        android:visibility="gone">
+        <EditText
+            android:id="@+id/edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dip"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:maxLength="2000"
+            android:paddingLeft="3dp"
+            android:textSize="16sp"
+            />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="3dp"
+            android:gravity="bottom"
+            android:text="发送" />
+
+
+    </LinearLayout>
+    </FrameLayout>
+    </android.support.v4.widget.NestedScrollView>

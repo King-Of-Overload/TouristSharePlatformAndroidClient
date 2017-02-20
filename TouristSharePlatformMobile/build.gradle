@@ -20,6 +20,8 @@ allprojects {
         maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
         //三方库代码仓库地址
         maven { url "https://jitpack.io" }
+
+        maven{ url "https://raw.githubusercontent.com/HyphenateInc/Hyphenate-SDK-Android/master/repository"}
     }
 }
 

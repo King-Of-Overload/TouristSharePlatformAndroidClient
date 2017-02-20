@@ -1,10 +1,13 @@
 package zjut.salu.share.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,17 +16,36 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import zjut.salu.share.R;
+import zjut.salu.share.activity.banggumi.BanggumiDetailActivity;
+import zjut.salu.share.adapter.favorite.UserFavoriteAdapter;
 import zjut.salu.share.base.RxBaseActivity;
 import zjut.salu.share.event.AppBarStateChangeEvent;
+import zjut.salu.share.event.MyRecycleViewScrollListener;
 import zjut.salu.share.model.TripUser;
+import zjut.salu.share.model.lightstrategy.banggume.Banggume;
+import zjut.salu.share.model.user.UserFavorite;
+import zjut.salu.share.utils.OkHttpUtils;
 import zjut.salu.share.utils.PreferenceUtils;
 import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.utils.SystemBarHelper;
 import zjut.salu.share.widget.CommonCircleImageView;
+import zjut.salu.share.widget.view.CustomEmptyView;
 
 /**
 *个人信息界面
@@ -45,8 +67,17 @@ public class PersonalInfoActivity extends RxBaseActivity {
     @Bind(R.id.user_sex)ImageView sexIV;//性别
     @Bind(R.id.tv_fans)TextView fansNumTV;//粉丝数
     @Bind(R.id.user_desc)TextView usignatureTV;//签名
+
+    @Bind(R.id.empty_layout)CustomEmptyView emptyView;
+    @Bind(R.id.recycle)RecyclerView recyclerView;
     private Boolean isCurrentUser=false;
     private TripUser user=null;
+    private OkHttpUtils okHttpUtils;
+
+    private List<UserFavorite> favoriteList;
+    private UserFavoriteAdapter adapter;
+    private WeakReference<Activity> reference;
+    private ImageLoader imageLoader;
 
     @Override
     public int getLayoutId() {
@@ -55,6 +86,9 @@ public class PersonalInfoActivity extends RxBaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        imageLoader=ImageLoader.getInstance();
+        okHttpUtils=new OkHttpUtils();
+        reference=new WeakReference<>(this);
         Intent intent=getIntent();
         isCurrentUser=intent.getBooleanExtra("isCurrentUser",false);
         if(isCurrentUser){//当前用户
@@ -63,6 +97,76 @@ public class PersonalInfoActivity extends RxBaseActivity {
             user= (TripUser) intent.getSerializableExtra("user");
         }
         changeUserUI();
+        finishTask();
+    }
+
+    @Override
+    public void finishTask() {
+        Map<String,Object> params=new HashMap<>();
+        params.put("userid",user.getUserid());
+        Observable<String> observable=okHttpUtils.asyncGetRequest(RequestURLs.GET_USER_FAVORITIES,params);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {}
+
+                    @Override
+                    public void onError(Throwable e) {
+                        runOnUiThread(()->{
+                            recyclerView.setVisibility(View.GONE);
+                            emptyView.setEmptyImage(R.drawable.img_tips_error_no_downloads);
+                            emptyView.setEmptyText(getString(R.string.load_error_text));
+                        });
+                    }
+
+                    @Override
+                    public void onNext(String result) {
+                        Gson gson=new Gson();
+                        favoriteList=gson.fromJson(result,new TypeToken<List<UserFavorite>>(){}.getType());
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(reference.get()));
+                        adapter=new UserFavoriteAdapter(recyclerView,favoriteList,imageLoader);
+                        recyclerView.setAdapter(adapter);
+                        adapter.setOnItemClickListener((position, holder) -> {
+                            UserFavorite favorite=favoriteList.get(position);
+                            switch (favorite.getType()){
+                                case "banggume":{
+                                    getBanggume(favorite.getEntityid());
+                                    break;
+                                }
+                            }
+                        });
+                        recyclerView.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
+                        if(favoriteList.size()==0){
+                            recyclerView.setVisibility(View.GONE);
+                            emptyView.setEmptyImage(R.drawable.img_tips_error_no_downloads);
+                            emptyView.setEmptyText(getString(R.string.no_favorite_text));
+                        }
+                    }
+                });
+    }
+
+    private void getBanggume(String banggumeid){
+        Map<String,Object> params=new HashMap<>();
+        params.put("banggumeid", banggumeid);
+        Observable<String> observable=okHttpUtils.asyncGetRequest(RequestURLs.GET_SINGLE_BANGGUME,params);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {}
+
+                    @Override
+                    public void onError(Throwable e) {}
+
+                    @Override
+                    public void onNext(String result) {
+                        Gson gson=new Gson();
+                        Banggume banggume=gson.fromJson(result,Banggume.class);
+                        BanggumiDetailActivity.launch(reference.get(),banggume);
+                    }
+                });
     }
 
     /**
@@ -111,12 +215,13 @@ public class PersonalInfoActivity extends RxBaseActivity {
 
     @Override
     public void initToolBar() {
-        mToolbar.setTitle("");
+        mToolbar.setTitle(user.getUsername());
+        mToolbar.setNavigationIcon(R.drawable.action_button_back_pressed_light);
+        mToolbar.setNavigationOnClickListener(v->finish());
 //        setSupportActionBar(mToolbar);
         ActionBar supportActionBar = getSupportActionBar();
         if (supportActionBar != null)
             supportActionBar.setDisplayHomeAsUpEnabled(true);
-
 
         //设置StatusBar透明
         SystemBarHelper.immersiveStatusBar(this);

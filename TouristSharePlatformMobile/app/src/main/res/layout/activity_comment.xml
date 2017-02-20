@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_comment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="zjut.salu.share.activity.user.CommentActivity">
+    <include layout="@layout/layout_toolbar"/>
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:inputType="textMultiLine"
+        android:background="@color/white"
+        android:hint="@string/comment_content_text"
+        android:gravity="start"
+        android:textColorHint="@color/text_hint"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_add_comment"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:background="@drawable/btn_pin_bg"
+        android:gravity="center"
+        android:layout_gravity="right"
+        android:text="@string/add_comment_text"
+        android:textColor="@color/focus_text_color" />
+
+</LinearLayout>

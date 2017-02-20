@@ -1,5 +1,6 @@
 package zjut.salu.share.utils;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -9,6 +10,8 @@ import android.os.StatFs;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 
 import zjut.salu.share.config.CuteTouristShareConfig;
@@ -18,6 +21,8 @@ import zjut.salu.share.config.CuteTouristShareConfig;
  */
 
 public class CommonUtils {
+
+
 
     /**
      * 获取聚合数据汇率app_key

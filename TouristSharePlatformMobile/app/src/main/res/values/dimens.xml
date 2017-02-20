@@ -78,4 +78,10 @@
     <dimen name="main__item_total_size_text_size">12sp</dimen>
     <dimen name="main__item_download_percent_text_size">12sp</dimen>
     <dimen name="main__item_extra_text_text_size">12sp</dimen>
+    <dimen name="list_item_vertical_margin_small">8dp</dimen>
+    <dimen name="height_top_bar">46dp</dimen>
+    <dimen name="margin_chat_activity">5dp</dimen>
+    <dimen name="size_avatar">50dp</dimen>
+    <dimen name="card_corner_radius_index">8dp</dimen>
+    <dimen name="card_default_small">170dp</dimen>
 </resources>

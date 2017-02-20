@@ -30,7 +30,9 @@ import rx.schedulers.Schedulers;
 import zjut.salu.share.R;
 import zjut.salu.share.activity.FriendsActivity;
 import zjut.salu.share.activity.UserInfoActivity;
+import zjut.salu.share.activity.user.ChatActivity;
 import zjut.salu.share.adapter.friends.FriendsRecycleAdapter;
+import zjut.salu.share.adapter.helper.AbsRecyclerViewAdapter;
 import zjut.salu.share.event.MyRecycleViewScrollListener;
 import zjut.salu.share.fragment.RxLazyFragment;
 import zjut.salu.share.model.TripUser;
@@ -134,6 +136,14 @@ public class FriendFocusFragment extends RxLazyFragment {
                                     intent.putExtra("userid",clickedUser.getUserid());
                                     startActivity(intent);
                                 });
+                                adapter.setOnItemLongClickListener((position, holder) -> {
+                                    TripUser user=userList.get(position);
+                                    Intent intent = new Intent(context, ChatActivity.class);
+                                    intent.putExtra("username", user.getUserid());
+                                    intent.putExtra("nickname",user.getUsername());
+                                    startActivity(intent);
+                                    return true;
+                            });
                                 recyclerView.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
                             }
                             refreshLayout.setRefreshing(false);

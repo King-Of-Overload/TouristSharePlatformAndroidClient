@@ -5,6 +5,7 @@ import android.text.TextPaint;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -201,6 +202,25 @@ public class StringUtils {
 
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         return format.format(date);
+    }
+
+    /**
+     * 格式化日期字符串
+     *
+     * @param date
+     * @param pattern
+     * @return
+     */
+    public static Date formatDateReturnDate(Date date, String pattern)
+    {
+
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        try {
+            return format.parse(format.format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

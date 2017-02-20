@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="244dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/visitor_me_cover" />
+        android:src="@drawable/sakura" />
 
     <zjut.salu.share.widget.MyPullToRefreshView
         android:id="@+id/plv_user_info"

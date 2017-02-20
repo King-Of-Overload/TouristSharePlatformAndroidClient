@@ -69,4 +69,9 @@ public class RequestURLs {
 
     public static final String ADD_FAVORITE = MAIN_URL + "tripuser_addUserFavorite.do";//添加收藏
     public static final String CHECK_COLLECT_STATUS = MAIN_URL + "tripuser_collectStatusCheck.do";//检查收藏状态
+    public static final String SAVE_COMMENTS = MAIN_URL + "saveComments.do";//添加评论
+    public static final String GET_COMMENTS = MAIN_URL + "getComments.do";//获取评论
+
+    public static final String VALIDATE_USER = MAIN_URL + "tripuser_validateUser.do";//qr验证用户
+    public static final String LOAD_INDEX_DATA = MAIN_URL + "tripuser_loadIndexData.do";//获取主页数据
 }

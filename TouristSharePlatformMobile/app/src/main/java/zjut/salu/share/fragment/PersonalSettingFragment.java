@@ -40,8 +40,10 @@ import zjut.salu.share.activity.LoginActivity;
 import zjut.salu.share.activity.PersonalInfoActivity;
 import zjut.salu.share.activity.SplashActivity;
 import zjut.salu.share.activity.UserFeedBackActivity;
+import zjut.salu.share.activity.UserInfoActivity;
 import zjut.salu.share.activity.UserOrderListActivity;
 import zjut.salu.share.activity.UserSettingActivity;
+import zjut.salu.share.activity.user.UserFavoritiesActivity;
 import zjut.salu.share.config.CuteTouristShareConfig;
 import zjut.salu.share.utils.CommonUtils;
 import zjut.salu.share.utils.ImageUtils;
@@ -234,6 +236,49 @@ public class PersonalSettingFragment extends RxLazyFragment {
         Intent intent=new Intent(context, LoginActivity.class);
         intent.putExtra("activity_name", HomeActivity.class.getName());
         startActivity(intent);
+    }
+
+    /**
+     * 好友动态
+     */
+    @OnClick(R.id.linear_btn_fragment_setting_user_dynamic_state)
+    public void friendActiveClick(View v){
+        friendOperations();
+    }
+
+    /**
+     * 我的收藏
+     */
+    @OnClick(R.id.rl_layout_btn_my_collection)
+    public void myCollection(View v){
+        if(PreferenceUtils.getBoolean("loginStatus",false)){
+            UserFavoritiesActivity.launch(mReference.get());
+        }else{
+            Intent intent=new Intent(mReference.get(),LoginActivity.class);
+            intent.putExtra("activity_name", mReference.get().getClass().getName());
+            startActivity(intent);
+        }
+    }
+
+    /**
+     * 我的空间
+     * @param v view
+     */
+    @OnClick(R.id.rl_layout_btn_user_space)
+    public void mySpaceClick(View v){
+        friendOperations();
+    }
+
+    private void friendOperations(){//跳转到用户首页操作
+        if(PreferenceUtils.getBoolean("loginStatus",false)){
+            Intent intent=new Intent(mReference.get(),UserInfoActivity.class);
+            intent.putExtra("isCurrentUser",true);
+            startActivity(intent);
+        }else{
+            Intent intent=new Intent(mReference.get(),LoginActivity.class);
+            intent.putExtra("activity_name", mReference.get().getClass().getName());
+            startActivity(intent);
+        }
     }
 
     /**

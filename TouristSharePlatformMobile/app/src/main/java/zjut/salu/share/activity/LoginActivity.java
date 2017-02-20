@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,6 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +40,7 @@ import okhttp3.Response;
 import zjut.salu.share.R;
 import zjut.salu.share.base.AbsBaseActivity;
 import zjut.salu.share.base.RxBaseActivity;
+import zjut.salu.share.config.CuteTouristShareConfig;
 import zjut.salu.share.exception.MyException;
 import zjut.salu.share.model.TripUser;
 import zjut.salu.share.model.city.City;
@@ -44,6 +51,8 @@ import zjut.salu.share.utils.PreferenceUtils;
 import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.utils.StringUtils;
 import zjut.salu.share.utils.ToastUtils;
+import zjut.salu.share.utils.huanxindb.DemoDBManager;
+import zjut.salu.share.utils.huanxindb.EaseUser;
 
 /**
  * 登录界面
@@ -184,7 +193,33 @@ public class LoginActivity extends RxBaseActivity {
                         PreferenceUtils.put("sex",user.getSex());//签名
                         PreferenceUtils.put("email",user.getUseremail());
                         PreferenceUtils.put("phone",user.getPhone());
+                        PreferenceUtils.put("password",resultObject.getString("password"));
                         PreferenceUtils.put("city",user.getCity().getProvince().getProvincename()+user.getCity().getCityname());
+                        DemoDBManager.getInstance().closeDB();
+                        // reset current user name before login
+                        CuteTouristShareConfig.getInstance().setCurrentUserName(user.getUserid());
+                        // 调用sdk登陆方法登陆聊天服务器
+                        EMClient.getInstance().login(user.getUserid(),resultObject.getString("password"), new EMCallBack() {
+                            @Override
+                            public void onSuccess() {
+                                // ** 第一次登录或者之前logout后再登录，加载所有本地群和回话
+                                // ** manually load all local groups and
+                                EMClient.getInstance().groupManager().loadAllGroups();
+                                EMClient.getInstance().chatManager().loadAllConversations();
+                                getFriends();
+                            }
+
+                            @Override
+                            public void onError(int code, String error) {
+                                runOnUiThread(() -> Toast.makeText(getApplicationContext(), getString(R.string.Login_failed) + error,
+                                        Toast.LENGTH_SHORT).show());
+                            }
+
+                            @Override
+                            public void onProgress(int progress, String status) {
+
+                            }
+                        });
                         if(prevClassName.equals(SplashActivity.class.getName())){
                             Intent intent=new Intent(LoginActivity.this,HomeActivity.class);//跳转到首页
                             startActivity(intent);
@@ -198,6 +233,26 @@ public class LoginActivity extends RxBaseActivity {
                 }
             }
         }
+    }
+
+    private  void  getFriends(){
+        try {
+            List<String> usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
+            Map<String ,EaseUser>users=new HashMap<String ,EaseUser>();
+            for(String username:usernames){
+                EaseUser user=new EaseUser(username);
+                users.put(username, user);
+
+
+            }
+
+            CuteTouristShareConfig.getInstance().setContactList(users);
+
+
+        } catch (HyphenateException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

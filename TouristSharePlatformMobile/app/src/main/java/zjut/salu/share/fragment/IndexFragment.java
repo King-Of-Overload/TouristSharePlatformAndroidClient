@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import android.widget.AdapterView;
@@ -14,9 +15,13 @@ import android.widget.SimpleAdapter;
 import com.andview.refreshview.XRefreshView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerClickListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,6 +54,8 @@ import zjut.salu.share.activity.UserInfoActivity;
 import zjut.salu.share.activity.UserStrategyActivity;
 import zjut.salu.share.activity.UserStrategyDetailActivity;
 import zjut.salu.share.activity.index.LightStrategyActivity;
+import zjut.salu.share.adapter.index.IndexStrategyRecycleAdapter;
+import zjut.salu.share.event.MyRecycleViewScrollListener;
 import zjut.salu.share.greendao.IndexBannerBeanDao;
 import zjut.salu.share.model.IndexBannerBean;
 import zjut.salu.share.model.UserStrategy;
@@ -60,6 +67,8 @@ import zjut.salu.share.utils.PullRefreshUtils;
 import zjut.salu.share.utils.RequestURLs;
 import zjut.salu.share.utils.ToastUtils;
 import zjut.salu.share.utils.greendao.GreenDaoDBHelper;
+import zjut.salu.share.widget.CityPicker;
+import zjut.salu.share.widget.layout.FullyGridLayoutManager;
 
 /**首页fragment
  * Created by Alan on 2016/10/16.
@@ -84,8 +93,15 @@ public class IndexFragment extends RxLazyFragment {
     private IndexBannerBeanDao bannerBeanDao;
     private List<IndexBannerBean> beans=null;
     private int isRefresh=1;//是否为刷新
+    private ImageLoader imageLoader;
 
     public static final String STRATEGY="strategy";
+
+    @Bind(R.id.recycle_strategy)RecyclerView strategyRecycle;
+
+    private List<UserStrategy> strategyList;
+
+    private IndexStrategyRecycleAdapter strategyRecycleAdapter;
 
     @Override
     public int getLayoutResId() {
@@ -95,6 +111,7 @@ public class IndexFragment extends RxLazyFragment {
 
     @Override
     public void finishCreateView(Bundle state) {
+        imageLoader=ImageLoader.getInstance();
         bannerBeanDao = GreenDaoDBHelper.getDaoSession().getIndexBannerBeanDao();
         PullRefreshUtils.bindPullRefreshView(refreshView,true,false,new IndexRefreshViewListener());
         indexGridView.setOverScrollMode(View.OVER_SCROLL_NEVER);
@@ -120,8 +137,44 @@ public class IndexFragment extends RxLazyFragment {
             initHeaderBanner();
         }
         initIndexGridView();
+        finishTask();
     }
 
+    @Override
+    protected void finishTask() {//初始化主数据
+        Observable<String> observable=okHttpUtils.asyncGetRequest(RequestURLs.LOAD_INDEX_DATA,null);
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {}
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ((Activity)context).runOnUiThread(()->{
+                            ToastUtils.ShortToast(R.string.server_down_text);
+                        });
+                    }
+
+                    @Override
+                    public void onNext(String result) {
+                        Gson gson=new Gson();
+                        try {
+                            JSONObject object=new JSONObject(result);
+                            strategyList=gson.fromJson(object.getString("strategy"),new TypeToken<List<UserStrategy>>(){}.getType());
+                            FullyGridLayoutManager gridLayoutManager=new FullyGridLayoutManager(context,2);
+                            strategyRecycle.setHasFixedSize(true);
+                            strategyRecycle.setNestedScrollingEnabled(true);
+                            strategyRecycle.setLayoutManager(gridLayoutManager);
+                            strategyRecycleAdapter=new IndexStrategyRecycleAdapter(strategyRecycle,strategyList,imageLoader);
+                            strategyRecycle.setAdapter(strategyRecycleAdapter);
+                            strategyRecycle.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
 
     /**
      * 初始化头部滚动轮播图

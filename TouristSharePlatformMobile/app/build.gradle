@@ -4,6 +4,8 @@ apply plugin: 'org.greenrobot.greendao'
 Properties props = new Properties()
 props.load(new FileInputStream(file("configuration.properties")))
 android {
+    //use legacy for android 6.0
+    useLibrary 'org.apache.http.legacy'
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
     defaultConfig {
@@ -146,7 +148,10 @@ dependencies {
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.6.0'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.6.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.1'
-    compile 'com.github.ctiao:DanmakuFlameMaster:0.5.6'
+    compile 'com.github.ctiao:DanmakuFlameMaster:0.6.4'
+    compile 'com.github.ctiao:ndkbitmap-armv7a:0.6.4'
+    compile 'com.github.ctiao:ndkbitmap-armv5:0.6.4'
+    compile 'com.github.ctiao:ndkbitmap-x86:0.6.4'
     compile 'com.foamtrace:photopicker:1.0'
     compile 'com.edmodo:cropper:1.0.1'
     compile 'com.github.mabbas007:TagsEditText:v0.95'
@@ -156,4 +161,9 @@ dependencies {
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/IndoorscapeAlbumPlugin.jar')
     compile 'com.liulishuo.filedownloader:library:1.4.1'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+
+    //Optional compile for GCM (Google Cloud Messaging).
+    compile 'com.google.android.gms:play-services-gcm:9.4.0'
+    compile 'com.hyphenate:hyphenate-sdk:3.2.3'
 }
