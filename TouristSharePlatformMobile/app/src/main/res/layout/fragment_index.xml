@@ -3,14 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@color/bacground"
     android:layout_height="match_parent">
 <zjut.salu.share.widget.scrollview.RecycleScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <!--<zjut.salu.share.widget.MyScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
     <com.andview.refreshview.XRefreshView
         android:id="@+id/xref_index"
         android:layout_width="match_parent"
@@ -57,10 +54,35 @@
                 android:overScrollMode="never"
                 android:scrollbars="none" />
 
+            <include layout="@layout/layout_index_skillacademy_header"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_skill_academy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+            <include layout="@layout/layout_index_product_header"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+            <include layout="@layout/layout_index_banggume_header"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_banggume"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+
+
         </LinearLayout>
 
     </com.andview.refreshview.XRefreshView>
-    <!--</zjut.salu.share.widget.MyScrollView>-->
 
 </zjut.salu.share.widget.scrollview.RecycleScrollView>
 

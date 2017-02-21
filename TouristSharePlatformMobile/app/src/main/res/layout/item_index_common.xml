@@ -4,23 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
     android:clickable="true"
+    android:layout_margin="3dp"
     android:foreground="?attr/selectableItemBackground"
     app:cardBackgroundColor="@color/card_view_background"
     app:cardCornerRadius="10dp"
-    app:cardElevation="@dimen/card_elevation"
+    app:cardElevation="2dp"
 
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/card_default_small">
+        android:layout_height="140dp">
 
         <ImageView
             android:id="@+id/item_img"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/card_image_default_height"
+            android:layout_height="90dp"
             android:src="@drawable/bangumi_cover_test"
             android:scaleType="fitXY" />
 
@@ -38,8 +38,8 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="有咩酱Hide and seek"
-                android:textColor="10sp"
-                android:textSize="@dimen/default_small_text_size" />
+                android:textColor="@color/black"
+                android:textSize="11sp" />
         </LinearLayout>
 
         <LinearLayout

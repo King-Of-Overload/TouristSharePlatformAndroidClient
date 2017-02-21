@@ -48,17 +48,26 @@ import zjut.salu.share.activity.DestinationActivity;
 import zjut.salu.share.activity.LoginActivity;
 import zjut.salu.share.activity.LoveCardActivity;
 import zjut.salu.share.activity.ProductActivity;
+import zjut.salu.share.activity.ProductDetailActivity;
 import zjut.salu.share.activity.SkillAcademyActivity;
 import zjut.salu.share.activity.SkillAcademyDetailActivity;
 import zjut.salu.share.activity.UserInfoActivity;
 import zjut.salu.share.activity.UserStrategyActivity;
 import zjut.salu.share.activity.UserStrategyDetailActivity;
+import zjut.salu.share.activity.banggumi.BanggumiDetailActivity;
 import zjut.salu.share.activity.index.LightStrategyActivity;
+import zjut.salu.share.adapter.index.IndexAlbumRecycleAdapter;
+import zjut.salu.share.adapter.index.IndexBanggumeRecycleAdapter;
+import zjut.salu.share.adapter.index.IndexProductRecycleAdapter;
+import zjut.salu.share.adapter.index.IndexSkillAcademyRecycleAdapter;
 import zjut.salu.share.adapter.index.IndexStrategyRecycleAdapter;
 import zjut.salu.share.event.MyRecycleViewScrollListener;
 import zjut.salu.share.greendao.IndexBannerBeanDao;
 import zjut.salu.share.model.IndexBannerBean;
 import zjut.salu.share.model.UserStrategy;
+import zjut.salu.share.model.lightstrategy.banggume.Banggume;
+import zjut.salu.share.model.photo.UserAlbums;
+import zjut.salu.share.model.product.Product;
 import zjut.salu.share.model.skillacademy.SkillAcademy;
 import zjut.salu.share.utils.GlideImageLoader;
 import zjut.salu.share.utils.OkHttpUtils;
@@ -98,10 +107,22 @@ public class IndexFragment extends RxLazyFragment {
     public static final String STRATEGY="strategy";
 
     @Bind(R.id.recycle_strategy)RecyclerView strategyRecycle;
+    @Bind(R.id.recycle_album)RecyclerView albumRecycle;
+    @Bind(R.id.recycle_skill_academy)RecyclerView academyRecycle;
+    @Bind(R.id.recycle_product)RecyclerView productRecycle;
+    @Bind(R.id.recycle_banggume)RecyclerView banggumeRecycle;
 
     private List<UserStrategy> strategyList;
+    private List<UserAlbums> albumsList;
+    private List<SkillAcademy> academyList;
+    private List<Product> productList;
+    private List<Banggume> banggumeList;
 
     private IndexStrategyRecycleAdapter strategyRecycleAdapter;
+    private IndexAlbumRecycleAdapter albumRecycleAdapter;
+    private IndexSkillAcademyRecycleAdapter academyRecycleAdapter;
+    private IndexProductRecycleAdapter productRecycleAdapter;
+    private IndexBanggumeRecycleAdapter banggumeRecycleAdapter;
 
     @Override
     public int getLayoutResId() {
@@ -162,6 +183,10 @@ public class IndexFragment extends RxLazyFragment {
                         try {
                             JSONObject object=new JSONObject(result);
                             strategyList=gson.fromJson(object.getString("strategy"),new TypeToken<List<UserStrategy>>(){}.getType());
+                            albumsList=gson.fromJson(object.getString("album"),new TypeToken<List<UserAlbums>>(){}.getType());
+                            academyList=gson.fromJson(object.getString("skillacademy"),new TypeToken<List<SkillAcademy>>(){}.getType());
+                            productList=gson.fromJson(object.getString("product"),new TypeToken<List<Product>>(){}.getType());
+                            banggumeList=gson.fromJson(object.getString("banggumes"),new TypeToken<List<Banggume>>(){}.getType());
                             FullyGridLayoutManager gridLayoutManager=new FullyGridLayoutManager(context,2);
                             strategyRecycle.setHasFixedSize(true);
                             strategyRecycle.setNestedScrollingEnabled(true);
@@ -169,11 +194,74 @@ public class IndexFragment extends RxLazyFragment {
                             strategyRecycleAdapter=new IndexStrategyRecycleAdapter(strategyRecycle,strategyList,imageLoader);
                             strategyRecycle.setAdapter(strategyRecycleAdapter);
                             strategyRecycle.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
+                            strategyRecycleAdapter.setOnItemClickListener((position, holder) -> {
+                                Intent intent=new Intent(context,UserStrategyDetailActivity.class);
+                                intent.putExtra("user_strategy",strategyList.get(position));
+                                startActivity(intent);
+                            });
+                            FullyGridLayoutManager gridLayoutManager2=new FullyGridLayoutManager(context,2);
+                            albumRecycle.setHasFixedSize(true);
+                            albumRecycle.setNestedScrollingEnabled(true);
+                            albumRecycle.setLayoutManager(gridLayoutManager2);
+                            albumRecycleAdapter=new IndexAlbumRecycleAdapter(albumRecycle,albumsList,imageLoader);
+                            albumRecycle.setAdapter(albumRecycleAdapter);
+                            albumRecycle.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
+                            albumRecycleAdapter.setOnItemClickListener((position, holder) -> {
+                                Intent intent=new Intent(context,AlbumDetailActivity.class);
+                                UserAlbums albums=albumsList.get(position);
+                                intent.putExtra("albumid",albums.getAlbumid());
+                                intent.putExtra("title",albums.getAlbumname());
+                                startActivity(intent);
+                            });
+                            FullyGridLayoutManager gridLayoutManager3=new FullyGridLayoutManager(context,2);
+                            academyRecycle.setHasFixedSize(true);
+                            academyRecycle.setNestedScrollingEnabled(true);
+                            academyRecycle.setLayoutManager(gridLayoutManager3);
+                            academyRecycleAdapter=new IndexSkillAcademyRecycleAdapter(academyRecycle,academyList,imageLoader);
+                            academyRecycle.setAdapter(academyRecycleAdapter);
+                            academyRecycle.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
+                            academyRecycleAdapter.setOnItemClickListener((position, holder) -> {
+                                Intent intent=new Intent(context,SkillAcademy.class);
+                                intent.putExtra("skill_academy",academyList.get(position));
+                                startActivity(intent);
+                            });
+                            FullyGridLayoutManager gridLayoutManager4=new FullyGridLayoutManager(context,2);
+                            productRecycle.setHasFixedSize(true);
+                            productRecycle.setNestedScrollingEnabled(true);
+                            productRecycle.setLayoutManager(gridLayoutManager4);
+                            productRecycleAdapter=new IndexProductRecycleAdapter(productRecycle,productList,imageLoader);
+                            productRecycle.setAdapter(productRecycleAdapter);
+                            productRecycle.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
+                            productRecycleAdapter.setOnItemClickListener((position, holder) -> {
+                                Intent intent=new Intent(context, ProductDetailActivity.class);
+                                intent.putExtra("product",productList.get(position));
+                                startActivity(intent);
+                            });
+                            FullyGridLayoutManager gridLayoutManager5=new FullyGridLayoutManager(context,2);
+                            banggumeRecycle.setHasFixedSize(true);
+                            banggumeRecycle.setNestedScrollingEnabled(true);
+                            banggumeRecycle.setLayoutManager(gridLayoutManager5);
+                            banggumeRecycleAdapter=new IndexBanggumeRecycleAdapter(banggumeRecycle,banggumeList,imageLoader);
+                            banggumeRecycle.setAdapter(banggumeRecycleAdapter);
+                            banggumeRecycle.addOnScrollListener(new MyRecycleViewScrollListener(null,null));
+                            banggumeRecycleAdapter.setOnItemClickListener((position, holder) -> {
+                                BanggumiDetailActivity.launch((Activity) context,banggumeList.get(position));
+                            });
+                            setRecycleNoScroll();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 });
+    }
+
+    private void setRecycleNoScroll()
+    {
+        strategyRecycle.setOnTouchListener((v, event) -> false);
+        albumRecycle.setOnTouchListener((v, event) -> false);
+        academyRecycle.setOnTouchListener((v, event) -> false);
+        productRecycle.setOnTouchListener((v, event) -> false);
+        banggumeRecycle.setOnTouchListener((v, event) -> false);
     }
 
     /**

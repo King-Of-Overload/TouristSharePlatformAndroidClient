@@ -667,4 +667,8 @@
     <string name="love_album_wall_text">爱の相册墙</string>
     <string name="more_new_alum_wall_text">更多相册</string>
     <string name="bangumi_recommend">旅游摄影技巧</string>
+    <string name="trip_equip_text">旅行装备</string>
+    <string name="more_equip_text">更多装备</string>
+    <string name="index_banggume_text">轻游记</string>
+    <string name="more_light_strategy_text">更多轻游记</string>
 </resources>
