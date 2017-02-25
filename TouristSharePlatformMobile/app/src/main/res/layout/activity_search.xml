@@ -13,33 +13,78 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <zjut.salu.share.widget.scrollview.RecycleScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-        <!--<LinearLayout-->
-            <!--android:id="@+id/search_layout"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:orientation="vertical">-->
+                        <GridView
+                            android:id="@+id/index_grid_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:numColumns="4"
+                            android:clickable="true"
+                            android:horizontalSpacing="2dp"
+                            android:verticalSpacing="10dp"
+                            />
 
-            <!--<com.flyco.tablayout.SlidingTabLayout-->
-                <!--android:id="@+id/sliding_tabs"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/tab_layout_default_height"-->
-                <!--android:background="@color/gray_light_30"-->
-                <!--app:tl_indicator_color="@color/colorPrimary"-->
-                <!--app:tl_indicator_corner_radius="@dimen/tab_indicator_corner_tiny_radius"-->
-                <!--app:tl_indicator_height="@dimen/tab_indicator_small_height"-->
-                <!--app:tl_tab_padding="@dimen/tab_bar_item_padding"-->
-                <!--app:tl_tab_space_equal="false"-->
-                <!--app:tl_textSelectColor="@color/colorPrimary"-->
-                <!--app:tl_textUnselectColor="@color/font_normal" />-->
+                        <include layout="@layout/layout_index_strategy_header"/>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycle_strategy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:overScrollMode="never"
+                            android:scrollbars="none" />
 
-            <!--<com.hotbitmapgg.ohmybilibili.widget.NoScrollViewPager-->
-                <!--android:id="@+id/view_pager"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:overScrollMode="never" />-->
+                        <include layout="@layout/layout_index_album_header"/>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycle_album"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:overScrollMode="never"
+                            android:scrollbars="none" />
 
-        <!--</LinearLayout>-->
+                        <include layout="@layout/layout_index_skillacademy_header"/>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycle_skill_academy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:overScrollMode="never"
+                            android:scrollbars="none" />
+                        <include layout="@layout/layout_index_product_header"/>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycle_product"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:overScrollMode="never"
+                            android:scrollbars="none" />
+                        <include layout="@layout/layout_index_banggume_header"/>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycle_banggume"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:overScrollMode="never"
+                            android:scrollbars="none" />
+
+
+                    </LinearLayout>
+
+
+            </zjut.salu.share.widget.scrollview.RecycleScrollView>
+        </LinearLayout>
 
 
         <ImageView

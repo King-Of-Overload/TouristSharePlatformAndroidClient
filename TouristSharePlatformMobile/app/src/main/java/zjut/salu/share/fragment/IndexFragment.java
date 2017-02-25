@@ -273,6 +273,8 @@ public class IndexFragment extends RxLazyFragment {
 
 
 
+
+
     /**
      * 获得滚动图数据
      */

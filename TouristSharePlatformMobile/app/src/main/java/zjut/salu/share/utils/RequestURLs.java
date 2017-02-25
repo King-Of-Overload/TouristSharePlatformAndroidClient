@@ -74,4 +74,5 @@ public class RequestURLs {
 
     public static final String VALIDATE_USER = MAIN_URL + "tripuser_validateUser.do";//qr验证用户
     public static final String LOAD_INDEX_DATA = MAIN_URL + "tripuser_loadIndexData.do";//获取主页数据
+    public static final String SEARCH_VALUE = MAIN_URL + "tripuser_searcKeyWords.do";//搜索
 }

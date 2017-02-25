@@ -127,10 +127,6 @@ public class TourismAttractionActivity extends RxBaseActivity {
                 }
             }
 
-            @Override
-            public void onConnectHotSpotMessage(String s, int i) {
-            }
-
 
         });
         locationClient.start();

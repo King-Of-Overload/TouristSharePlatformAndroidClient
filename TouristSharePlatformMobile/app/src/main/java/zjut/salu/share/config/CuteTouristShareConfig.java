@@ -63,8 +63,11 @@ public class CuteTouristShareConfig extends MultiDexApplication implements Theme
     public void onCreate() {
         super.onCreate();
         mInstance=this;
+        //注意该方法要再setContentView方法之前实现
+        SDKInitializer.initialize(getApplicationContext());
         // 初始化环信sdk
         init(getApplicationContext());
+        //EasyAR.initialize(this, key);
         // 初始化主题切换
         ThemeUtils.setSwitchColor(this);
         int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);//总内存
@@ -87,8 +90,6 @@ public class CuteTouristShareConfig extends MultiDexApplication implements Theme
         }
         Bmob.initialize(this,pro.getProperty("applicationid"));
         //在使用SDK各组件之前初始化context信息，传入ApplicationContext
-        //注意该方法要再setContentView方法之前实现
-        //SDKInitializer.initialize(getApplicationContext());
         //下载器初始化
         FileDownloader.init(getApplicationContext(), new DownloadMgrInitialParams.InitCustomMaker()
                 .connectionCreator(new FileDownloadUrlConnection

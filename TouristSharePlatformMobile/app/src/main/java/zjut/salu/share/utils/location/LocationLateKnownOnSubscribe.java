@@ -33,10 +33,6 @@ public class LocationLateKnownOnSubscribe implements Observable.OnSubscribe<BDLo
                     subscriber.onCompleted();
                 }
 
-                @Override
-                public void onConnectHotSpotMessage(String s, int i) {
-
-                }
             };
             LocationClient.get(context).locate(bdLocationListener);
         }

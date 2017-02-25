@@ -42,11 +42,6 @@ public class LocationClient {
                 realClient.unRegisterLocationListener(this);
                 stop();
             }
-
-            @Override
-            public void onConnectHotSpotMessage(String s, int i) {
-
-            }
         };
         realClient.registerLocationListener(realListener);
         if (!realClient.isStarted()) {

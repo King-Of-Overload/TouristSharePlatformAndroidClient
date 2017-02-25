@@ -28,10 +28,7 @@ public class LocationOnSubscribe implements Observable.OnSubscribe<BDLocation>  
                 subscriber.onCompleted();
             }
 
-            @Override
-            public void onConnectHotSpotMessage(String s, int i) {
 
-            }
         };
         LocationClient.get(context).locate(bdLocationListener);
     }
